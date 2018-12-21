@@ -120,3 +120,24 @@ class Solution:
                 dp[i] += dp[i-2]
 
         return dp[len(s)]
+
+# ============================= Problem 139 =============================
+# ============================= Word Break =============================
+# 发现很多 dp 问题都是有一个数组来对应保存每一步的结果。 （自底向上法）
+
+
+class Solution:
+    def wordBreak(self, s, wordDict):
+        """
+        :type s: str
+        :type wordDict: List[str]
+        :rtype: bool
+        """
+        dp = [False for _ in range(len(s))]
+
+        for i in range(len(s)):
+            for w in wordDict:
+                if w == s[i-len(w)+1:i+1] and (dp[i-len(w)] or i-len(w) < 0):
+                    dp[i] = True
+
+        return dp[len(s)-1]
