@@ -141,3 +141,73 @@ class Solution:
                     dp[i] = True
 
         return dp[len(s)-1]
+
+# ================================ Problem 188 ========================
+# ===================== Best Time to Buy and Sell Stock IV =========
+# 这道题难在找状态和状态转移方程。
+# 另外 k大于n//2与不大于分开讨论。
+
+
+class Solution:
+    def maxProfit(self, k, prices):
+        """
+        :type k: int
+        :type prices: List[int]
+        :rtype: int
+        """
+        if not prices or not k:
+            return 0
+
+        n = len(prices)
+
+        if k >= n//2:
+            s = 0
+            for i in range(1, n):
+                if prices[i] > prices[i-1]:
+                    s = s+prices[i]-prices[i-1]
+            return s
+
+        dp = [[0 for _ in range(n)] for _ in range(k+1)]
+        for x in range(1, k+1):
+            temp = float("-inf")
+            for i in range(1, n):
+                temp = max(temp, dp[x-1][i-1]-prices[i-1])
+                dp[x][i] = max(dp[x][i-1], prices[i]+temp)
+
+        return dp[k][n-1]
+
+
+# ================================ Problem 560 ========================
+# ===================== Subarray Sum Equals K =========
+# 思路差不多了，答案里有更简洁的代码细节。
+class Solution:
+    def subarraySum(self, nums, k):
+        """
+        :type nums: List[int]
+        :type k: int
+        :rtype: int
+        """
+        if not nums:
+            return 0
+
+        n = len(nums)
+        dp = [0 for _ in range(n)]
+        dp[0] = nums[0]
+        count = 0
+        if dp[0] == k:
+            count += 1
+        for i in range(1, n):
+            dp[i] = dp[i-1]+nums[i]
+            if dp[i] == k:
+                count += 1
+        hashtable = {}
+        for i in range(n):
+            if dp[i]-k in hashtable:
+                count += hashtable[dp[i]-k]
+
+            if dp[i] not in hashtable:
+                hashtable[dp[i]] = 1
+            else:
+                hashtable[dp[i]] += 1
+
+        return count
