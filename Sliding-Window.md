@@ -43,3 +43,33 @@ class Solution:
 
         return ans
 ```
+
+### Problem 995. Minimum Number of K Consecutive Bit Flips
+
+假设用 flippedTime 来表示 A[i] 被之前元素翻转所影响的次数， 那么如果 flippedTime 是偶数且 A[i]=0, 或者 flippedTime 是奇数且 A[i]=1，那么 A[i] 就需要被翻转。
+用代码表示为如果 flippedTime%2==A[i]，那么 A[i] 需要被翻转。
+
+因为我们每次都要对长度为 K 的区间进行翻转，假设存在一个 window 在闭区间 [i-K, i-1]，当 i<K 时，即为 [0, K-1]。用 flippedTime 计算在该 window 里发生翻转的次数。
+
+当 i>=K 时，对 A[i] 是否翻转产生影响的应该是在区间 [i-K+1, i-1]内的。所以我们检测 A[i-k]是否发生翻转，如果 A[i-K] 翻转了，那么就把 flippedTime-1，此时 flippedTime 即为 A[i]在此之前被翻转的次数。这时再判断 A[i] 是否要被翻转。
+
+在代码中，如果 A[j] 被翻转了，就把其值设为2，便于之后的检测。
+
+```py
+class Solution:
+    def minKBitFlips(self, A: 'List[int]', K: 'int') -> 'int':
+        flippedTime=0
+        count=0
+        for i in range(len(A)):
+            if i>=K and A[i-K]==2:
+                flippedTime-=1
+                
+            if (flippedTime %2) == A[i]:
+                if i+K>len(A):
+                    return -1
+                A[i]=2
+                flippedTime+=1
+                count+=1
+                
+        return count
+```
