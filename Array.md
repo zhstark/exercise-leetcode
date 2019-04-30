@@ -8,7 +8,7 @@ Given an array nums containing n + 1 integers where each integer is between 1 an
 
 ### Solution 1
 
-We can split the figures of 1~n into 2 parts from the middle m. Part one is 1~m, part two is m+1~n. If the numbers of 1~m is more than m, than this part must has the duplicate number. Then we split this part again, like binary search. So the time complexity is O(nlogn), the sapcial complexity is O(1).
+We can split the figures of 1\~n into 2 parts from the middle m. Part one is 1\~m, part two is m+1\~n. If the numbers of 1\~m is more than m, than this part must has the duplicate number. Then we split this part again, like binary search. So the time complexity is O(nlogn), the sapcial complexity is O(1).
 
 ```cpp
 
@@ -47,6 +47,7 @@ Consider the array as a Linkedlist, where the index is the value of LinkedList n
 Let's see an array like this:
 
 | value | 1 | 3 | 4 | 2 | 2 |
+
 | index | 0 | 1 | 2 | 3 | 4 |
 
 Consider the array as a LinkedList: 1->3->2->4->2
@@ -66,3 +67,54 @@ The proof:(https://leetcode.com/problems/linked-list-cycle-ii/solution/#approach
 and my notes of this proof:
 
 ![](IMG_6892FF5D41DA-1.jpeg)
+
+```cpp
+class Solution {
+public:
+    int findDuplicate(const vector<int>& nums) {
+        if( nums.size()==0) return -1;
+        int slow=nums[0];
+        int fast=nums[0];
+        slow=nums[slow];
+        fast=nums[nums[fast]];
+        while(slow!=fast){
+            slow=nums[slow];
+            fast=nums[nums[fast]];
+        }
+        fast=nums[0];
+        while(fast!=slow){
+            fast=nums[fast];
+            slow=nums[slow];
+        }
+        return fast;
+    }
+};
+```
+
+## 240. Search a 2D Matrix II
+
+Write an efficient algorithm that searches for a value in an m x n matrix. This matrix has the following properties:
+
+- Integers in each row are sorted in ascending from left to right.
+- Integers in each column are sorted in ascending from top to bottom.
+
+Provide an example and analyse it. I find that if I start from the right-top, there is a rule that make this problem very easy.
+
+Start from thr right-top, in the same row, every elements in the left of the number is smaller than it, in the same column, every elements below the number is larger than it. So in each iteration, we can eliminate a row or a column. If the target is larger than it, we know this row can not have the same value, we move the right-top down to next row. If the target is smaller than it, we know this column can not have the same value, we move the right-top left to next column, until we find the value or know there is not such a value. Time complexity is O(m+n), spacial complexity is O(1).
+
+```cpp
+class Solution {
+public:
+    bool searchMatrix(vector<vector<int>>& matrix, int target) {
+        if(matrix.size()==0 || matrix[0].size()==0) return false;
+        int n=matrix.size(), m=matrix[0].size();
+        int row=0, col=m-1;
+        while(row<n && col>=0){
+            if(matrix[row][col]==target)    return true;
+            if(target<matrix[row][col]) --col;
+            else ++row;
+        }
+        return false;
+    }
+};
+```
