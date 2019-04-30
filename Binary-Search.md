@@ -4,7 +4,7 @@
 2. mid 取值：`mid=l+(r-l)//1`
 3. 更新的时候， **l=mid+1, not l=mid**，r 同理
 4. 先检测是否不满足条件，在检测是否满足条件
-
+5. ">>"的优先级低于"+"，所以除以二的时候用位移记得加括号
 ## 花式二分法
 
 ### 查找第一个 值 等于给定值的元素
@@ -53,7 +53,7 @@ def BS_2(array, value):
 def BS_3(array, value):
     l,r=0,len(array)-1
     while l<=r:
-        mid=l+(r-l)>>1
+        mid=l+((r-l)>>1)
         if array[mid]>=value:
             if mid==0 or array[mid-1]<value:
                 return mid

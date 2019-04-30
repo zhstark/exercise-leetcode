@@ -73,3 +73,40 @@ class Solution:
                 
         return count
 ```
+
+### Problem 1004
+
+contest的时候咋就没想到用 slide window啊
+现在用 C++了
+```C++
+class Solution {
+public:
+    int longestOnes(vector<int>& A, int K) 
+    {
+        int left=0, right=0;
+        int ans=0;
+        while(right<A.size())
+        {
+            if(A[right]==1)
+                right++;
+            else
+            {
+                if(K>0)
+                {
+                    K--;
+                    right++;
+                }
+                else
+                {
+                    while(A[left]==1)
+                        left++;
+                    left++;
+                    K++;
+                }
+            }
+            ans=max(ans,right-left);
+        }
+        return ans;
+    }
+};
+```

@@ -68,3 +68,6 @@ class Solution:
             self.dfs((y+1, x), r, c, grid)
             self.dfs((y, x-1), r, c, grid)
             self.dfs((y, x+1), r, c, grid)
+
+
+# Problem 505

@@ -211,3 +211,52 @@ class Solution:
                 hashtable[dp[i]] += 1
 
         return count
+
+
+# == == == == == == == == Problem 403 == == == == == == == == == == == ==
+# ===================== frog jump =========
+# 不再用数组，用 hashtable
+class Solution:
+    def canCross(self, stones: List[int]) -> bool:
+        if not stones or (len(stones) > 1 and stones[1] != 1):
+            return False
+
+        dic = {}
+        for i in stones:
+            dic[i] = set()
+
+        dic[1].add(1)
+
+        for unit in stones:
+            if unit == 0:
+                continue
+
+            for size in dic[unit]:
+                if unit+size in dic:
+                    dic[unit+size].add(size)
+                if unit+size+1 in dic:
+                    dic[unit+size+1].add(size+1)
+                if size > 1 and (unit+size-1 in dic):
+                    dic[unit+size-1].add(size-1)
+
+        if not dic[stones[-1]]:
+            return False
+        else:
+            return True
+
+#============= 一个 string，返回最长的重复 string =========
+
+def dynamic(s):
+    if not s:
+        return ""
+
+    n=len(s)
+    dp=[["" for _ in range(n+1)] for _ in range(n+1)]
+    for i in range(1,n+1):
+        for j in range(1,n+1):
+            if s[i-1]==s[j-1] and i!=j:
+                dp[i][j]=dp[i-1][j-1]+s[i-1]
+                if len(dp[i][j])>len(ans):
+                    ans=dp[i][j]
+    return ans
+                

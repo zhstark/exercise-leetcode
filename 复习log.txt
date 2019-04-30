@@ -1,9 +1,0 @@
-pass easy problems(except 1).
-
-###### dont know when
-
-1,2,200,3,42,273,138,15,4,
-
-###### 2.7
-
-904,5,56

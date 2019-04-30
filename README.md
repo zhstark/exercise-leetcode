@@ -1,6 +1,58 @@
-# 一
-记录刷题过程，不是每个题都记，有点感悟就记下来，如果不记录过段时间就全忘了（其实记录也忘，但至少可以帮助自己回忆）
+Records thinking and code of problems.
 
-顺便练练使用
+Code is written by C++ or Python.
 
-刷题语言：python3
+## Array
+
+- 287 Find the duplicate number
+
+## BackTracking
+
+- 282 Expression Add Operators
+- 39 Combination Sum
+- 46 Permutations
+- 47 Permutations II
+
+## BFS
+
+- 279
+
+## DFS
+
+- 543
+- 200
+
+## BST (Binary Search Tree)
+
+- 173
+- 617
+
+## Graph-Dijkstra
+
+- 743
+
+## Sliding Window
+
+- 76 Minimum Window Substring
+- 995. Minimum Number of K Consecutive Bit Flips
+- 1004
+
+## Topological Sort
+
+- 210
+
+## Dynamic programming
+
+- 152
+- 639
+- 91
+- 139
+- 188
+- 560
+- 403
+
+## Some tips of different kinds of problems
+
+- 2 dimension matrix
+- Bit manipulation
+- 
