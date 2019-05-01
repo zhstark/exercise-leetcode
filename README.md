@@ -28,8 +28,8 @@ Code is written by C++ or Python.
 
 ## [Binary Tree](Binary-Tree.md)
 
-- 105. Construct Binary Tree from Preorder and Inorder Traversal
-- 106. Construct Binary Tree from Inorder and Postorder Traversal
+- 105 Construct Binary Tree from Preorder and Inorder Traversal
+- 106 Construct Binary Tree from Inorder and Postorder Traversal
 
 ## [BST (Binary Search Tree)](BST.md)
 
