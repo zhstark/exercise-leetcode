@@ -118,3 +118,44 @@ public:
     }
 };
 ```
+
+## 442. Find All Duplicates in an Array
+
+[link](https://leetcode.com/problems/find-all-duplicates-in-an-array/)
+
+Since 1 ≤ a[i] ≤ n, if there is no duplicate figure, this array can be permutated that for index i, the value is i+1. When there are duplicate figures and we permutate it again, there are some index that we can not find i+1 to match it and there are some value j that can not put to index j-1 again because index j-1 has already had a value j on it. We solve this problem according to this rule.
+
+Traversing the array, when we traverse the index i, we check whether the value m is equal to i+1. If no, we compare this value to the value in index m-1, if these values are same, we find a duplicated number, if not, we swap these value, so we put m in right position: the index m-1 has value m. Then we check index i again and repeat this process.
+
+If a number is duplicated more than twice, the above method will get this number more than one time. In order to avoid duplication, when we find a duplicated number, we set the value to -1 to mark that it has been got before.
+
+```cpp
+class Solution {
+public:
+    vector<int> findDuplicates(vector<int>& nums) {
+        vector<int> ans;
+        //corner case
+        int n=nums.size();
+        if(n==0) 
+            return ans;
+        
+        for(int i=0;i<n;++i){
+            int d=nums[i]-1;
+            if(d!=i){
+                //got this value before
+                if(d==-2 || nums[d]==-1)
+                    continue;
+                else if(nums[d]==nums[i]){
+                    ans.push_back(d+1);
+                    nums[d]=-1;
+                }
+                else{
+                    swap(nums[i], nums[d]);
+                    --i;
+                }
+            }
+        }
+        return ans;
+    }
+};
+```
