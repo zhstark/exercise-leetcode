@@ -54,6 +54,7 @@ class Solution:
 ```
 
 ## Problem 39 Combination Sum
+
 犯了2个错误：
 1.
 最开始传数组：
@@ -161,7 +162,7 @@ class Solution:
             if i+1 < len(nums) and nums[i] == nums[i+1]:
                 continue
             self.backtrack(nums[:i]+nums[i+1:], ans, temp+[nums[i]])
-
+```
 
 ## Problem 40 Combination Sum II
 
@@ -171,6 +172,7 @@ class Solution:
 等回溯结束，又该填第二个位置时，我们怎么知道这次填的是该位置的第二次或第三次:
 在那个 for loop 里， i>0
 
+```py
 class Solution:
     def combinationSum2(self, candidates, target):
         """
@@ -206,4 +208,60 @@ class Solution:
 grid[nx][ny] = 3
 dfs(step + 1, nx, ny)                    
 grid[nx][ny] = 0
+```
+## 301 Remove Invalid Parentheses
+
+[link](https://leetcode.com/problems/remove-invalid-parentheses/)
+
+Remove the minimum number of invalid parentheses in order to make the input string valid. Return all possible results.
+
+Since it need to return **all** results, generally we need to use backtracking to try all resultes.
+
+In order to reduce the layers of backtracking, firstly we count how many `(` and how many `)` needs to be removed.
+
+Then recusively backtracking, in the meanwhile, use a variable `pair` to check if the expression is valid or not. When we add a `(` into expression, pair+1, when we add a `)` into expression, pair-1(under the condition pair>1)
+
+```cpp
+class Solution {
+public:
+    vector<string> removeInvalidParentheses(string s) {
+        int left_to_move=0, right_to_move=0;
+        // count how many ( and ) should be removed in order to make it valid.
+        for(auto &c:s){
+            if(c==')'){
+                if(left_to_move==0) ++right_to_move;
+                else    --left_to_move;
+            }
+            else if(c=='('){
+                ++left_to_move;
+            }
+        }
+        unordered_set<string> ans;
+        helper(s, 0,left_to_move, right_to_move, 0, "", ans);
+        vector<string> res(ans.begin(),ans.end());
+        return res;
+    }
+private:
+    void helper(string &s, int index, int left_move, int right_move, int pair, string path, unordered_set<string>& ans){
+        if(index==s.size()){
+            if(left_move==0 && right_move==0 && pair==0)    ans.insert(path);
+            return;
+        }
+        if(s[index]!='(' && s[index]!=')'){
+            helper(s, index+1, left_move, right_move, pair, path+s[index], ans);
+        }
+        // if (,check if still need to remove it, backtrack remove it and no-remove it
+        else if(s[index]=='('){
+            //remove it
+            if(left_move>0) helper(s, index+1, left_move-1, right_move, pair, path, ans);
+            //not remove it
+            helper(s, index+1, left_move, right_move, pair+1, path+s[index], ans);
+        }
+        else{
+            if(right_move>0)    helper(s, index+1, left_move, right_move-1, pair, path, ans);
+            if(pair>0)  helper(s, index+1, left_move, right_move, pair-1, path+s[index], ans);
+        }
+    }
+};
+
 ```

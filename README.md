@@ -16,7 +16,7 @@ Code is written by C++ or Python.
 ## [Sliding Window](Sliding-Window.md)
 
 - 76 Minimum Window Substring
-- 995. Minimum Number of K Consecutive Bit Flips
+- 995 Minimum Number of K Consecutive Bit Flips
 - 1004
 
 ## [BackTracking](BackTracking.md)
@@ -72,7 +72,7 @@ Code is written by C++ or Python.
 
 - 991 Broken Calculator
 
-## NP Problem
+## [NP Problem](NP.py)
 
 - 17
 

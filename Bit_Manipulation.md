@@ -37,6 +37,7 @@ def count_one(n):
 sum 为其异或， carry 为其与。
 
 多位求和（l_carry 为上一位的进位）：
+
 | x | y | l_carry | sum | carry |
 |-----|-----|-----|-----|-----|
 | 0 | 0 | 0 | 0 | 0 |
@@ -48,8 +49,9 @@ sum 为其异或， carry 为其与。
 | 0 | 1 | 1 | 0 | 1 |
 | 1 | 1 | 1 | 1 | 1 |
 
-sum=x^y^l_carry
-carry=x&y or x&l_carry or y&l_carry
+`sum=x^y^l_carry`
+
+`carry=x&y or x&l_carry or y&l_carry`
 
 ```py
 def add(a,b):
