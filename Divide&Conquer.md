@@ -6,7 +6,7 @@ Given an array nums, we call (i, j) an important reverse pair if i < j and nums[
 
 You need to return the number of important reverse pairs in the given array.
 
-Basic idea is backtracking to compare all the combinations. The time complexity is O(n^2), not good enough.
+Basic idea is using 2 for-loop traversing to compare all the combinations. The time complexity is O(n^2), not good enough.
 
 We know that we need to compare 2 elememts in order to check if it is a Revers pair, which is similar to sort.
 
