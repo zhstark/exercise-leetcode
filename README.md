@@ -26,6 +26,10 @@ Code is written by C++ or Python.
 - 46 Permutations
 - 47 Permutations II
 
+## [Divide and Conquuer](Divide&Conquer.md)
+
+- 493 Reverse Pairs
+
 ## [Binary Tree](Binary-Tree.md)
 
 - 105 Construct Binary Tree from Preorder and Inorder Traversal
