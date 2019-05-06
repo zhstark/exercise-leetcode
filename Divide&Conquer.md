@@ -2,9 +2,9 @@
 
 [link](https://leetcode.com/problems/reverse-pairs/)
 
-Given an array nums, we call (i, j) an important reverse pair if i < j and nums[i] > 2*nums[j].
+> Given an array nums, we call (i, j) an important reverse pair if i < j and nums[i] > 2*nums[j].
 
-You need to return the number of important reverse pairs in the given array.
+> You need to return the number of important reverse pairs in the given array.
 
 Basic idea is using 2 for-loop traversing to compare all the combinations. The time complexity is O(n^2), not good enough.
 
@@ -70,6 +70,76 @@ private:
     
     void merge_sort(vector<int>& nums, int& count){
         count=merge_sort_rec(nums, 0, nums.size()-1);
+    }
+};
+```
+
+## 315 Count of Smaller Numbers After Self
+
+[link](https://leetcode.com/problems/count-of-smaller-numbers-after-self/)
+
+> You are given an integer array nums and you have to return a new counts array. The counts array has the property where counts[i] is the number of smaller elements to the right of nums[i].
+
+Very similar to the above question. The trick is use a vector `index` to map the indices of merged array to the indices of origin array.
+
+And for shuffling the elements in `merge`, we can use std::move.
+
+```cpp
+class Solution {
+public:
+    vector<int> countSmaller(vector<int>& nums) {
+        int n=nums.size();
+        vector<int> count(n,0);
+        vector<int> index(n);
+        iota(index.begin(), index.end(),0);
+        merge_sort(nums, count, index);
+       
+        return count;
+    }
+private:
+    void merge_sort(vector<int>& nums, vector<int>& count, vector<int>& index){
+        merge_rec(nums, count, index, 0, nums.size()-1);
+    }
+    void merge_rec(vector<int>& nums, vector<int>& count, vector<int>& index, int left, int right){
+        if(left>=right) return;
+        int mid=(left+right)/2;
+        merge_rec(nums, count, index, left, mid);
+        merge_rec(nums, count, index, mid+1, right);
+        // counting
+        int p=mid, q=right;
+        while(p>=left && q>mid){
+            int idx1=index[p], idx2=index[q];
+            if(nums[idx1]>nums[idx2]){
+                count[idx1]+=q-mid;
+                --p;
+            }
+            else{
+                --q;
+            }
+        }
+        merge(nums, count, index, left, mid, mid+1, right);
+    }
+    void merge(vector<int>& nums, vector<int>& count, vector<int>& index, int left1, int right1, int left2, int right2){
+        int n=right2-left1+1;
+        int x[n];
+        n=0;
+        int i=left1, j=left2;
+        while(i<=right1 && j<=right2){
+            int idx1=index[i], idx2=index[j];
+            if(nums[idx1]<=nums[idx2]){
+                x[n++]=index[i++];
+            }
+            else{
+                x[n++]=index[j++];
+            }
+        }
+        while(i<=right1){
+           x[n++]=index[i++];
+        }
+        while(j<=right2){
+           x[n++]=index[j++];
+        }
+        move(x, x+n, index.begin()+left1);
     }
 };
 ```

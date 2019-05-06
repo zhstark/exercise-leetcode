@@ -29,6 +29,7 @@ Code is written by C++ or Python.
 ## [Divide and Conquuer](Divide&Conquer.md)
 
 - 493 Reverse Pairs
+- 315 Count of Smaller Numbers After Self
 
 ## [Binary Tree](Binary-Tree.md)
 
