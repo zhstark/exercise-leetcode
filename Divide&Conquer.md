@@ -143,3 +143,60 @@ private:
     }
 };
 ```
+
+## 327 Count of Range Sum
+
+[link](https://leetcode.com/problems/count-of-range-sum/)
+
+> Given an integer array nums, return the number of range sums that lie in [lower, upper] inclusive.
+> Range sum S(i, j) is defined as the sum of the elements in nums between indices i and j (i ≤ j), inclusive.
+
+> Note:
+> A naive algorithm of O(n2) is trivial. You MUST do better than that.
+
+In above questions, we compared Reverse Pairs which means `S[j]-S[i]<0 (j>i)`, while in this case, we compare`a<=S[j]-S[i]<=b (j>i)`, where `S[i]` is the sum of first i elements.
+
+Using merge sort again. But in this case, when we count, we use two pointers `p` and `q` begining from the middle. We pass `p` forword if `S[p]<S[i]+a`, pass `q` forword if `S[q]<=S[i]+b`. Then all the element between p and q are the elements that meet the requirement.
+
+Tips:
+
+- Since we calculate the **sum** of the nums, the elements might be very large. So for the array `S`, we set the type of elements be `long long`.
+- In this case, I used `std::inplace_merge` to merge, which is much easier.
+
+```cpp
+class Solution {
+public:
+    int countRangeSum(vector<int>& nums, int lower, int upper) {
+        if(nums.size()==0)  return 0;
+        vector<long long> S(nums.size());
+        S[0]=nums[0];
+        for(int i=1; i<nums.size();++i){
+            S[i]=S[i-1]+nums[i];
+        }
+        int count=0;
+        merge_sort(S, lower, upper, count);
+        return count;
+    }
+private:
+    void merge_sort(vector<long long>& S, int lower, int upper, int& count){
+        merge_rec(S, lower, upper, count, 0, S.size()-1);
+    }
+    
+    void merge_rec(vector<long long>& S, int lower, int upper, int& count, int left, int right){
+        if(left>=right){
+            if(S[left]>=lower&&S[left]<=upper)  ++count;
+            return;
+        }
+        int mid=left+(right-left)/2;
+        merge_rec(S, lower, upper, count, left, mid);
+        merge_rec(S, lower, upper, count, mid+1, right);
+        int p=mid+1,q=mid+1;
+        for(int i=left; i<mid+1; ++i){
+            while(q<=right && S[q]<lower+S[i]) ++q;
+            while(p<=right&& S[p]<=upper+S[i]) ++p;
+            count+=p-q;
+        }
+        inplace_merge(S.begin()+left, S.begin()+mid+1,S.begin()+right+1);
+    }
+};
+```

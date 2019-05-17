@@ -13,6 +13,8 @@ Code is written by C++ or Python.
 - 325 Maximum Size Subarray Sum Equals k
 - 311 Sparse Matrix Multiplication
 
+## [Stack and Queue](Stack&Queue.md)
+
 ## [Sliding Window](Sliding-Window.md)
 
 - 76 Minimum Window Substring
@@ -30,6 +32,7 @@ Code is written by C++ or Python.
 
 - 493 Reverse Pairs
 - 315 Count of Smaller Numbers After Self
+- 327 Count of Range Sum
 
 ## [Binary Tree](Binary-Tree.md)
 
