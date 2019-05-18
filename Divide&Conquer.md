@@ -14,7 +14,7 @@ In merge sort, before we merge two subarrays, we have two sorted subarrays. We c
 
 Assuming we have 2 2-elements subarrays, we use 2 pointers p and q pointing to the last elements in the subarrays.
 
-_ _    _ _
+_ _   \ _ _
 
   p      q
 

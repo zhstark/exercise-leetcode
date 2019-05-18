@@ -15,6 +15,9 @@ Code is written by C++ or Python.
 
 ## [Stack and Queue](Stack&Queue.md)
 
+- 232 Implement Queue using Stacks
+- 225 Implement Stack using Queues
+
 ## [Sliding Window](Sliding-Window.md)
 
 - 76 Minimum Window Substring
@@ -33,6 +36,11 @@ Code is written by C++ or Python.
 - 493 Reverse Pairs
 - 315 Count of Smaller Numbers After Self
 - 327 Count of Range Sum
+
+## [Binary Search](Binary-Search.md)
+
+- [154 Find Minimum in Rotated Sorted Array II](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array-ii/)
+- [81 Search in Rotated Sorted Array II](https://leetcode.com/problems/search-in-rotated-sorted-array-ii/)
 
 ## [Binary Tree](Binary-Tree.md)
 
