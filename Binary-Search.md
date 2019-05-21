@@ -90,8 +90,11 @@ def BS_4(array, value):
 ## [154 Find Minimum in Rotated Sorted Array II](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array-ii/)
 
 > Suppose an array sorted in ascending order is rotated at some pivot unknown to you beforehand.
+
 > (i.e.,  [0,1,2,4,5,6,7] might become  [4,5,6,7,0,1,2]).
+
 > Find the minimum element.
+
 > The array may contain duplicates.
 
 Since the array is sorted anyway, we will consider binary search method to solve it.
@@ -122,7 +125,9 @@ public:
 ## [81 Search in Rotated Sorted Array II](https://leetcode.com/problems/search-in-rotated-sorted-array-ii/)
 
 > Suppose an array sorted in ascending order is rotated at some pivot unknown to you beforehand.
+
 > (i.e., [0,0,1,2,2,5,6] might become [2,5,6,0,0,1,2]).
+
 > You are given a target value to search. If found in the array return true, otherwise return false.> 
 
 The key of binary search is the body in the while loop.

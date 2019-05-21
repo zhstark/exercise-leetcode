@@ -83,6 +83,9 @@ Code is written by C++ or Python.
 - 188
 - 560
 - 403
+- [343 Integer Break](https://leetcode.com/problems/integer-break/)
+- 0-1 knapsack
+- [474 Ones and Zeroes](https://leetcode.com/problems/ones-and-zeroes/)
 
 ## [Math](math.md)
 
