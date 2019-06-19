@@ -8,6 +8,10 @@ Code is written by C++ or Python.
 - 240 Search a 2D Matrix II
 - 442 Find All Duplicates in an Array
 
+## [String](String.md)
+
+- [1078 Occurrences After Bigram](https://leetcode.com/problems/occurrences-after-bigram/)
+
 ## [Hash Table](HashTable.py)
 
 - 325 Maximum Size Subarray Sum Equals k
