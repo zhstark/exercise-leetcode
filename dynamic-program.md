@@ -1,3 +1,17 @@
+<!-- GFM-TOC -->
+- [Content]
+  - [0-1 knapsack](#0-1-knapsack)
+  - [Longset common substring](#Longset-common-substring)
+  - [1092 Shortest Common Supersequence](#1092-Shortest-Common-Supersequence)
+- [152 Maximum Product Subarray](#152-Maximum-Product-Subarray)
+- [639 Decode Ways II](#639-Decode-Ways-II)
+- [91 Decode ways](#91-Decode-ways)
+- [139 Word Break](#139-Word-Break)
+- [188 Best Time to Buy and Sell Stock IV](#188-Best-Time-to-Buy-and-Sell-Stock-IV)
+- [560 Subarray Sum Equals K](#560-Subarray-Sum-Equals-K)
+- [403 frog jump](#403-frog-jump)
+- [343 Integer Break](#343-Integer-Break)
+- [474 Ones and Zeroes](#474-Ones-and-Zeroes)
 
 ## 0-1 knapsack
 
@@ -31,7 +45,148 @@ int knapscak(vector<int> A, vector<int> values, int w){
 }
 ```
 
-## Problem 152 Maximum Product Subarray 
+## Longset common substring
+
+最长公共子序列，这里子序列不一定在父字符串中是连续的。返回长度或字符串。
+
+`dp[i][j]`表示字符串 `A[0:i+1]` 与 `B[0:j+1]` 中的最长公共子序列。
+
+`dp[i][j]=0,  if i=0 or j=0;`
+`dp[i][j]=dp[i-1][j-1]+1,  if i>0,j>0 and Ai=Bj;`
+`dp[i][j]=max( dp[i][j-1], dp[i-1][j]),  if i,j>0 and Ai!=Bj`
+
+C++
+
+```cpp
+// Return the string
+string lcs(string& A, string& B){
+    int n=A.size(), m=B.size();
+    vector<vector<string>> dp(n+1, vector<string>(m+1, ""));
+    for(int i=0; i<n; ++i){
+        for(int j=0; j<m; ++j){
+            if(A[i]==B[j])
+                dp[i+1][j+1]=dp[i][j]+A[i];
+            else
+                dp[i+1][j+1]=dp[i+1][j].size()>dp[i][j+1].size()? dp[i+1][j]:dp[i][j+1];
+        }
+    }
+    return dp[n][m];
+}
+
+// Return the length
+int lcs_length(string& A, string& B){
+    int n=A.size(), m=B.size();
+    vector<vector<int>> dp(n+1, vector<int>(m+1, 0));
+    for(int i=0; i<n; ++i){
+        for(int j=0; j<m; ++j){
+            if(A[i]==B[j])
+                dp[i+1][j+1]=dp[i][j]+1;
+            else
+                dp[i+1][j+1]=dp[i+1][j]>dp[i][j+1]?dp[i+1][j]:dp[i][j+1];
+        }
+    }
+    return dp[n][m];
+}
+```
+
+## [1092 Shortest Common Supersequence](https://leetcode.com/problems/shortest-common-supersequence/)
+
+> Given two strings str1 and str2, return the shortest string that has both str1 and str2 as subsequences.  If multiple answers exist, you may return any of them.
+
+> (A string S is a subsequence of string T if deleting some number of characters from T (possibly 0, and the characters are chosen anywhere from T) results in the string S.)
+
+Firstly, we need to find the longgest common substring(lcs), then we check which characters are missed in parent string.
+
+When getting the answer using lcs, we set 2 pointers points to a parent string respectively. 
+
+Then traversing lcs, let's say we are passing `ch`, for one parent string, if the character at index `i` is not equal to `ch`, we will add it to the answer and move the pointer forward. When both pointers point to character `ch`, now we have assembled all characters before `ch`, so we add `ch` now, and move 2 pointers forward one step.
+
+When we traversed lcs, we add all the characters left in parent-strings.
+
+C++
+
+```cpp
+class Solution {
+public:
+    string shortestCommonSupersequence(string str1, string str2) {
+        int i=0, j=0;
+        int n=str1.size(), m=str2.size();
+        
+        string res="";
+        for(auto c: lcs(str1, str2)){
+            while(i<n && str1[i]!=c)
+                res+=str1[i++];
+            while(j<m && str2[j]!=c)
+                res+=str2[j++];
+            res+=c;
+            ++i;
+            ++j;
+        }
+        return res+str1.substr(i)+str2.substr(j);
+    }
+    
+private:
+    string lcs(string& A, string& B){
+        int n=A.size(), m=B.size();
+        vector<vector<string>> dp(n+1, vector<string>(m+1, ""));
+        for(int i=0; i<n; ++i){
+            for(int j=0; j<m; ++j){
+                if(A[i]==B[j])
+                    dp[i+1][j+1]=dp[i][j]+A[i];
+                else
+                    dp[i+1][j+1]=dp[i+1][j].size()>dp[i][j+1].size()? dp[i+1][j]:dp[i][j+1];
+            }
+        }
+        return dp[n][m];
+    }
+};
+```
+
+Java
+
+```Java
+class Solution {
+    public String shortestCommonSupersequence(String A, String B) {
+        // set 2 pointers, one points to A, the other points to B
+        int i=0, j=0;
+        StringBuilder res=new StringBuilder();
+        // traverse the lcs
+        String ll=lcs(A,B);
+        for(int k=0; k<ll.length(); ++k){
+            while(A.charAt(i)!=ll.charAt(k))
+                res.append(A.charAt(i++));
+            while(B.charAt(j)!=ll.charAt(k))
+                res.append(B.charAt(j++));
+            
+            res.append(ll.charAt(k));
+            ++i;
+            ++j;
+        }
+        res.append(A.substring(i)).append(B.substring(j));
+        return res.toString();
+    }
+    private String lcs(String A, String B){
+        int n=A.length(), m=B.length();
+        String[][] dp= new String[n+1][m+1];
+        for(int i=0; i<=n; ++i)
+            dp[i][0]="";
+        for(int j=0; j<=m; ++j)
+            dp[0][j]="";
+        
+        for(int i=0; i<n; ++i){
+            for(int j=0; j<m; ++j){
+                if(A.charAt(i)==B.charAt(j))
+                    dp[i+1][j+1]=dp[i][j]+A.charAt(i);
+                else
+                    dp[i+1][j+1]=dp[i+1][j].length()>dp[i][j+1].length()?dp[i+1][j]:dp[i][j+1];
+            }
+        }
+        return dp[n][m];
+    }
+}
+```
+
+## 152 Maximum Product Subarray 
 
  太他妈鸡儿南难了这题
  局部最优与全局最优的关系
@@ -63,7 +218,7 @@ class Solution:
 ```
 
 
-##  Problem 639  Decode Ways II 
+## 639 Decode Ways II 
 
 下面有个简单级别的 
  
@@ -136,7 +291,7 @@ class Solution:
         return dp[len(s)-1] % (10**9+7)
 ```
 
-##  Problem 91  Decode ways 
+## 91 Decode ways 
 
  最开始的判断其实没必要这么复杂
  
@@ -164,7 +319,7 @@ class Solution:
         return dp[len(s)]
 ```
 
-## Problem 139  Word Break 
+## 139 Word Break
 
  发现很多 dp 问题都是有一个数组来对应保存每一步的结果。 （自底向上法）
 
@@ -186,7 +341,7 @@ class Solution:
         return dp[len(s)-1]
 ```
 
-## Problem 188  Best Time to Buy and Sell Stock IV 
+## 188 Best Time to Buy and Sell Stock IV 
 
 这道题难在找状态和状态转移方程。
  
@@ -222,7 +377,7 @@ class Solution:
         return dp[k][n-1]
 ```
 
-## Problem 560  Subarray Sum Equals K 
+## 560 Subarray Sum Equals K 
 
 思路差不多了，答案里有更简洁的代码细节。
 
@@ -260,7 +415,7 @@ class Solution:
         return count
 ```
 
-## Problem 403 frog jump 
+## 403 frog jump 
 
  不再用数组，用 hashtable
 
@@ -295,7 +450,7 @@ class Solution:
 ```
 
 
-## 一个 string，返回最长的重复 string 
+## 一个 string 返回最长的重复 string 
 
 ```py
 

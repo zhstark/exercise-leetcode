@@ -80,15 +80,18 @@ Code is written by C++ or Python.
 
 ## [Dynamic programming](dynamic-program.py)
 
-- 152
-- 639
-- 91
-- 139
-- 188
-- 560
-- 403
-- [343 Integer Break](https://leetcode.com/problems/integer-break/)
 - 0-1 knapsack
+- Longest Common Substring
+- [1092 Shortest Common Supersequence](https://leetcode.com/problems/shortest-common-supersequence/)
+- 152 Maximum Product Subarray
+- 639 Decode Ways II 
+- 91 Decode ways 
+- 139 Word Break
+- 188 Best Time to Buy and Sell Stock IV 
+- 560 Subarray Sum Equals K
+- 403 frog jump 
+- 一个 string 返回最长的重复 string 
+- [343 Integer Break](https://leetcode.com/problems/integer-break/)
 - [474 Ones and Zeroes](https://leetcode.com/problems/ones-and-zeroes/)
 
 ## [Math](math.md)
