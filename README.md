@@ -78,7 +78,7 @@ Code is written by C++ or Python.
 - 621 Task Scheduler
 - 253 Meeting room II
 
-## [Dynamic programming](dynamic-program.py)
+## [Dynamic programming](dynamic-program.md)
 
 - 0-1 knapsack
 - Longest Common Substring
