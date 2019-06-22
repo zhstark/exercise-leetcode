@@ -1,3 +1,36 @@
+
+## 0-1 knapsack
+
+对于一组不同重量，不同价值，不可分割的物品，我们选择将某些物品装入背包，在满足背包最大重量限制的条件下，背包可装入的最大总价值是多少？
+
+Given a set of items, each with a weight and a value, determine the number of each item to include in a collection so that the total weight is less than or equal to a given limit and the total value is as large as possible.
+
+`n: number of items`
+`w: maximum weight of the knapscak`
+
+set a 2 dimension matrix `states[n][w+1]`, `states[i][j]` means when we decide item i, now the weight is j, the max value is `states[i][j]`
+
+`states[i][j]=max( states[i-1][j], states[i][j],states[i-1][ j-weight[i] ]+v[i]), ( j-weight[i]>=0 )`
+
+```cpp
+int knapscak(vector<int> A, vector<int> values, int w){
+    int n=A.size();
+    vector<vector<int> > dp(n, vector<int>(w+1, 0));
+    int m=0;
+    if(A[0]<=w)
+        dp[0][A[0]]=values[0];
+    for(int i=1; i<n; ++i){
+        for(int j=0; j<=w; ++j){
+            dp[i][j]=max(dp[i][j],dp[i-1][j]);
+            if(j-A[i]>=0)
+                dp[i][j]=max( dp[i][j], dp[i-1][j-A[i]]+values[i] );
+            m=max(m,dp[i][j]);
+        }
+    }
+    return m;
+}
+```
+
 ## Problem 152 Maximum Product Subarray 
 
  太他妈鸡儿南难了这题
@@ -315,37 +348,6 @@ public:
 };
 ```
 
-## 0-1 knapsack
-
-对于一组不同重量，不同价值，不可分割的物品，我们选择将某些物品装入背包，在满足背包最大重量限制的条件下，背包可装入的最大总价值是多少？
-
-Given a set of items, each with a weight and a value, determine the number of each item to include in a collection so that the total weight is less than or equal to a given limit and the total value is as large as possible.
-
-`n: number of items`
-`w: maximum weight of the knapscak`
-
-set a 2 dimension matrix `states[n][w+1]`, `states[i][j]` means when we decide item i, now the weight is j, the max value is `states[i][j]`
-
-`states[i][j]=max( states[i-1][j], states[i][j],states[i-1][ j-weight[i] ]+v[i]), ( j-weight[i]>=0 )`
-
-```cpp
-int knapscak(vector<int> A, vector<int> values, int w){
-    int n=A.size();
-    vector<vector<int> > dp(n, vector<int>(w+1, 0));
-    int m=0;
-    if(A[0]<=w)
-        dp[0][A[0]]=values[0];
-    for(int i=1; i<n; ++i){
-        for(int j=0; j<=w; ++j){
-            dp[i][j]=max(dp[i][j],dp[i-1][j]);
-            if(j-A[i]>=0)
-                dp[i][j]=max( dp[i][j], dp[i-1][j-A[i]]+values[i] );
-            m=max(m,dp[i][j]);
-        }
-    }
-    return m;
-}
-```
 
 ## [474 Ones and Zeroes](https://leetcode.com/problems/ones-and-zeroes/)
 

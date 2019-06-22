@@ -159,3 +159,90 @@ public:
     }
 };
 ```
+
+## [1089 Duplicate Zeros](https://leetcode.com/problems/duplicate-zeros/)
+
+> Given a fixed length array arr of integers, duplicate each occurrence of zero, shifting the remaining elements to the right.
+
+> Note that elements beyond the length of the original array are not written.
+
+> Do the above modifications to the input array in place, do not return anything from your function.
+
+Assuming that we use extra space to show the result of shifting, firstly we count how many zeros there are, then we set a longer array with size of arr.size()+number_of_zeros, which store the result of shifting. Then we pass backword (from right to left), and move item from old array to new array. When we meet zero, we duplicate it.
+
+```cpp
+
+void duplicateZeros(vector<int>& arr) {
+    int zeros=0;
+    for(auto a: arr){
+        if(a==0)    ++zeros;
+    }
+
+    // Set a new array
+    vector<int> arr2(arr.size()+zeros);
+
+    // shuffle from old array into new array
+    for(int i=arr.size()-1, int j=arr2.size()-1; i>=0 && j>=0; --i, --j){
+        if(arr[i]!=0)
+            arr2[j]=arr[i];
+
+        // Meet zeor, duplicate it  
+        else{
+            arr2[j]==arr[i];
+            arr2[--j]=arr[i];
+        }
+    }
+    for(int i=0; i<arr.size(); ++i)
+        arr[i]=arr2[i];
+}
+```
+
+However, since `i` is always ahead of `j`, when we change `A[j]`, it will not influence any elements we will pass, so we donot need to set another array, but just manipulate original array.
+
+```cpp
+
+void duplicateZeros(vector<int>& arr) {
+    int zeros=0;
+    for(auto a: arr){
+        if(a==0)    ++zeros;
+    }
+    
+    int n=arr.size();
+    
+    for(int i=n-1, j=n-1+zeros; i>=0 && j>=0; --i, --j){
+        if(arr[i]!=0){
+            if(j<n) arr[j]=arr[i];
+        }
+        else{
+            if(j<n) arr[j]=arr[i];
+            --j;
+            if(j<n) arr[j]=arr[i];
+        }
+    }
+}
+```
+
+Java
+
+```Java
+
+class Solution {
+    public void duplicateZeros(int[] A) {
+        int n = A.length, i = 0, j = 0;
+        for (i = 0; i < n; ++i, ++j) {
+            if (A[i] == 0) ++j;
+        }
+        for(i=n-1, j=j-1; j>=0 && i>=0; --i,--j){
+            if(A[i]!=0){
+                if(j<A.length)
+                    A[j]=A[i];
+            }
+            else{
+                if(j<A.length)  A[j]=A[i];
+                --j;
+                if(j<A.length)  A[j]=A[i];
+            }
+        }
+    }
+}
+```

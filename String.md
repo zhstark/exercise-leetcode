@@ -34,3 +34,26 @@ public:
 
 ```
 
+```Java
+
+class Solution {
+    public String[] findOcurrences(String text1, String first, String second) {
+        if(text1==null || first==null || second==null)
+            return new String[0];
+        
+        String[] text=text1.split(" ", 0);
+        if(text.length<3)   return new String[0];
+        ArrayList<String> ans=new ArrayList<>();
+        
+        for(int i=2; i<text.length; ++i){
+            if(text[i-2].equals(first) && text[i-1].equals(second))
+                ans.add(text[i]);
+        }
+        String[] a=new String[ans.size()];
+        ans.toArray(a);
+        return a;
+        
+    }
+}
+```
+
