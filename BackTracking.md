@@ -1,3 +1,78 @@
+## [301 Remove Invalid Parentheses](https://leetcode.com/problems/remove-invalid-parentheses/)
+
+> Remove the minimum number of invalid parentheses in order to make the input string valid. Return all possible results.
+
+> Note: The input string may contain letters other than the parentheses ( and ).
+
+Since the output are all possible results, we consider bractracking method. 
+
+However, since we only need results that remove the minimum number of invalid parentheses, if we just try all the results, we may get many expression that we don't want. 
+
+So what if we could count the invalid parentheses?
+
+1. We process the expression one bracket at a time starting from the left.
+2. Suppose we encounter an opening bracket i.e.`(`, it may or may not lead to an invaild expression because there can be a matching ending bracket somewhere in the remaining part of the expression. Here, we simply increment the counter keeping track of left parantheses till now. `left+=1`
+3. If we encounter a closing bracket, this has two meanings:
+   - Either there was no matching opening bracket for this closing bracket and in that case we have an invalid expression. This is the case when `left==0` i.e. when there are no unmatched left brackets available. In such a case we increment another counter say `right+=1` to represent misplaced right parentheses.
+   - Or ,we had some unmatch opening bracket available to match this closing bracket. This is the case when `left>0`. In this case we simply decrement the left counter.`left-=1`
+4. Continue processing the string until all parentheses have been processed.
+5. In the end, the `left` will be the number of invalid opening bracket and `right` will be the number of invalid closing bracket.
+
+Then we can use these to do backtracking, which may save a lot of time.
+
+```cpp
+class Solution {
+public:
+    vector<string> removeInvalidParentheses(string& s) {
+        //find the number of `(` and `)` that need to be removed
+        int left=0, right=0;
+        for(auto c:s){
+            if(c=='(')
+                left++;
+            else if(c==')'){
+                if(left>0)  left--;
+                else    right++;
+            }
+        }
+        unordered_set<string> ans;
+        string temp="";
+        bracktrack(ans,s,0,temp, 0,left, right);
+        return vector<string>(ans.begin(),ans.end());
+
+    }
+private:
+    void backtrack(vector<string>& ans, string&s, int idx, string& temp, int left, int right){
+        if(left<0 || right<0 || count<0)   return;
+        if(idx==s.size()){
+            if(left==0 && right==0 && count==0){
+                ans.insert(temp);
+             }
+            return;
+        }
+        if(s[idx]=='('){
+            temp+=s[idx];
+            bracktrace2(ans, s, idx+1, temp,count+1, left, right);
+            temp.erase(temp.size()-1);
+            bracktrace2(ans, s, idx+1, temp,count, left-1, right);
+        }
+        else if(s[idx]==')'){
+            temp+=s[idx];
+            bracktrace2(ans,s,idx+1, temp, count-1,left, right);
+            temp.erase(temp.size()-1);
+            bracktrace2(ans,s,idx+1, temp,count, left,right-1);
+        }
+        else{
+            temp+=s[idx];
+            bracktrace2(ans, s, idx+1, temp,count, left, right);
+            temp.erase(temp.size()-1);
+        }
+        return;
+    }
+};
+```
+
+
+
 ## Problem 282 Expression Add Operators
 
 ##### step1

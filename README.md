@@ -2,6 +2,8 @@ Records thinking and code of Leetcode problems.
 
 Code is written by C++ or Python.
 
+:neckbeard: meaning that problem has *Facebook* tag in LeetCode.
+
 ## [Array](Array.md)
 
 - 287 Find the duplicate number
@@ -30,6 +32,7 @@ Code is written by C++ or Python.
 
 ## [BackTracking](BackTracking.md)
 
+- [301 Remove Invalid Parentheses](https://leetcode.com/problems/remove-invalid-parentheses/) :neckbeard:
 - 282 Expression Add Operators
 - 39 Combination Sum
 - 46 Permutations
