@@ -3,6 +3,7 @@
   - [0-1 knapsack](#0-1-knapsack)
   - [Longset common substring](#Longset-common-substring)
   - [1092 Shortest Common Supersequence](#1092-Shortest-Common-Supersequence)
+  - [322 Coin Change](#322-Coin-Change)
   - [152 Maximum Product Subarray](#152-Maximum-Product-Subarray)
   - [639 Decode Ways II](#639-Decode-Ways-II)
   - [91 Decode ways](#91-Decode-ways)
@@ -182,6 +183,61 @@ class Solution {
             }
         }
         return dp[n][m];
+    }
+}
+```
+
+## [322 Coin Change](https://leetcode.com/problems/coin-change/)
+
+> You are given coins of different denominations and a total amount of money amount. Write a function to compute the fewest number of coins that you need to make up that amount. If that amount of money cannot be made up by any combination of the coins, return -1.
+
+Consider *F(i)* is the fewest numboer of coins that make up *i*. Before calculating *F(i)*, we have to compute all minimum counts for amounts up to *i*. Then *F(i)=min_j=0..n-1 F(i-c_j)+1*. For each *i*, we calculate *F(i)* by traversing all the coins.
+
+Time complexity: O(S\*n), where S is the amount, n is the denomination count. On each step, we get *F(i)* in n iterations.
+
+Space complexity:O(S)
+
+C++
+
+```cpp
+    int coinChange(vector<int>& coins, int amount) {
+        int n=coins.size();
+        if(n==0)    return -1;
+        
+        const int m=amount+1;
+        int dp[amount+1];
+        fill(dp, dp+amount+1, m);
+        dp[0]=0;
+
+        for(int i=1; i<=amount; ++i){
+            for(auto c:coins){
+                if(c<=i){
+                    dp[i]=min(dp[i], dp[i-c]+1);
+                }
+            }
+        }
+        return dp[amount]>amount?-1:dp[amount];
+    }
+```
+
+Java
+
+```Java
+class Solution {
+    public int coinChange(int[] coins, int amount) {
+        final int n=coins.length;
+        int[] dp=new int[amount+1];
+        int max=amount+1;
+        Arrays.fill(dp, max);
+        dp[0]=0;
+        for(int i=1; i<=amount; ++i){
+            for(int j=0; j<n; ++j){
+                if(coins[j]<=i){
+                    dp[i]=Math.min(dp[i], dp[i-coins[j]]+1);
+                }
+            }
+        }
+        return dp[amount]>=max?-1:dp[amount];
     }
 }
 ```

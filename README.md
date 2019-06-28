@@ -2,7 +2,7 @@ Records thinking and code of Leetcode problems.
 
 Code is written by C++ or Python.
 
-:neckbeard: meaning that problem has *Facebook* tag in LeetCode.
+:neckbeard: means that problem has *Facebook* tag in LeetCode.
 
 ## [Array](Array.md)
 
