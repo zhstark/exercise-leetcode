@@ -2,7 +2,7 @@ Records thinking and code of Leetcode problems.
 
 Code is written by C++ or Python.
 
-:neckbeard: means that problem has *Facebook* tag in LeetCode.
+:triangular_flag_on_post: means that problem has *Facebook* tag in LeetCode.
 
 ## [Array](Array.md)
 
@@ -32,7 +32,7 @@ Code is written by C++ or Python.
 
 ## [BackTracking](BackTracking.md)
 
-- [301 Remove Invalid Parentheses](https://leetcode.com/problems/remove-invalid-parentheses/) :neckbeard:
+- [301 Remove Invalid Parentheses](https://leetcode.com/problems/remove-invalid-parentheses/) :triangular_flag_on_post:
 - 282 Expression Add Operators
 - 39 Combination Sum
 - 46 Permutations
@@ -86,6 +86,8 @@ Code is written by C++ or Python.
 - 0-1 knapsack
 - Longest Common Substring
 - [1092 Shortest Common Supersequence](https://leetcode.com/problems/shortest-common-supersequence/)
+- [1105 Filling Bookcase Shelves](https://leetcode.com/problems/filling-bookcase-shelves/)
+- [322 Coin Change](https://leetcode.com/problems/coin-change/)
 - 152 Maximum Product Subarray
 - 639 Decode Ways II 
 - 91 Decode ways 

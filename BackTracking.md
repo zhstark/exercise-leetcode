@@ -1,4 +1,4 @@
-## [301 Remove Invalid Parentheses](https://leetcode.com/problems/remove-invalid-parentheses/)
+## [301 Remove Invalid Parentheses](https://leetcode.com/problems/remove-invalid-parentheses/) :triangular_flag_on_post:
 
 > Remove the minimum number of invalid parentheses in order to make the input string valid. Return all possible results.
 

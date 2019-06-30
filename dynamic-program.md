@@ -3,6 +3,7 @@
   - [0-1 knapsack](#0-1-knapsack)
   - [Longset common substring](#Longset-common-substring)
   - [1092 Shortest Common Supersequence](#1092-Shortest-Common-Supersequence)
+  - [1105 Filling Bookcase Shelves](#1092-Shortest-Common-Supersequence)
   - [322 Coin Change](#322-Coin-Change)
   - [152 Maximum Product Subarray](#152-Maximum-Product-Subarray)
   - [639 Decode Ways II](#639-Decode-Ways-II)
@@ -185,6 +186,51 @@ class Solution {
         return dp[n][m];
     }
 }
+```
+
+## [1105 Filling Bookcase Shelves](https://leetcode.com/problems/filling-bookcase-shelves/)
+
+> We have a sequence of books: the i-th book has thickness books\[i\]\[0\] and height books\[i\]\[1\].
+
+> We want to place these books in order onto bookcase shelves that have total width shelf_width.
+
+> We choose some of the books to place on this shelf (such that the sum of their thickness is <= shelf_width), then build another level of shelf of the bookcase so that the total height of the bookcase has increased by the maximum height of the books we just put down.  We repeat this process until there are no more books to place.
+
+> Note again that at each step of the above process, the order of the books we place is the same order as the given sequence of books.  For example, if we have an ordered list of 5 books, we might place the first and second book onto the first shelf, the third book on the second shelf, and the fourth and fifth book on the last shelf.
+
+> Return the minimum possible height that the total bookshelf can be after placing shelves in this manner.
+
+Consider `dp[i]` as the minumum height up to the ith book, the `i+1`th book has two option:
+
+1. Place it on another level. then `dp[i+1]=dp[i]+h[i+1]`;
+2. Place it together with other books. Then `dp[i+1]=min(dp[j]+max(h[j+1] ... h[i]))`, where `sum(w[j+1]...w[i])<shelf_width`. This means `j+1`th book to `i+1`th book make up a level.
+
+`dp[i+1]=min( option1, option2)`
+
+```cpp
+class Solution {
+public:
+    int minHeightShelves(vector<vector<int>>& books, int shelf_width) {
+        int n=books.size();
+        vector<int> dp( n+1, INT_MAX);
+        dp[0]=0;
+        for(int i=0; i<n; ++i){
+            auto book=books[i];
+            int w=book[0];
+            int h=book[1];
+            // option 1
+            dp[i+1]=dp[i]+h;
+            // option 2
+            for(int j=i-1; j>=0; --j){
+                w+=books[j][0];
+                h=max(h ,books[j][1]);
+                if(w>shelf_width)   break;
+                dp[i+1]=min(dp[i+1], dp[j]+h);
+            }
+        }
+        return dp[n];
+    }
+};
 ```
 
 ## [322 Coin Change](https://leetcode.com/problems/coin-change/)
