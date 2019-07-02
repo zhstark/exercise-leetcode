@@ -40,6 +40,7 @@ Code is written by C++ or Python.
 
 ## [Divide and Conquuer](Divide&Conquer.md)
 
+- [973 K Closest Points to Origin](https://leetcode.com/problems/k-closest-points-to-origin/) :triangular_flag_on_post:
 - 493 Reverse Pairs
 - 315 Count of Smaller Numbers After Self
 - 327 Count of Range Sum

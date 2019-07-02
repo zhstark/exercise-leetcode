@@ -1,3 +1,63 @@
+## [973 K Closest Points to Origin](https://leetcode.com/problems/k-closest-points-to-origin/) :triangular_flag_on_post:
+
+> We have a list of points on the plane.  Find the K closest points to the origin (0, 0).
+
+> (Here, the distance between two points on a plane is the Euclidean distance.)
+
+> You may return the answer in any order.  The answer is guaranteed to be unique (except for the order that it is in.)
+
+It can be easily solved by using priority queue. But the time complexity will be O(nlogK). Can we solve it in O(n)?
+
+Since the answer can be in any order, we can modify quick sort to solve this problem because it is not necessary to sort all the elements. In quick sort, we get an index `p` in each iteration, all the elements before it is smaller than it and all the elements after it is bigger than it. If the number of smaller elements is smaller than `K`, we donot need to sort it, but just sort the posterior part.
+
+Then average time complexity is O(n)
+
+C++
+
+``` cpp
+class Solution {
+public:
+    vector<vector<int>> kClosest(vector<vector<int>>& points, int K) {
+        quickSort(points, 0, points.size()-1,K);
+        vector<vector<int>> ans;
+        for(int i=0; i<K;++i){
+            ans.push_back(points[i]);
+        }
+        return ans;
+    }
+private:
+    int dist(vector<int>& point){
+        return point[0]*point[0]+point[1]*point[1];
+    }
+    
+    int partition(vector<vector<int>>& points, int left, int right){
+        int p=left;
+        int random=rand()%(right-left+1)+left;
+        swap(points[random], points[right]);
+        int pivot=dist(points[right]);
+        for(int now=left; now<right; ++now){
+            if(dist(points[now])<pivot){
+                swap(points[p], points[now]);
+                ++p;
+            }
+        }
+        swap(points[p], points[right]); 
+        return p;
+    }
+    
+    void quickSort(vector<vector<int>>& points, int left, int right, int K){
+        if(left<right){
+            int p=partition(points, left, right);
+            int leftLength=p-left+1;
+            if(leftLength<K)
+                quickSort(points, p+1, right, K-leftLength);
+            else if(leftLength>K)
+                quickSort(points, left, p-1, K);
+        }
+    }
+};
+```
+
 ## 493 Reverse Pairs
 
 [link](https://leetcode.com/problems/reverse-pairs/)
