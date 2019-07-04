@@ -14,8 +14,9 @@ Code is written by C++ or Python.
 
 - [1078 Occurrences After Bigram](https://leetcode.com/problems/occurrences-after-bigram/)
 
-## [Hash Table](HashTable.py)
+## [Hash Table](HashTable.md)
 
+- [560 Subarray Sum Equals K](https://leetcode.com/problems/subarray-sum-equals-k/) :triangular_flag_on_post:
 - 325 Maximum Size Subarray Sum Equals k
 - 311 Sparse Matrix Multiplication
 
