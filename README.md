@@ -104,6 +104,7 @@ Code is written by C++ or Python.
 ## [Math](math.md)
 
 - 991 Broken Calculator
+- [50 Pow(x, n)](https://leetcode.com/problems/powx-n/) :triangular_flag_on_post:
 
 ## [NP Problem](NP.py)
 

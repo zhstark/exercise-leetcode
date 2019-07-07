@@ -1,3 +1,40 @@
+## [50 Pow(x, n)](https://leetcode.com/problems/powx-n/) :triangular_flag_on_post:
+
+> Implement pow(x, n), which calculates x raised to the power n (x^n).
+
+1. cornor case: What if x<0? x=0? x>0?
+2. `a^n=a^(n/2) * a^(n/2)                 if n is even`
+3. `a^n=a^((n-1)/2) * a^((n-1)/2) * a     if n is odd`
+
+C++
+
+When using `abs()` function, we cannot give it an integer type because it will return an integer type and it does not work if input is `-2^n`.
+
+```cpp
+class Solution {
+public:
+    double myPow(double x, int n) {
+        if(x==0)    return 0.0;
+        
+        // using abs() has a problem that there will be an error if n= -2^n
+        long long N=n;
+        double absPow=myAbsPow(x, abs(N));
+        return n<0? 1/absPow: absPow;
+    }
+private:
+    // -2147483648 cannot be represented in type 'int'
+    double myAbsPow(double x, unsigned int n){
+        if(n==0)    return 1.0;
+        if(n==1)    return x;
+        
+        double half=myAbsPow(x, n/2);
+        // 注意优先级
+        if((n&0x1)==0)  return half*half;
+        return half*half*x;
+    }
+};
+```
+
 ## Problem 991 Broken Calculator
 
 On a broken calculator that has a number showing on its display, we can perform two operations:
