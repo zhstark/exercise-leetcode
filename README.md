@@ -80,7 +80,7 @@ Code is written by C++ or Python.
 
 ## [Greedy Algorithm](Greedy.md)
 
-- 621 Task Scheduler
+- [621 Task Scheduler](https://leetcode.com/problems/task-scheduler/) :triangular_flag_on_post: 
 - 253 Meeting room II
 
 ## [Dynamic programming](dynamic-program.md)
