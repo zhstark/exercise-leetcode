@@ -21,6 +21,17 @@ A
 
 那么按照任务次数从多到少的顺序，将任务依次填入进去就好了，即`idle_slots=idle_slots-count[i]`，但此时注意，如果有任务的次数跟最多的一样，那么要减的不是 `count[i]`，而是`count[i]-1`。因为框架最后一行随便填，没有 idle。所以`idle_slots=idle_slots- min(count[i], max_val)`（`max_val`为最多的次数-1)
 
+当然，也有可能最后不会有 idle，比如 n=4 时，任务很多，如下种情况，
+
+```
+ABCDEF
+ABCDEG
+ABCDS
+AB
+```
+
+此时按照上述算法，idle_slots最终小于 0，所以最后 return 的时候要判断一下。
+
 写代码的时候变量名经常忘记加 s，要注意一下。
 
 C++
