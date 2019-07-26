@@ -75,19 +75,25 @@ private:
 
 ## Problem 282 Expression Add Operators
 
-##### step1
+**step1**
 
-对输入的数字有不同的切分方式，所以要想办法遍历所有可能的组合。
-类似有分治排序的分割方法，不同是每次分割都会去组合一遍，而不是把全部分割为单个数字后再组合
-分割过程还要注意“00”的存在
+- 对输入的数字有不同的切分方式，所以要想办法遍历所有可能的组合。
+- 类似有分治排序的分割方法，不同是每次分割都会去组合一遍，而不是把全部分割为单个数字后再组合
+- 分割过程还要注意“00”的存在
 
-##### step2
-遍历所有+ - * 运算。
-对于‘*’， 需要保存前面挨着的乘法得到的数（没有乘法运算就是上一个数）
-A+B*C 为上一步的表达式，值为curr， 这一步 *d
-在上一步要保存 prev=B*C 传递到下一次迭代。
-A+B*C*d=(A+B*C)-prev+prev*d
-更新 prev=prev*d
+**step2**
+- 遍历所有+ - * 运算。
+- 对于‘*’， 需要保存前面挨着的乘法得到的数（没有乘法运算就是上一个数）
+- A+B*C 为上一步的表达式，值为curr， 这一步 *d
+- 在上一步要保存 prev=B*C 传递到下一次迭代。
+- A+B\*C\*d=(A+B\*C)-prev+prev\*d
+- 更新 prev=prev*d
+
+C++注意两点：
+1. 字符串可能太长，不能用 `stoi`，用`stol`，转换为 long 型
+2. 注意 `00`  情况的出现，在主 function 和辅助 function 中都要检查
+
+Python
 
 ```python
 class Solution:
@@ -128,6 +134,50 @@ class Solution:
                                 int(temp), num[i:],  ans+'*'+temp, l)
 ```
 
+C++
+```cpp
+class Solution {
+public:
+    //1. string to long
+    vector<string> addOperators(string num, int target) {
+        vector<string> ans;
+        if(num.size()==0)
+            return ans;
+        string temp=string(1,num[0]);
+        for(int i=0; i<num.size(); i++){
+            if(num[0]=='0' && i>0)
+                break;
+            long number=stol(num.substr(0,i+1));
+            backtracing(num, i+1, target, number, number, num.substr(0,i+1), ans);
+        }
+        return ans;
+    }
+    
+private:
+    void backtracing(string& num, int index, int target, long long curr, long long prev, string temp, vector<string>& ans){
+        if(index==num.size()){
+            if(curr==target){
+                cout<<curr<<endl;
+                cout<<target<<endl;
+                ans.push_back(temp);
+            }
+            return;
+        }
+        for(int i=index; i<num.size(); ++i){
+            if(num[index]=='0' && i>index)
+                break;
+            long number=stol(num.substr(index, i-index+1));
+            //+
+            backtracing(num, i+1, target, curr+number, number, temp+"+"+num.substr(index, i-index+1), ans);
+            //-
+            backtracing(num, i+1, target, curr-number, -1*number, temp+"-"+num.substr(index, i-index+1), ans);
+            //*
+            backtracing(num, i+1, target, curr-prev+prev*number, prev*number, temp+"*"+num.substr(index, i-index+1), ans);
+        }
+        
+    }
+};
+```
 ## Problem 39 Combination Sum
 
 犯了2个错误：

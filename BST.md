@@ -5,7 +5,7 @@
 
 2、如果没有了左子树，那么输出该节点，然后指向其右子树，回到第一步
 
-##### No 173
+### No 173
 
 ```py
 # Definition for a binary tree node.
@@ -48,9 +48,114 @@ class BSTIterator(object):
         return self.stack!=[]
 ```
 
+### [426 Convert Binary Search Tree to Sorted Doubly Linked List](https://leetcode.com/problems/convert-binary-search-tree-to-sorted-doubly-linked-list/)   :triangular_flag_on_post: 
+
+C++ 
+```cpp
+/*
+// Definition for a Node.
+class Node {
+public:
+    int val;
+    Node* left;
+    Node* right;
+
+    Node() {}
+
+    Node(int _val, Node* _left, Node* _right) {
+        val = _val;
+        left = _left;
+        right = _right;
+    }
+};
+*/
+class Solution {
+public:
+    Node* treeToDoublyList(Node* root) {
+        if(!root)   return NULL;
+        inorder(root);
+        last->right=first;
+        first->left=last;
+        return first;
+        
+    }
+private:
+    Node* first=NULL;
+    Node* last=NULL;
+    
+    void inorder(Node* node){
+        if(node!=NULL){        
+            inorder(node->left);
+            if(last!=NULL){
+                last->right=node;
+                node->left=last;    
+            }
+            else
+                first=node;
+            
+            last=node;
+            inorder(node->right);
+        }
+        return;
+    }
+};
+```
+
+Java
+```Java
+/*
+// Definition for a Node.
+class Node {
+    public int val;
+    public Node left;
+    public Node right;
+
+    public Node() {}
+
+    public Node(int _val,Node _left,Node _right) {
+        val = _val;
+        left = _left;
+        right = _right;
+    }
+};
+*/
+class Solution {
+    private Node first=null;
+    private Node last=null;
+    
+    private void inOrder(Node node){
+        if(node!=null){
+            inOrder(node.left);
+            if(last!=null){
+                last.right=node;
+                node.left=last;
+            }
+            else
+                first=node;
+            
+            last=node;
+            inOrder(node.right);
+        }
+        return;
+        
+    }
+    public Node treeToDoublyList(Node root) {
+        first=null;
+        last=null;
+        if(root ==null)   return null;
+        inOrder(root);
+        first.left=last;
+        last.right=first;
+        return first;
+    }
+}
+```
+
+
+
 ## Pre-Order
 
-###### ------No 617 -------------------------
+###No 617 
 
 in Python:
 `x or y` = `x if x else y` = `x ? x : y` in C++

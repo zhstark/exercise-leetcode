@@ -10,26 +10,25 @@ Code is written by C++ or Python.
 - 240 Search a 2D Matrix II
 - 442 Find All Duplicates in an Array
 
-## [String](String.md)
+## [Binary Search](Binary-Search.md)
 
-- [1078 Occurrences After Bigram](https://leetcode.com/problems/occurrences-after-bigram/)
+- [154 Find Minimum in Rotated Sorted Array II](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array-ii/)
+- [81 Search in Rotated Sorted Array II](https://leetcode.com/problems/search-in-rotated-sorted-array-ii/)
 
-## [Hash Table](HashTable.md)
+## [Binary Tree](Binary-Tree.md)
 
-- [560 Subarray Sum Equals K](https://leetcode.com/problems/subarray-sum-equals-k/) :triangular_flag_on_post:
-- 325 Maximum Size Subarray Sum Equals k
-- 311 Sparse Matrix Multiplication
+- 105 Construct Binary Tree from Preorder and Inorder Traversal
+- 106 Construct Binary Tree from Inorder and Postorder Traversal
 
-## [Stack and Queue](Stack&Queue.md)
+## [BST (Binary Search Tree)](BST.md)
 
-- 232 Implement Queue using Stacks
-- 225 Implement Stack using Queues
+- 173
+- [426 Convert Binary Search Tree to Sorted Doubly Linked List](https://leetcode.com/problems/convert-binary-search-tree-to-sorted-doubly-linked-list/)   :triangular_flag_on_post: 
+- 617
 
-## [Sliding Window](Sliding-Window.md)
+## [BFS](BFS.md)
 
-- 76 Minimum Window Substring
-- 995 Minimum Number of K Consecutive Bit Flips
-- 1004
+- 279
 
 ## [BackTracking](BackTracking.md)
 
@@ -46,42 +45,10 @@ Code is written by C++ or Python.
 - 315 Count of Smaller Numbers After Self
 - 327 Count of Range Sum
 
-## [Binary Search](Binary-Search.md)
-
-- [154 Find Minimum in Rotated Sorted Array II](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array-ii/)
-- [81 Search in Rotated Sorted Array II](https://leetcode.com/problems/search-in-rotated-sorted-array-ii/)
-
-## [Binary Tree](Binary-Tree.md)
-
-- 105 Construct Binary Tree from Preorder and Inorder Traversal
-- 106 Construct Binary Tree from Inorder and Postorder Traversal
-
-## [BST (Binary Search Tree)](BST.md)
-
-- 173
-- 617
-
-## [BFS](BFS.md)
-
-- 279
-
 ## [DFS](DFS.md)
 
 - 543
 - 200
-
-## [Graph-Dijkstra](Dijkstra.md)
-
-- 743
-
-## [Topological Sort](TopologicalSort.py)
-
-- 210
-
-## [Greedy Algorithm](Greedy.md)
-
-- [621 Task Scheduler](https://leetcode.com/problems/task-scheduler/) :triangular_flag_on_post: 
-- 253 Meeting room II
 
 ## [Dynamic programming](dynamic-program.md)
 
@@ -101,6 +68,21 @@ Code is written by C++ or Python.
 - [343 Integer Break](https://leetcode.com/problems/integer-break/)
 - [474 Ones and Zeroes](https://leetcode.com/problems/ones-and-zeroes/)
 
+## [Graph-Dijkstra](Dijkstra.md)
+
+- 743
+
+## [Greedy Algorithm](Greedy.md)
+
+- [621 Task Scheduler](https://leetcode.com/problems/task-scheduler/) :triangular_flag_on_post: 
+- 253 Meeting room II
+
+## [Hash Table](HashTable.md)
+
+- [560 Subarray Sum Equals K](https://leetcode.com/problems/subarray-sum-equals-k/) :triangular_flag_on_post:
+- 325 Maximum Size Subarray Sum Equals k
+- 311 Sparse Matrix Multiplication
+
 ## [Math](math.md)
 
 - 991 Broken Calculator
@@ -109,6 +91,25 @@ Code is written by C++ or Python.
 ## [NP Problem](NP.py)
 
 - 17
+
+## [String](String.md)
+
+- [1078 Occurrences After Bigram](https://leetcode.com/problems/occurrences-after-bigram/)
+
+## [Stack and Queue](Stack&Queue.md)
+
+- 232 Implement Queue using Stacks
+- 225 Implement Stack using Queues
+
+## [Sliding Window](Sliding-Window.md)
+
+- 76 Minimum Window Substring
+- 995 Minimum Number of K Consecutive Bit Flips
+- 1004
+
+## [Topological Sort](TopologicalSort.py)
+
+- 210
 
 ## Some tips of different kinds of problems
 
