@@ -33,7 +33,7 @@ Code is written by C++ or Python.
 ## [BackTracking](BackTracking.md)
 
 - [301 Remove Invalid Parentheses](https://leetcode.com/problems/remove-invalid-parentheses/) :triangular_flag_on_post:
-- 282 Expression Add Operators
+- 282 Expression Add Operators   :triangular_flag_on_post: 
 - 39 Combination Sum
 - 46 Permutations
 - 47 Permutations II
@@ -47,6 +47,7 @@ Code is written by C++ or Python.
 
 ## [DFS](DFS.md)
 
+- [785 Is Graph Bipartite?](https://leetcode.com/problems/is-graph-bipartite/) :triangular_flag_on_post:
 - 543
 - 200
 
@@ -62,11 +63,15 @@ Code is written by C++ or Python.
 - 91 Decode ways 
 - 139 Word Break
 - 188 Best Time to Buy and Sell Stock IV 
-- 560 Subarray Sum Equals K
+- [560 Subarray Sum Equals K](https://leetcode.com/problems/subarray-sum-equals-k/submissions/) :triangular_flag_on_post: 
 - 403 frog jump 
 - 一个 string 返回最长的重复 string 
 - [343 Integer Break](https://leetcode.com/problems/integer-break/)
 - [474 Ones and Zeroes](https://leetcode.com/problems/ones-and-zeroes/)
+
+## [File](File.md)
+
+- [158 Read N Characters Given Read4 II - Call multiple times](https://leetcode.com/problems/read-n-characters-given-read4-ii-call-multiple-times/)  :triangular_flag_on_post: 
 
 ## [Graph-Dijkstra](Dijkstra.md)
 
@@ -95,6 +100,8 @@ Code is written by C++ or Python.
 ## [String](String.md)
 
 - [1078 Occurrences After Bigram](https://leetcode.com/problems/occurrences-after-bigram/)
+- [125 Valid Palindrome](https://leetcode.com/problems/valid-palindrome/)  :triangular_flag_on_post:
+- [680 Valid Palindrome II](https://leetcode.com/problems/valid-palindrome-ii/)  :triangular_flag_on_post:
 
 ## [Stack and Queue](Stack&Queue.md)
 
@@ -110,6 +117,10 @@ Code is written by C++ or Python.
 ## [Topological Sort](TopologicalSort.py)
 
 - 210
+
+## [Union Find](Union-Find.md)
+
+- [721 Accounts Merge](https://leetcode.com/problems/accounts-merge/)  :triangular_flag_on_post:
 
 ## Some tips of different kinds of problems
 

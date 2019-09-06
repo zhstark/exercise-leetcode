@@ -1,3 +1,82 @@
+[785 Is Graph Bipartite?](https://leetcode.com/problems/is-graph-bipartite/) :triangular_flag_on_post:
+
+> Given an undirected graph, return true if and only if it is bipartite.
+
+> Recall that a graph is bipartite if we can split it's set of nodes into two independent subsets A and B such that every edge in the graph has one node in A and another node in B.
+
+> The graph is given in the following form: graph[i] is a list of indexes j for which the edge between nodes i and j exists.  Each node is an integer between 0 and graph.length - 1.  There are no self edges or parallel edges: graph[i] does not contain i, and it doesn't contain any element twice.
+
+Using two colors to color the graph and to see if the adjacent nodes having the same color.
+
+Using an array `colors[]` to mark the nodes' color.
+
+- 0 not colored
+- 1 red
+- -1 blue
+
+So coloring the graph can be made by DFS and BFS. If the node has not been colored, color it, otherwise, to see the color is that it is supposed to be.
+
+**Notes that the graph may be disconnected, maybe several independent sub-graph. So we need to run the algorithm from each node.**
+
+C++
+
+```cpp
+class Solution {
+public:
+    bool isBipartite(vector<vector<int>>& graph) {
+        int n=graph.size();
+        vector<int> colors(n, 0);
+        for(int i=0; i<n; ++i){
+            if(colors[i]==0 && !validColor(graph, colors, 1, i))
+                return false;
+        }
+        return true;
+    }
+private:
+    bool validColor(vector<vector<int>>& graph, vector<int>& colors, int color, int index){
+        if(colors[index]!=0)
+            return colors[index]==color;
+        
+        colors[index]=color;
+        for(auto next: graph[index]){
+            if(!validColor(graph, colors, -color, next))
+                return false;
+        }
+        return true;
+    }
+};
+```
+
+Java
+
+```Java
+class Solution {
+    public boolean isBipartite(int[][] graph) {
+        int n=graph.length;
+        int[] colors=new int[n];
+        for(int i=0; i<n; ++i){
+            if(colors[i]==0 && !dfs_validColor(graph, colors, 1, i)){
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    public boolean dfs_validColor(int[][] graph, int[] colors, int color, int index){
+        if(colors[index]!=0)
+            return colors[index]==color;
+        
+        colors[index]=color;
+        for(int next: graph[index]){
+            if(!dfs_validColor(graph, colors, -color, next))
+                return false;
+        }
+        return true;
+    }
+}
+```
+
+
 ## [1079 Letter Tile Possibilities](https://leetcode.com/problems/letter-tile-possibilities/)
 
 > You have a set of tiles, where each tile has one letter tiles\[i\] printed on it.  Return the number of possible non-empty sequences of letters you can make.

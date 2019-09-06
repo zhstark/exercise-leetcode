@@ -57,3 +57,74 @@ class Solution {
 }
 ```
 
+## [125 Valid Palindrome](https://leetcode.com/problems/valid-palindrome/)  :triangular_flag_on_post:
+
+> Given a string, determine if it is a palindrome, considering only alphanumeric characters and ignoring cases.
+
+> Note: For the purpose of this problem, we define empty string as valid palindrome.
+
+In order to save space, we just use 2 pointers, one from the string's begin to end, the other pass from the end to the begin.
+
+C++
+
+```cpp
+class Solution {
+public:
+    bool isPalindrome(string s) {
+        for(int i=0, j=s.size(); i<j; ++i,--j){
+            while(!isalnum(s[i]) && i<j)    ++i;
+            while(!isalnum(s[j]) && i<j)    --j;
+            if(tolower(s[i])!=tolower(s[j]))    return false;
+        }
+        return true;
+    }
+};
+```
+
+Java
+
+```Java
+class Solution {
+    public boolean isPalindrome(String s) {
+        for(int i=0, j=s.length()-1; i<j; ++i, --j){
+            while(!Character.isLetterOrDigit(s.charAt(i)) &&i <j)   ++i;
+            while(!Character.isLetterOrDigit(s.charAt(j)) && i<j)   --j;
+            if(Character.toLowerCase(s.charAt(i))!=Character.toLowerCase(s.charAt(j))) 
+                return false;
+        }
+        return true;
+    }
+}
+```
+
+## [680 Valid Palindrome II](https://leetcode.com/problems/valid-palindrome-ii/)  :triangular_flag_on_post:
+
+> Given a non-empty string s, you may delete at most one character. Judge whether you can make it a palindrome.
+
+Just check it step by step using 2 pointers like the former one. If we meet unmatched characters, now we just need to check whether `S(i+1)_j` and `Si_(j-1)` are palindromes.
+
+Java
+
+```Java
+class Solution {
+    public boolean validPalindrome(String s) {
+        int l=0;
+        int r=s.length()-1;
+        while(l<r){
+            if(s.charAt(l) != s.charAt(r))
+                return isPalindrome(s, l+1, r) || isPalindrome(s, l, r-1);
+            l++;
+            r--;
+        }
+        return true;
+    }
+    public boolean isPalindrome(String s, int l, int r){
+        while(l<r){
+            if(s.charAt(l)!=s.charAt(r)) return false;
+            l++;
+            r--;
+        }
+        return true;
+    }
+}
+```
