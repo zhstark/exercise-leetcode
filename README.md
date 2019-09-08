@@ -1,6 +1,6 @@
 Records thinking and code of Leetcode problems.
 
-Code is written by C++ or Python.
+Code is written by C++ or Python or Java.
 
 :triangular_flag_on_post: means that problem has *Facebook* tag in LeetCode.
 
@@ -92,6 +92,7 @@ Code is written by C++ or Python.
 
 - 991 Broken Calculator
 - [50 Pow(x, n)](https://leetcode.com/problems/powx-n/) :triangular_flag_on_post:
+- [523 Continuous Subarray Sum](https://leetcode.com/problems/continuous-subarray-sum/) :triangular_flag_on_post:
 
 ## [NP Problem](NP.py)
 
