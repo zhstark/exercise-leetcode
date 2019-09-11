@@ -88,6 +88,10 @@ Code is written by C++ or Python or Java.
 - 325 Maximum Size Subarray Sum Equals k
 - 311 Sparse Matrix Multiplication
 
+## [Linked List](Linked-List.md)
+
+- [92 Reverse Linked List II](https://leetcode.com/problems/reverse-linked-list-ii/)
+
 ## [Math](math.md)
 
 - 991 Broken Calculator
@@ -117,7 +121,7 @@ Code is written by C++ or Python or Java.
 
 ## [Topological Sort](TopologicalSort.py)
 
-- ## [269 Alien Dictionary](https://leetcode.com/problems/alien-dictionary/)
+- ## [269 Alien Dictionary](https://leetcode.com/problems/alien-dictionary/) :triangular_flag_on_post:
 - 210
 
 ## [Union Find](Union-Find.md)
@@ -129,5 +133,4 @@ Code is written by C++ or Python or Java.
 - [2 dimension matrix](2-dimension-matrix.md)
 - [Bit manipulation](Bit_Manipulation.md)
 - [Binary Search](Binary-Search.md)
-- [Linked List](Linked-List.md)
 - [N Sum](NSum.md)

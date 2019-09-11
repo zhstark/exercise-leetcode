@@ -48,3 +48,51 @@ struct ListNode {
 
 
  ```
+
+## [92 Reverse Linked List II](https://leetcode.com/problems/reverse-linked-list-ii/)
+
+> Reverse a linked list from position m to n. Do it in one-pass.
+
+> Note: 1 ≤ m ≤ n ≤ length of list.
+
+```Java
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public ListNode reverseBetween(ListNode head, int m, int n) {
+        if(head==null)  return null;
+        if(m>=n)    return head;
+        ListNode pre=null;
+        ListNode curr=head;
+        int dis=n-m;
+        for(int i=0; i<m-1; i++){
+            ListNode next=curr.next;
+            pre=curr;
+            curr=next;
+        }
+        
+        ListNode pre2=null;
+        ListNode head2=curr;
+        for(int i=0; i<dis; ++i){
+            ListNode next=curr.next;
+            curr.next=pre2;
+            pre2=curr;
+            curr=next;
+        }
+        if(pre!=null)
+            pre.next=curr;
+        else
+            head= curr;
+        head2.next=curr.next;
+        curr.next=pre2;
+        return head;
+        
+    }
+}
+```
