@@ -1,7 +1,7 @@
 拓扑排序需要使用图的数据结构来方便实现。
 构建好图之后需要创建一个数组来记录各节点的入度。
 
-## [269 Alien Dictionary](https://leetcode.com/problems/alien-dictionary/)
+## [269 Alien Dictionary](https://leetcode.com/problems/alien-dictionary/)  :triangular_flag_on_post:
 
 > There is a new alien language which uses the latin alphabet. However, the order among letters are unknown to you. You receive a list of non-empty words from the dictionary, where words are sorted lexicographically by the rules of this new language. Derive the order of letters in this language.
 

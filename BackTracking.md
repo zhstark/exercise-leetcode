@@ -73,7 +73,7 @@ private:
 
 
 
-## Problem 282 Expression Add Operators
+## 282 Expression Add Operators  :triangular_flag_on_post: 
 
 **step1**
 
@@ -143,7 +143,6 @@ public:
         vector<string> ans;
         if(num.size()==0)
             return ans;
-        string temp=string(1,num[0]);
         for(int i=0; i<num.size(); i++){
             if(num[0]=='0' && i>0)
                 break;
@@ -157,8 +156,6 @@ private:
     void backtracing(string& num, int index, int target, long long curr, long long prev, string temp, vector<string>& ans){
         if(index==num.size()){
             if(curr==target){
-                cout<<curr<<endl;
-                cout<<target<<endl;
                 ans.push_back(temp);
             }
             return;
@@ -178,6 +175,45 @@ private:
     }
 };
 ```
+
+Java
+
+```Java
+class Solution {
+    public List<String> addOperators(String num, int target) {
+        List<String> res=new ArrayList();
+        if(num==null || num.length()==0)  return res;
+        for(int i=0; i<num.length(); ++i){
+            if(num.charAt(0)=='0' && i>0)   break;
+            String curr=num.substring(0, i+1);
+            Long element=Long.parseLong(curr);
+            backtracking(num, i+1, target, element, element, curr, res);
+        }
+        return res;
+    }
+    
+    public void backtracking(String num, int index, int target, Long sum, Long prev, String temp, List<String> res){
+        if(index==num.length() && sum==target){
+            res.add(temp);
+            return;
+        }
+        
+        for(int i=index; i<num.length(); ++i){
+            if(num.charAt(index)=='0' && i>index)
+                break;
+            String curr=num.substring(index, i+1);
+            Long element=Long.parseLong(curr);
+            //+
+            backtracking(num, i+1, target, sum+element, element, temp+"+"+curr, res);
+            //-
+            backtracking(num, i+1, target, sum-element, -1*element, temp+"-"+curr, res);
+            //*
+            backtracking(num, i+1, target, sum-prev+prev*element, prev*element, temp+"*"+curr, res);        
+        }
+    }
+}
+```
+
 ## Problem 39 Combination Sum
 
 犯了2个错误：

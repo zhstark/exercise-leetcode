@@ -17,6 +17,7 @@ Code is written by C++ or Python or Java.
 
 ## [Binary Tree](Binary-Tree.md)
 
+- ## [173 Binary Search Tree Iterator](https://leetcode.com/problems/binary-search-tree-iterator/)  :triangular_flag_on_post:
 - 105 Construct Binary Tree from Preorder and Inorder Traversal
 - 106 Construct Binary Tree from Inorder and Postorder Traversal
 
@@ -115,7 +116,7 @@ Code is written by C++ or Python or Java.
 
 ## [Sliding Window](Sliding-Window.md)
 
-- 76 Minimum Window Substring
+- [76 Minimum Window Substring](https://leetcode.com/problems/minimum-window-substring/)  :triangular_flag_on_post:
 - 995 Minimum Number of K Consecutive Bit Flips
 - 1004
 

@@ -5,7 +5,49 @@ At any point in time only one of these pointers move and the other one remains f
 
 对 sliding window 问题，我们用两个指针，右指针用于扩展当前窗口，左指针用于缩小窗口。在任何时间点，只有一个指针移动，而另外一个静止。
 
-### Problem 76 Minimum Window Substring
+## [76 Minimum Window Substring](https://leetcode.com/problems/minimum-window-substring/)  :triangular_flag_on_post:
+
+> Given a string S and a string T, find the minimum window in S which will contain all the characters in T in complexity O(n).
+
+关于 sliding window 这类问题，这个题目的讨论中有答题模板，忘了怎么写可以去看一看，点击题目超链接就可。
+
+对于这个问题，这里用了一个数组作为 dictionary 来查询 T 中元素的个数，比用 hashmap 方便些。另外不需要实时记录 substring，而是记录其起始位置，随后截取 substring。另外用一个 `counter` 来表示此事的 substring 是否是 valid。
+
+Java
+
+```Java
+class Solution {
+    public String minWindow(String s, String t) {
+        int[] dic=new int[128];
+        for(int i=0; i<t.length(); ++i){
+            dic[t.charAt(i)]++;
+        }
+        int left=0, right=0;
+        int head=0;
+        int counter=t.length();
+        int length=Integer.MAX_VALUE;//record the length of valid result
+        while(right<s.length()){
+            if(dic[s.charAt(right)]>0){
+                counter--;
+            }
+            dic[s.charAt(right)]--;
+            right++;
+            while(counter==0){
+                if(length>right-left){
+                    head=left;
+                    length=right-left;
+                }
+                if(dic[s.charAt(left)]==0){
+                    counter++;
+                }
+                dic[s.charAt(left)]++;
+                left++;
+            }
+        }
+        return length==Integer.MAX_VALUE? "": s.substring(head, head+length);
+    }
+}
+```
 
 用 counter 结合Counter(substring) 来记录判断是否已包换全部 substring
 比较 subtring 长度后记得更新 substring 长度（length）
