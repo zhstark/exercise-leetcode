@@ -165,5 +165,45 @@ public:
         return false;
     }
 };
+```
 
+## [410 Split Array Largest Sum](https://leetcode.com/problems/split-array-largest-sum/)
+
+> Given an array which consists of non-negative integers and an integer m, you can split the array into m non-empty continuous subarrays. Write an algorithm to minimize the largest sum among these m subarrays.
+
+这个题的思路我感觉很奇特，非常规。我们随便选一个数 X，看看能不能在每个子数组和不超过 X 的情况下，分成 m 份。这样每次选一个 X，对数组进行遍历、分组，如果当前子数组加入后面一个数就超过 X 了，那么就要在此时分开，最后查看分成的分数是否小于 m 份，如果小于，说明可以这个 X 符合要求。那么就将这个题目转为用二分法查找这个 X。时间复杂度为 O(nlog(sumofnums))，空间复杂度为 O(1)
+
+```Java
+class Solution {
+    public int splitArray(int[] nums, int m) {
+        long left=0, right=0;
+        for(int i=0; i<nums.length; ++i){
+            right+=nums[i];
+            left=Math.max(left, nums[i]);
+        }
+        long ans=right;
+        while(left<=right){
+            long mid=left+(right-left)/2;
+            
+            long sum=0;
+            int cnt=1;
+            for(int i=0; i<nums.length; ++i){
+                if(sum+nums[i]>mid){
+                    cnt++;
+                    sum=nums[i];
+                }
+                else{
+                    sum+=nums[i];
+                }
+            }
+            if(cnt<=m){
+                ans=Math.min(ans, mid);
+                right=mid-1;
+            }
+            else
+                left=mid+1;
+        }
+        return (int)ans;
+    }
+}
 ```

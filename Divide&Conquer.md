@@ -58,6 +58,67 @@ private:
 };
 ```
 
+## [23 Merge k Sorted Lists](https://leetcode.com/problems/merge-k-sorted-lists/)   :triangular_flag_on_post:
+
+> Merge k sorted linked lists and return it as one sorted list. Analyze and describe its complexity.
+
+There is no need to put in into logn levels like merge sort. We can just merge 2 linked list at once. Than the time complextiy is O(n), while the space complexity is O(1).
+
+```Java
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public ListNode mergeKLists(ListNode[] lists) {
+        if(lists.length==0) return null;
+        int interval=1;
+        while(interval<lists.length){
+            int i=0;
+            int j=i+interval;
+            while(j<lists.length){
+                lists[i]=merge2(lists[i], lists[j]);
+                i=j+interval;
+                j=i+interval;
+            }
+            interval*=2;
+
+        }
+        return lists[0];
+    }
+    
+    public ListNode merge2(ListNode t1, ListNode t2){
+        if(t1==null || t2==null)
+            return t1==null? t2:t1;
+        
+        ListNode dummy=new ListNode(0);
+        ListNode curr=dummy;
+        while(t1!=null && t2!=null){
+            if(t1.val>t2.val){
+                curr.next=t2;
+                t2=t2.next;
+            }
+            else{
+                curr.next=t1;
+                t1=t1.next;
+            }
+            curr=curr.next;
+        }
+        if(t1!=null){
+            curr.next=t1;
+        }
+        if(t2!=null){
+            curr.next=t2;
+        }
+        return dummy.next;
+    }
+}
+```
+
 ## 493 Reverse Pairs
 
 [link](https://leetcode.com/problems/reverse-pairs/)

@@ -1,3 +1,49 @@
+## [23 Merge k Sorted Lists](https://leetcode.com/problems/merge-k-sorted-lists/)   :triangular_flag_on_post:
+
+> Merge k sorted linked lists and return it as one sorted list. Analyze and describe its complexity.
+
+It can be solved by using priority queue, but this method will using O(K) space complexity. It can also solved by using [divide and conquer](Difide&Conquer.md) in O(1) space complexity.
+
+```Java
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public ListNode mergeKLists(ListNode[] lists) {
+        if(lists.length==0) return null;
+        PriorityQueue<ListNode> q=new PriorityQueue(lists.length, new Comparator<ListNode>(){
+            public int compare(ListNode t1, ListNode t2){
+                return t1.val-t2.val;
+            }
+        });
+        for(int i=0; i<lists.length; ++i){
+            if(lists[i]!=null)
+                q.add(lists[i]);
+        }
+        if(q.isEmpty()) return null;
+        ListNode head=q.peek();
+        q.poll();
+        if(head.next!=null)
+            q.add(head.next);
+        ListNode curr=head;
+        while(!q.isEmpty()){
+            ListNode node=q.peek();
+            q.poll();
+            if(node.next!=null)
+                q.add(node.next);
+            curr.next=node;
+            curr=node;
+        }
+        return head;
+    }
+}
+```
+
 ## 232 Implement Queue using Stacks
 
 [link](https://leetcode.com/problems/implement-queue-using-stacks/)

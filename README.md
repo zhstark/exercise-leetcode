@@ -14,10 +14,11 @@ Code is written by C++ or Python or Java.
 
 - [154 Find Minimum in Rotated Sorted Array II](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array-ii/)
 - [81 Search in Rotated Sorted Array II](https://leetcode.com/problems/search-in-rotated-sorted-array-ii/)
-
+- [410 Split Array Largest Sum](https://leetcode.com/problems/split-array-largest-sum/)
+  
 ## [Binary Tree](Binary-Tree.md)
 
-- ## [173 Binary Search Tree Iterator](https://leetcode.com/problems/binary-search-tree-iterator/)  :triangular_flag_on_post:
+- [173 Binary Search Tree Iterator](https://leetcode.com/problems/binary-search-tree-iterator/)  :triangular_flag_on_post:
 - 105 Construct Binary Tree from Preorder and Inorder Traversal
 - 106 Construct Binary Tree from Inorder and Postorder Traversal
 
@@ -91,7 +92,9 @@ Code is written by C++ or Python or Java.
 
 ## [Linked List](Linked-List.md)
 
+- [23 Merge k Sorted Lists](https://leetcode.com/problems/merge-k-sorted-lists/)   :triangular_flag_on_post:
 - [92 Reverse Linked List II](https://leetcode.com/problems/reverse-linked-list-ii/)
+- [86 Partition List](https://leetcode.com/problems/partition-list/)
 
 ## [Math](math.md)
 
@@ -111,6 +114,7 @@ Code is written by C++ or Python or Java.
 
 ## [Stack and Queue](Stack&Queue.md)
 
+- [23 Merge k Sorted Lists](https://leetcode.com/problems/merge-k-sorted-lists/)   :triangular_flag_on_post:
 - 232 Implement Queue using Stacks
 - 225 Implement Stack using Queues
 

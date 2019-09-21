@@ -45,9 +45,13 @@ struct ListNode {
     ListNode *next;
     ListNode(int x) : val(x), next(NULL) {}
 };
-
-
  ```
+
+## [23 Merge k Sorted Lists](https://leetcode.com/problems/merge-k-sorted-lists/)   :triangular_flag_on_post:
+
+> Merge k sorted linked lists and return it as one sorted list. Analyze and describe its complexity.
+
+The methods used to solve this problem are [priority queue](Stack&Queue.md) and [divide and conquer](Divide&Conquer.md). The time complexity are both O(Nlogk). See the details in these 2 files.
 
 ## [92 Reverse Linked List II](https://leetcode.com/problems/reverse-linked-list-ii/)
 
@@ -92,7 +96,49 @@ class Solution {
         head2.next=curr.next;
         curr.next=pre2;
         return head;
-        
+    }
+}
+```
+
+## [86 Partition List](https://leetcode.com/problems/partition-list/)
+
+> Given a linked list and a value x, partition it such that all nodes less than x come before nodes greater than or equal to x.
+
+> You should preserve the original relative order of the nodes in each of the two partitions.
+
+The intuition is to use 2 pointers -- small and big to traverse the linked list and record all the nodes which are samller than x and which are big than x. This step split the whole linked list into 2 sub linked list.
+
+Then we joint these 2 linked list together, than the final linked list will meet the requirement.
+
+```Java
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public ListNode partition(ListNode head, int x) {
+        ListNode node1=new ListNode(0);
+        ListNode node2=new ListNode(0);
+        ListNode small=node1;
+        ListNode big=node2;
+        while(head!=null){
+            if(head.val<x){
+                small.next=head;
+                small=small.next;
+            }
+            else{
+                big.next=head;
+                big=big.next;
+            }
+            head=head.next;
+        }
+        big.next=null;
+        small.next=node2.next;
+        return node1.next;
     }
 }
 ```
