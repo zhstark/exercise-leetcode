@@ -30,6 +30,8 @@ Code is written by C++ or Python or Java.
 
 ## [BFS](BFS.md)
 
+- [314 Binary Tree Vertical Order Traversal](https://leetcode.com/problems/binary-tree-vertical-order-traversal/)  :triangular_flag_on_post:
+- [199 Binary Tree Right Side View](https://leetcode.com/problems/binary-tree-right-side-view/) :triangular_flag_on_post:
 - 279
 
 ## [BackTracking](BackTracking.md)
@@ -118,15 +120,17 @@ Code is written by C++ or Python or Java.
 - 232 Implement Queue using Stacks
 - 225 Implement Stack using Queues
 
-## [Sliding Window](Sliding-Window.md)
+## [2Pointers](2Pointers.md)
 
 - [76 Minimum Window Substring](https://leetcode.com/problems/minimum-window-substring/)  :triangular_flag_on_post:
+- [438 Find All Anagrams in a String](https://leetcode.com/problems/find-all-anagrams-in-a-string/)  :triangular_flag_on_post:
 - 995 Minimum Number of K Consecutive Bit Flips
 - 1004
+- [986 Interval List Intersections](https://leetcode.com/problems/interval-list-intersections/) :triangular_flag_on_post:
 
 ## [Topological Sort](TopologicalSort.py)
 
-- ## [269 Alien Dictionary](https://leetcode.com/problems/alien-dictionary/) :triangular_flag_on_post:
+- [269 Alien Dictionary](https://leetcode.com/problems/alien-dictionary/) :triangular_flag_on_post:
 - 210
 
 ## [Union Find](Union-Find.md)

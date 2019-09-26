@@ -216,6 +216,8 @@ class Solution {
 
 ## Problem 39 Combination Sum
 
+**当用 Java 时**因为 Java 一直是引用，所以当把一个解添加到 list 中时要 new 一个新的，不然后续操作会在更改这个解
+
 犯了2个错误：
 1.
 最开始传数组：
@@ -225,6 +227,40 @@ self.f(candidates[i:], target-candidates[i], l, temp)
 2.
 想象每次迭代的 i：
 1-2-1 与 1-1-2重复了，所以要注意不要重复
+
+Java
+
+```Java
+class Solution {
+    public List<List<Integer>> combinationSum(int[] A, int target) {
+        Arrays.sort(A);
+        List<List<Integer>> ans=new ArrayList<>();
+        List<Integer> temp=new ArrayList();
+        for(int i=0; i<A.length; ++i){
+            temp.add(A[i]);
+            backTrack(A, i, ans, temp, A[i], target);
+            temp.remove(temp.size()-1);
+        }
+        return ans;
+    }
+    public void backTrack(int[] A, int index, List<List<Integer>> ans, List<Integer> temp, int sum, int target){
+        if(sum==target){
+            ans.add(new ArrayList<Integer>(temp));
+            return;
+        }
+        if(index==A.length || sum>target)
+            return;
+        
+        for(int i=index; i<A.length; ++i){
+            temp.add(A[i]);
+            backTrack(A, i, ans, temp, sum+A[i], target);
+            temp.remove(temp.size()-1);
+        }
+    }
+}
+```
+
+Python
 
 ```python
 class Solution:
@@ -333,6 +369,10 @@ class Solution:
 等回溯结束，又该填第二个位置时，我们怎么知道这次填的是该位置的第二次或第三次:
 在那个 for loop 里， i>0
 
+Python 答案里面如果 target 是 0，那么空 list 会是正确答案，而不是带有 0的 list，Java 的答案是带有 0 的list 才是答案，但测试用例中没有 target=0 出现，所以不知道哪个对，但是 python 的方法更简洁些
+
+Python
+
 ```py
 class Solution:
     def combinationSum2(self, candidates, target):
@@ -361,6 +401,44 @@ class Solution:
             self.backtrack(ca[i+1:], target-ca[i], ans, temp+[ca[i]])
 ```
 
+Java
+
+```Java
+class Solution {
+    public List<List<Integer>> combinationSum2(int[] candidates, int target) {
+        List<List<Integer>> ans= new ArrayList();
+        if(candidates.length==0)    return ans;
+        Arrays.sort(candidates);
+        List<Integer> temp=new ArrayList();
+        for(int i=0; i<candidates.length;++i){
+            if(i>0 && candidates[i]==candidates[i-1])
+                continue;
+            temp.add(candidates[i]);
+            backtracking(candidates, i+1, candidates[i], target,  temp, ans);
+            temp.remove(temp.size()-1);
+        }
+        return ans;
+    }
+    public void backtracking(int[] A, int index, int sum, int target, List<Integer> temp, List<List<Integer>> ans){
+        if(sum==target){
+            ans.add(new ArrayList<Integer>(temp));
+            return;
+        }
+        if(index>=A.length || sum>target)
+            return;
+    
+        else{
+            for(int i=index; i<A.length; ++i){
+                if(i>index && A[i]==A[i-1])
+                    continue;
+                temp.add(A[i]);
+                backtracking(A, i+1, sum+A[i], target, temp, ans);
+                temp.remove(temp.size()-1);
+            }
+        }
+    }
+}
+```
 
 ## 对一个 list 的不同修改的递归方法
 比如对`l[x]`，第一次回溯回来改值为1，第二次为2，不需要复制一个数组，改数，传递，只需在传递前在原数组更改，回溯后再改回来
