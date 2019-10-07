@@ -128,3 +128,85 @@ class Solution {
     }
 }
 ```
+
+## [161 One Edit Distance](https://leetcode.com/problems/one-edit-distance/)  :triangular_flag_on_post:
+
+> Given two strings s and t, determine if they are both one edit distance apart.
+
+> Note: 
+
+> There are 3 possiblities to satisify one edit distance apart:
+
+> Insert a character into s to get t
+> Delete a character from s to get t
+> Replace a character of s to get t
+
+还是人别家的答案写的好啊
+
+```Java
+class Solution {
+    public boolean isOneEditDistance(String s, String t) {
+        for (int i = 0; i < Math.min(s.length(), t.length()); i++) { 
+            if (s.charAt(i) != t.charAt(i)) {
+                if (s.length() == t.length()) // s has the same length as t, so the only possibility is replacing one char in s and t
+                    return s.substring(i + 1).equals(t.substring(i + 1));
+                else if (s.length() < t.length()) // t is longer than s, so the only possibility is deleting one char from t
+                    return s.substring(i).equals(t.substring(i + 1));	        	
+                else // s is longer than t, so the only possibility is deleting one char from s
+                    return t.substring(i).equals(s.substring(i + 1));
+            }
+        }       
+        //All previous chars are the same, the only possibility is deleting the end char in the longer one of s and t 
+        return Math.abs(s.length() - t.length()) == 1;        
+    }
+}
+```
+
+## [65 Valid Number](https://leetcode.com/problems/valid-number/)  :triangular_flag_on_post:
+
+We start with trimming.
+
+If we see [0-9] we reset the number flags.
+- We can only see . if we didn't see e or ..
+- We can only see e if we didn't see e but we did see a number. We reset numberAfterE flag.
+- We can only see + and - in the beginning and after an e
+- any other character break the validation.
+- At the and it is only valid if there was at least 1 number and if we did see an e then a number after it as well.
+
+So basically the number should match this regular expression:
+
+`[-+]?(([0-9]+(.[0-9]*)?)|.[0-9]+)(e[-+]?[0-9]+)?`
+
+```Java
+class Solution {
+    public boolean isNumber(String s) {
+        s=s.trim();
+        boolean numberSeen=false;
+        boolean eSeen=false;
+        boolean pointSeen=false;
+        for(int i=0; i<s.length(); ++i){
+            char c=s.charAt(i);
+            if(c=='+'||c=='-'){
+                if(i!=0 && s.charAt(i-1)!='e')
+                    return false;
+            }
+            else if(c>='0' && c<='9')
+                numberSeen=true;
+            else if(c=='.'){
+                if(pointSeen || eSeen)
+                    return false;
+                pointSeen=true;
+            }
+            else if(c=='e'||c=='E'){
+                if(eSeen || numberSeen==false)
+                    return false;
+                eSeen=true;
+                numberSeen=false;
+            }
+            else
+                return false;
+        }
+        return numberSeen;
+    }
+}
+```

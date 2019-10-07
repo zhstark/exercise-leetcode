@@ -174,3 +174,45 @@ private:
     }
 };
 ```
+
+## [124 Binary Tree Maximum Path Sum](https://leetcode.com/problems/binary-tree-maximum-path-sum/)    :triangular_flag_on_post:
+
+> Given a non-empty binary tree, find the maximum path sum.
+
+> For this problem, a path is defined as any sequence of nodes from some starting node to any node in the tree along the parent-child connections. The path must contain at least one node and does not need to go through the root.
+
+post order, think it clearly that that the return value means and what the meaning of ans is.
+
+Using post order traverse the tree, every time I finish recursive, it will return the max value that added from this node to another node in the subtree. So when I traverse the left subtree and right subtree, I get the max value of left path and right path. Then I added them, and get the maximum path sum cross this node, and compare this value with stored answer value. Then return the node value add the larger value between left path and right path.
+
+Since we do not need to add to the leaves, if the sub path is less than 0, we do not need to add it.
+
+```Java
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    private int ans=Integer.MIN_VALUE;
+    public int maxPathSum(TreeNode root) {
+        ans=Math.max(postOrder(root), ans);
+        return ans;
+    }
+    public int postOrder(TreeNode root){
+        if(root!=null){
+            int left=postOrder(root.left);
+            int right=postOrder(root.right);
+            if(left<0)  left=0;
+            if(right<0) right=0;
+            ans=Math.max(root.val+left+right, ans);
+            return root.val+Math.max(left, right);
+        }
+        return 0;
+    }
+}
+```

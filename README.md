@@ -21,6 +21,7 @@ Code is written by C++ or Python or Java.
 - [173 Binary Search Tree Iterator](https://leetcode.com/problems/binary-search-tree-iterator/)  :triangular_flag_on_post:
 - 105 Construct Binary Tree from Preorder and Inorder Traversal
 - 106 Construct Binary Tree from Inorder and Postorder Traversal
+- [124 Binary Tree Maximum Path Sum](https://leetcode.com/problems/binary-tree-maximum-path-sum/)   :triangular_flag_on_post:
 
 ## [BST (Binary Search Tree)](BST.md)
 
@@ -33,6 +34,8 @@ Code is written by C++ or Python or Java.
 - [314 Binary Tree Vertical Order Traversal](https://leetcode.com/problems/binary-tree-vertical-order-traversal/)  :triangular_flag_on_post:
 - [199 Binary Tree Right Side View](https://leetcode.com/problems/binary-tree-right-side-view/) :triangular_flag_on_post:
 - 279
+- [1210 Minimum Moves to Reach Target with Rotations](https://leetcode.com/problems/minimum-moves-to-reach-target-with-rotations/)
+- [542 01 Matrix](https://leetcode.com/problems/01-matrix/)
 
 ## [BackTracking](BackTracking.md)
 
@@ -48,6 +51,7 @@ Code is written by C++ or Python or Java.
 - 493 Reverse Pairs
 - 315 Count of Smaller Numbers After Self
 - 327 Count of Range Sum
+- [51 N-Queens](https://leetcode.com/problems/n-queens/)
 
 ## [DFS](DFS.md)
 
@@ -113,6 +117,8 @@ Code is written by C++ or Python or Java.
 - [1078 Occurrences After Bigram](https://leetcode.com/problems/occurrences-after-bigram/)
 - [125 Valid Palindrome](https://leetcode.com/problems/valid-palindrome/)  :triangular_flag_on_post:
 - [680 Valid Palindrome II](https://leetcode.com/problems/valid-palindrome-ii/)  :triangular_flag_on_post:
+- [161 One Edit Distance](https://leetcode.com/problems/one-edit-distance/)   :triangular_flag_on_post:
+- [65 Valid Number](https://leetcode.com/problems/valid-number/)  :triangular_flag_on_post:
 
 ## [Stack and Queue](Stack&Queue.md)
 

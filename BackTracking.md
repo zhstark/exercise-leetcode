@@ -295,10 +295,44 @@ class Solution:
 
 ## Problem 46 Permutations
 
-f(nums) 是传该数组，在原数组上更改
-f(nums[:]) 是传数据，原数组不变
-我做这个题的方法排名倒数，discuss 有很多其他方法，现在还不能理解
+f(nums) 是传该数组，在原数组上更改，f(nums[:]) 是传数据，原数组不变
+
+在Java 中，不方便将一个数组分割组合，那么有两种方法来遍历，
+1. 用一个 set 记录该元素是否访问过
+2. 在第 i 步中，每遍历到一个元素，就将该元素与第 i 个元素交换，那么在第 i 个之前的元素都是遍历过的，后面的时候没有访问的。可以用`Collections.swap()`交换，但是需要把输入改为 List
+
 其他 backtrack 的题：78，90，47，39，40，131
+
+Java
+
+```Java
+class Solution {
+    public List<List<Integer>> permute(int[] nums) {
+        List<List<Integer>> ans=new ArrayList();
+        if(nums.length==0)  return ans;
+        ArrayList<Integer> nums_lst = new ArrayList<Integer>();
+        for (int num : nums)
+            nums_lst.add(num);
+        backtracking(nums_lst, ans, new ArrayList<Integer>(), 0);
+        return ans;
+    }
+    public void backtracking(List<Integer> nums, List<List<Integer>> ans, List<Integer> temp, int index){
+        if(index==nums.size()){
+            ans.add(new ArrayList(temp));
+            return;
+        }
+        for(int i=index; i<nums.size(); ++i){
+            temp.add(nums.get(i));
+            Collections.swap(nums, index, i);
+            backtracking(nums, ans, temp, index+1);
+            Collections.swap(nums,index, i);
+            temp.remove(temp.size()-1);
+        }
+    }
+}
+```
+
+python
 
 ```python
 class Solution:
@@ -502,5 +536,74 @@ private:
         }
     }
 };
+```
 
+## [51 N-Queens](https://leetcode.com/problems/n-queens/)
+
+> The n-queens puzzle is the problem of placing n queens on an n×n chessboard such that no two queens attack each other.
+
+> Given an integer n, return all distinct solutions to the n-queens puzzle.
+
+> Each solution contains a distinct board configuration of the n-queens' placement, where 'Q' and '.' both indicate a queen and an empty space respectively.
+
+ you should think how to solve the problem step by step, and think whether it should be splited in to several small functions.
+
+ So this question can be thought that
+ 1. traverse, using backtracking
+ 2. when it comes to a position, check if we can put queen in this position
+ 3. construct the result
+
+```Java
+class Solution {
+    public List<List<String>> solveNQueens(int n) {
+        List<List<String>> ans=new ArrayList();
+        if(n<=0)    return ans;
+        char[][] solution=new char[n][n];
+        for(int i=0; i<n; i++){
+            for(int j=0; j<n; j++){
+                solution[i][j]='.';
+            }
+        }
+        backtrack(solution, ans, 0);
+        return ans;
+    }
+
+    public void backtrack(char[][] chars, List<List<String>> ans, int row){
+        if(row==chars.length){
+            addSolution(chars, ans);
+            return;
+        }
+        for(int col=0; col<chars.length; ++col){
+            if(isValid(row, col, chars)){
+                chars[row][col]='Q';
+                backtrack(chars, ans, row+1);
+                chars[row][col]='.';
+            }
+        }
+    }
+    
+    public void addSolution(char[][] chars, List<List<String>> ans){
+        List<String> temp=new ArrayList();
+        for(int i=0; i<chars.length; ++i){
+            temp.add(new String(chars[i]));
+        }
+        ans.add(temp);
+    }
+    
+    public boolean isValid(int row, int col, char[][] chars){
+        for(int i=row-1; i>=0; --i){
+            if(chars[i][col]=='Q')
+                return false;
+        }
+        for(int i=row-1, j=col-1; i>=0 && j>=0; --i,--j){
+            if(chars[i][j]=='Q')
+                return false;
+        }
+        for(int i=row-1, j=col+1; j<chars.length && i>=0; ++j, --i){
+            if(chars[i][j]=='Q')
+                return false;
+        }
+        return true;
+    }
+}
 ```
