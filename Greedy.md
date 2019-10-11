@@ -111,3 +111,27 @@ class Solution:
             heapq.heappush(l, k.end)
         return len(l)
 ```
+
+## [53 Maximum Subarray](https://leetcode.com/problems/maximum-subarray/)
+
+> Given an integer array nums, find the contiguous subarray (containing at least one number) which has the largest sum and return its sum.
+
+Keep adding the number into the sum, if the sum is smaller than 0, it means we need to have a new start.
+
+```Java
+class Solution {
+    public int maxSubArray(int[] nums) {
+        if(nums.length==0)  return 0;
+        int maxNum=nums[0];
+        int sum=nums[0];
+        for(int i=1; i<nums.length;++i){
+            if(sum>0)
+                sum+=nums[i];
+            else
+                sum=nums[i];
+            maxNum=Math.max(maxNum, sum);
+        }
+        return maxNum;
+    }
+}
+```

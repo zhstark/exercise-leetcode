@@ -246,3 +246,56 @@ class Solution {
     }
 }
 ```
+
+## [31 Next Permutation](https://leetcode.com/problems/next-permutation/)  :triangular_flag_on_post:
+
+> mplement next permutation, which rearranges numbers into the lexicographically next greater permutation of numbers.
+
+> If such arrangement is not possible, it must rearrange it as the lowest possible order (ie, sorted in ascending order).
+
+> The replacement must be in-place and use only constant extra memory.
+
+此题难点在于理清逻辑，找个下个组合与当前组合的关系：需要如何排列
+
+1. 找到相邻的两个点，`a[i], a[i-1]`，满足`a[i]>a[i-1]`，并且自`a[i]`往后为递减。（倒着找方便）
+2. 在`a[i]` 开始递减的部分中找到比`a[i-1]`大的最小的数，设为`a[j]`，那么`a[j]` 应该换在 `a[i-1]` 的位置。（倒着找）
+3. 将`i-1`后的数升序排列，因为将`a[i-1], a[j]` 互换后，这些数仍是降序，所以只要将其翻转就好了
+
+时间复杂度 O(3*n)
+
+```Java
+class Solution {
+    public void nextPermutation(int[] nums) {
+        if(nums.length<=1)  return;
+        int i=nums.length-1;
+        for(;i>0; --i){
+            if(nums[i]>nums[i-1])
+                break;
+        }
+        if(i<=0){
+            reverse(nums, 0);
+            return;
+        }
+        int j=nums.length-1;
+        for(;j>=0; --j){
+            if(nums[j]>nums[i-1])
+                break;
+        }
+        swap(nums, i-1, j);
+        reverse(nums, i);
+    }
+    public void swap(int[] nums, int index1, int index2){
+        int temp=nums[index1];
+        nums[index1]=nums[index2];
+        nums[index2]=temp;
+    }
+    public void reverse(int[] nums, int index){
+        int i=index, j=nums.length-1;
+        while(i<j){
+            swap(nums, i,j);
+            ++i;
+            --j;
+        }
+    }
+}
+```

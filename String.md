@@ -13,8 +13,6 @@ When `pprev==first && prev==second`, we know `curr` is that we want.
 Time O(n), space O(n)
 
 ```Cpp
-
-
 class Solution {
 public:
     vector<string> findOcurrences(string text, string first, string second) {

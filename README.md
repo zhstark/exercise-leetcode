@@ -9,6 +9,7 @@ Code is written by C++ or Python or Java.
 - 287 Find the duplicate number
 - 240 Search a 2D Matrix II
 - 442 Find All Duplicates in an Array
+- [31 Next Permutation](https://leetcode.com/problems/next-permutation/) :triangular_flag_on_post:
 
 ## [Binary Search](Binary-Search.md)
 
@@ -36,6 +37,7 @@ Code is written by C++ or Python or Java.
 - 279
 - [1210 Minimum Moves to Reach Target with Rotations](https://leetcode.com/problems/minimum-moves-to-reach-target-with-rotations/)
 - [542 01 Matrix](https://leetcode.com/problems/01-matrix/)
+- [317 Shortest Distance from All Buildings](https://leetcode.com/problems/shortest-distance-from-all-buildings/)   :triangular_flag_on_post:
 
 ## [BackTracking](BackTracking.md)
 
@@ -89,6 +91,7 @@ Code is written by C++ or Python or Java.
 
 - [621 Task Scheduler](https://leetcode.com/problems/task-scheduler/) :triangular_flag_on_post: 
 - 253 Meeting room II
+- [53 Maximum Subarray](https://leetcode.com/problems/maximum-subarray/)
 
 ## [Hash Table](HashTable.md)
 
@@ -107,6 +110,7 @@ Code is written by C++ or Python or Java.
 - 991 Broken Calculator
 - [50 Pow(x, n)](https://leetcode.com/problems/powx-n/) :triangular_flag_on_post:
 - [523 Continuous Subarray Sum](https://leetcode.com/problems/continuous-subarray-sum/) :triangular_flag_on_post:
+- [825. Friends Of Appropriate Ages](https://leetcode.com/problems/friends-of-appropriate-ages/)    :triangular_flag_on_post: 
 
 ## [NP Problem](NP.py)
 
@@ -133,6 +137,12 @@ Code is written by C++ or Python or Java.
 - 995 Minimum Number of K Consecutive Bit Flips
 - 1004
 - [986 Interval List Intersections](https://leetcode.com/problems/interval-list-intersections/) :triangular_flag_on_post:
+
+## [Trie](Trie.md)
+
+- [211 Add and Search Word - Data structure design](https://leetcode.com/problems/add-and-search-word-data-structure-design)  :triangular_flag_on_post:
+
+
 
 ## [Topological Sort](TopologicalSort.py)
 

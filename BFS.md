@@ -255,3 +255,70 @@ public class Solution {
     }
 }
 ```
+
+## [317 Shortest Distance from All Buildings](https://leetcode.com/problems/shortest-distance-from-all-buildings/)  :triangular_flag_on_post:
+
+> You want to build a house on an empty land which reaches all buildings in the shortest amount of distance. You can only move up, down, left and right. You are given a 2D grid of values 0, 1 or 2, where:
+
+> - Each 0 marks an empty land which you can pass by freely.
+> - Each 1 marks a building which you cannot pass through.
+> - Each 2 marks an obstacle which you cannot pass through.
+
+Traverse the matrix. For each building, use BFS to compute the shortest distance from each '0' to
+this building. After we do this for all the buildings, we can get the sum of shortest distance
+from every '0' to all reachable buildings. This value is stored
+in 'distance[][]'. For example, if grid[2][2] == 0, distance[2][2] is the sum of shortest distance from this block to all reachable buildings.
+Time complexity: O(number of 1)O(number of 0) ~ O(m^2n^2)
+
+```Java
+class Solution {
+    public int shortestDistance(int[][] grid) {
+        if(grid.length==0 || grid[0].length==0) return -1;
+        int n=grid.length, m=grid[0].length;
+        int[][] distence=new int[n][m];
+        int[][] reach=new int[n][m];
+        int[] dx={0,1,0,-1};
+        int[] dy={1,0,-1,0};
+        int buildings=0;
+        for(int i=0; i<n; ++i){
+            for(int j=0; j<m; ++j){
+                if(grid[i][j]==1){
+                    //BFS
+                    buildings++;
+                    Queue<int[]> q=new LinkedList();
+                    boolean[][] visited=new boolean[n][m];
+                    q.add(new int[]{i,j});
+                    visited[i][j]=true;
+                    int dis=1;
+                    while(!q.isEmpty()){
+                        int len=q.size();
+                        for(int co=0; co<len; ++co){
+                            int[] point=q.poll();
+                            for(int k=0; k<4; ++k){
+                                int nx=point[0]+dx[k];
+                                int ny=point[1]+dy[k];
+                                if(nx>=0 && nx<n && ny>=0 && ny<m && !visited[nx][ny]&& grid[nx][ny]==0){
+                                    distence[nx][ny]+=dis;
+                                    reach[nx][ny]++;
+                                    q.add(new int[] {nx,ny});
+                                    visited[nx][ny]=true;
+                                }
+                            }
+                        }
+                        dis++;
+                    }
+                }
+            }
+        }
+        int ans=Integer.MAX_VALUE;
+        for(int i=0; i<n; ++i){
+            for(int j=0; j<m; ++j){
+                if(grid[i][j]==0 && reach[i][j]==buildings){
+                    ans=Math.min(distence[i][j], ans);
+                }
+            }
+        }
+        return ans==Integer.MAX_VALUE?-1:ans;
+    }
+}
+```

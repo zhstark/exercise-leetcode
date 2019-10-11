@@ -150,3 +150,36 @@ public:
     }
 };
 ```
+
+## [825. Friends Of Appropriate Ages](https://leetcode.com/problems/friends-of-appropriate-ages/)    :triangular_flag_on_post: 
+
+```Java
+class Solution {
+    public int numFriendRequests(int[] ages) {
+        if(ages.length<=1)  return 0;
+        int n=ages.length;
+        int[] agesNum=new int[121];
+        for(int i=0; i<n; ++i){
+            agesNum[ages[i]]++;
+        }
+        int count=0;
+        for(int i=0; i<121; ++i){
+            for(int j=0; j<121; ++j){
+                if(makeFriend(i,j)){
+                    if(i==j)
+                        count+=(agesNum[i]*(agesNum[i]-1));
+                    else{
+                        count+=agesNum[j]*agesNum[i];
+                    }
+                }
+            }
+        }
+        return count;
+    }
+    public boolean makeFriend(int A, int B){
+        if(B<=0.5*A+7 || B>A)
+            return false;
+        return true;
+    }
+}
+```
