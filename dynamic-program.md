@@ -14,6 +14,9 @@
   - [403 frog jump](#403-frog-jump)
   - [343 Integer Break](#343-Integer-Break)
   - [474 Ones and Zeroes](#474-Ones-and-Zeroes)
+  - [1027 Longest Arithmetic Sequence](#1027-Longest-Arithmetic-Sequence)  :triangular_flag_on_post:
+  - [123 Best Time to Buy and Sell Stock III](#123-best-time-to-buy-and-sell-stock-iiihttpsleetcodecomproblemsbest-time-to-buy-and-sell-stock-iii)
+  - [518 Coin Change 2](#518-coin-change-2httpsleetcodecomproblemscoin-change-2)
 
 ## 0-1 knapsack
 
@@ -237,7 +240,7 @@ public:
 
 > You are given coins of different denominations and a total amount of money amount. Write a function to compute the fewest number of coins that you need to make up that amount. If that amount of money cannot be made up by any combination of the coins, return -1.
 
-Consider *F(i)* is the fewest numboer of coins that make up *i*. Before calculating *F(i)*, we have to compute all minimum counts for amounts up to *i*. Then *F(i)=min_j=0..n-1 F(i-c_j)+1*. For each *i*, we calculate *F(i)* by traversing all the coins.
+Think in dp method. If now we have all solutions for `amount<a`, when `amount=a`, we traverse all the coins, if `a-coins[i]` in `[0, amount]`, `dp[a]=min(dp[a-coins[i]]+1, dp[a])`. Now 
 
 Time complexity: O(S\*n), where S is the amount, n is the denomination count. On each step, we get *F(i)* in n iterations.
 
@@ -674,5 +677,246 @@ public:
         return ans;
     }
 };
+```
 
+## [1027 Longest Arithmetic Sequence](https://leetcode.com/problems/longest-arithmetic-sequence/)   :triangular_flag_on_post:
+
+>  Given an array A of integers, return the length of the longest arithmetic subsequence in A.
+
+> Recall that a subsequence of A is a list `A[i_1], A[i_2], ..., A[i_k]` with` 0 <= i_1 < i_2 < ... < i_k <= A.length - 1`, and that a sequence B is arithmetic if` B[i+1] - B[i] `are all the same value (for `0 <= i < B.length - 1`).
+
+可太难了这题，咋能想到用 hashmap 的 list
+
+We iteratively build the map for a new index i, by considering all elements to the left one-by-one.
+
+For each pair of indices `(j,i) j<i` and difference `d=A[i]-A[j]`, we check if there was an existing chain at the index `j` with different `d` already.
+
+```Java
+class Solution {
+    public int longestArithSeqLength(int[] A) {
+        if(A.length==0) return 0;
+        Map<Integer, Integer>[] dp=new HashMap[A.length];
+        int ans=1;
+        for(int i=0; i<A.length; ++i){
+            dp[i]=new HashMap();
+        }
+        for(int i=1; i<A.length; ++i){
+            int x=A[i];
+            for(int j=0; j<i; ++j){
+                int y=A[j];
+                int d=x-y;
+                int len=2;
+                if(dp[j].containsKey(d))
+                    len=dp[j].get(d)+1;
+                //dp[i].put(d, dp[i].getOrDefault(d,0)+len);
+                dp[i].put(d, len);
+                ans=Math.max(ans, len);
+            }
+        }
+        return ans;
+    }
+}
+```
+
+## [714 Best Time to Buy and Sell Stock with Transaction Fee](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/)
+
+> Your are given an array of integers prices, for which the i-th element is the price of a given stock on day i; and a non-negative integer fee representing a transaction fee.
+
+> You may complete as many transactions as you like, but you need to pay the transaction fee for each transaction. You may not buy more than 1 share of a stock at a time (ie. you must sell the stock share before you buy again.)
+
+> Return the maximum profit you can make.
+
+dp 问题的关键是找状态，对这个题我们可以定义两个数组代表两个状态：
+
+- `buy[]`代表在买入状态下，第 i 天的最大收益
+- `sell[]`代表在卖出状态下，第 i 天的最大收益
+
+那么在第 i 天，我们有三种可能：买入，啥也不干，卖出。在买入状态下，可以买入，`buy[i]=sell[i-1]-prices[i]`, 也可以啥也不干`buy[i]=buy[i-1]`；同理，在卖出状态下，`sell[i]=buy[i-1]+prices[i]-fee Or sell[i]=sell[i-1]`，两种选项中取最大的就好了。
+
+**初始状态** `buy[0]=-prices[0], sell[0]=0`，最后只要返回在最后一天的卖出状态的收益
+
+```Java
+class Solution {
+    public int maxProfit(int[] prices, int fee) {
+        if(prices.length<=1)  return 0;
+        int[] buy=new int[prices.length];
+        int[] sell=new int[prices.length];
+        buy[0]=-prices[0];
+        sell[0]=0;
+        for(int i=1; i<prices.length; i++){
+            buy[i]=Math.max(buy[i-1], sell[i-1]-prices[i]);
+            sell[i]=Math.max(sell[i-1], buy[i-1]+prices[i]-fee);
+        }
+        return sell[prices.length-1];
+    }
+}
+```
+
+此时时间复杂度 O(n),空间复杂度 O(n)。因为我们发现最新的状态只与上一次状态有关，那么保存这么多状态就没有意义，就可以将空间复杂度降为常数
+
+```Java
+class Solution {
+    public int maxProfit(int[] prices, int fee) {
+        if(prices.length<=1)    return 0;
+        int buy=-prices[0];
+        int sell=0;
+        for(int i=1; i<prices.length; ++i){
+            buy=Math.max(buy, sell-prices[i]);
+            sell=Math.max(sell, buy+prices[i]-fee);
+        }
+        return sell;
+    }
+}
+```
+
+## [123 Best Time to Buy and Sell Stock III](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iii/)
+
+> Say you have an array for which the ith element is the price of a given stock on day i.
+
+> Design an algorithm to find the maximum profit. You may complete at most two transactions.
+
+1. 定义状态
+   `f(k,i)`表示 the profit at most k transactions at ith day
+2. 状态转移方程
+   `f(k,i)=max(f(k,i-1), f(k-1,j)+prices[i]-prices[j]), j<i and make the expression max`
+   `f(k,i)=max(f(k,i-1), prices[i]+max(f(k-1,j)-prices[j])`
+3. 初始状态
+   `f(k,0)=0;  f(0,i)=0`
+
+有了这些条件就好做了
+```Java
+class Solution {
+    public int maxProfit(int[] prices) {
+        if(prices.length<=1)    return 0;
+        int[][] dp=new int[3][prices.length];
+        int ans=Integer.MIN_VALUE;
+        for(int k=1; k<3; ++k){
+            int lastProfit=dp[k-1][0]-prices[0];
+            for(int i=1; i<prices.length; ++i){
+                dp[k][i]=Math.max(dp[k][i-1], prices[i]+lastProfit);
+                lastProfit=Math.max(lastProfit, dp[k-1][i]-prices[i]);
+            }
+        }
+        return dp[2][prices.length-1];
+    }
+```
+时间复杂度和空间复杂度都为 O(kn)，还有更简单的方法，只维持一时的状态，很难表达清楚， 看代码吧
+
+```Java
+class Solution {
+    public int maxProfit(int[] prices) {
+        if(prices.length<=1)    return 0;
+        int firstBuy=Integer.MIN_VALUE;
+        int secondBuy=Integer.MIN_VALUE;
+        int firstSell=0;
+        int secondSell=0;
+        for(int i=0; i<prices.length;++i){
+            int p=prices[i];
+            secondSell=Math.max(secondSell, p+secondBuy);
+            secondBuy=Math.max(secondBuy, firstSell-p);
+            firstSell=Math.max(firstSell, p+firstBuy);
+            firstBuy=Math.max(firstBuy, -p);           
+        }
+        return secondSell;
+    }
+}
+```
+时间复杂度为 O(n), 空间复杂度为 O(1)
+
+## [518 Coin Change 2](https://leetcode.com/problems/coin-change-2/)
+
+> You are given coins of different denominations and a total amount of money. Write a function to compute the number of combinations that make up that amount. You may assume that you have infinite number of each kind of coin.
+
+定义状态：`dp[i][j]` 表示用了前 i 个 coins 到达 amount j 的组合数（这都咋想出来的啊）
+
+初始：`dp[0][0]=1`
+
+`dp[i][j]=dp[i-1][j]+dp[i][j-coins[i]]`
+
+```Java
+class Solution {
+    public int change(int amount, int[] coins) {
+        int[][] dp=new int[coins.length+1][amount+1];
+        dp[0][0]=1;
+        for(int i=1; i<coins.length+1; ++i){
+            for(int j=0; j<amount+1; ++j){
+                dp[i][j]=dp[i-1][j]+ (j>=coins[i-1]?dp[i][j-coins[i-1]]:0);
+            }
+        }
+        return dp[coins.length][amount];
+    }
+}
+```
+
+此时注意到`dp[i][j]`只跟上一行的`dp[i-1][j]`有关系，意味着可以缩短空间复杂度
+
+```Java
+class Solution {
+    public int change(int amount, int[] coins) {
+        int[] dp=new int[amount+1];
+        dp[0]=1;
+        for(int coin:coins){
+            for(int i=coin; i<amount+1; ++i)
+                dp[i]+=dp[i-coin];
+        }
+        return dp[amount];
+    }
+}
+```
+
+## [309 Best Time to Buy and Sell Stock with Cooldown](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/)
+
+> Say you have an array for which the ith element is the price of a given stock on day i.
+
+> Design an algorithm to find the maximum profit. You may complete as many transactions as you like (ie, buy one and sell one share of the stock multiple times) with the following restrictions:
+
+> - You may not engage in multiple transactions at the same time (ie, you must sell the stock before you buy again).
+> -After you sell your stock, you cannot buy stock on next day. (ie, cooldown 1 day)
+
+The natural states for this problem are `buy` and `sell`
+
+- `buy[i]` means the maxProfit end with buy at day i
+- `sell[i]` means the maxProfit end with sell at day i
+
+Then we have the transition function:
+
+- `buy[i]=max(buy[i-1], sell[i-2]-prices[i]) (i>=2) buy[i]=max(buy[i-1], -prices[i] (i<2)`
+- `sell[i]=max(sell[i-1], buy[i-1]+prices[i]`
+
+```Java
+class Solution {
+    public int maxProfit(int[] prices) {
+        if(prices.length<=1)    return 0;
+        int[] buy=new int[prices.length];
+        int[] sell=new int[prices.length];
+        buy[0]=-prices[0];
+        for(int i=1; i<prices.length;++i){
+            if(i>1)
+                buy[i]=Math.max(buy[i-1], sell[i-2]-prices[i]);
+            else
+                buy[i]=Math.max(buy[i-1], -prices[i]);
+            sell[i]=Math.max(sell[i-1], prices[i]+buy[i-1]);
+        }
+        return sell[prices.length-1];
+    }
+}
+```
+
+Since the curr state is only related to the 1 step previous state, we can reduce the spacial complexity to O(1).
+
+```Java
+class Solution {
+    public int maxProfit(int[] prices) {
+        if(prices.length<=1)    return 0;
+        int buy=-prices[0],preBuy=0;
+        int preSell=0, sell=0;
+        for(int i=1; i<prices.length; ++i){
+            preBuy=buy;
+            buy=Math.max(buy, preSell-prices[i]);
+            preSell=sell;
+            sell=Math.max(sell, prices[i]+preBuy); 
+        }
+        return sell;
+    }
+}
 ```

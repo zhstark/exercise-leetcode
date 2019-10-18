@@ -216,3 +216,39 @@ class Solution {
     }
 }
 ```
+
+## [958 Check Completeness of a Binary Tree](https://leetcode.com/problems/check-completeness-of-a-binary-tree/)  :triangular_flag_on_post:
+
+> Given a binary tree, determine if it is a complete binary tree.
+
+What is a completed binary tree? If you level order traverse the tree, you will not meet any node after you met a null
+
+```Java
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public boolean isCompleteTree(TreeNode root) {
+        if(root==null)  return true;
+        Queue<TreeNode> q=new LinkedList();
+        q.add(root);
+        boolean noChild=false;
+        while(!q.isEmpty()){
+            TreeNode node=q.poll();
+            if(node==null)  noChild=true;
+            else{
+                if(noChild) return false;
+                q.add(node.left);
+                q.add(node.right);
+            }
+        }
+        return true;
+    }
+}
+```

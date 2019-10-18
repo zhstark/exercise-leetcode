@@ -23,6 +23,8 @@ Code is written by C++ or Python or Java.
 - 105 Construct Binary Tree from Preorder and Inorder Traversal
 - 106 Construct Binary Tree from Inorder and Postorder Traversal
 - [124 Binary Tree Maximum Path Sum](https://leetcode.com/problems/binary-tree-maximum-path-sum/)   :triangular_flag_on_post:
+- [958 Check Completeness of a Binary Tree](https://leetcode.com/problems/check-completeness-of-a-binary-tree/)  :triangular_flag_on_post:
+
 
 ## [BST (Binary Search Tree)](BST.md)
 
@@ -78,6 +80,12 @@ Code is written by C++ or Python or Java.
 - 一个 string 返回最长的重复 string 
 - [343 Integer Break](https://leetcode.com/problems/integer-break/)
 - [474 Ones and Zeroes](https://leetcode.com/problems/ones-and-zeroes/)
+- [1027 Longest Arithmetic Sequence](https://leetcode.com/problems/longest-arithmetic-sequence/)   :triangular_flag_on_post:
+- [714 Best Time to Buy and Sell Stock with Transaction Fee](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/)
+- [123 Best Time to Buy and Sell Stock III](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iii/)
+- [518 Coin Change 2](https://leetcode.com/problems/coin-change-2/)
+- [309 Best Time to Buy and Sell Stock with Cooldown](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/)
+
 
 ## [File](File.md)
 
@@ -141,8 +149,6 @@ Code is written by C++ or Python or Java.
 ## [Trie](Trie.md)
 
 - [211 Add and Search Word - Data structure design](https://leetcode.com/problems/add-and-search-word-data-structure-design)  :triangular_flag_on_post:
-
-
 
 ## [Topological Sort](TopologicalSort.py)
 
