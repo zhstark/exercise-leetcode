@@ -227,3 +227,38 @@ class Solution:
             self.dfs((y, x+1), r, c, grid)
 ```
 
+## [1239 Maximum Length of a Concatenated String with Unique Characters](https://leetcode.com/problems/maximum-length-of-a-concatenated-string-with-unique-characters/)
+
+```Java
+class Solution {
+    private int ans=0;
+    public int maxLength(List<String> arr) {
+        if(arr==null || arr.size()==0)
+            return 0;
+        dfs(arr, "", 0);
+        return ans;
+    }
+    private void dfs(List<String> arr, String path, int index){
+        boolean isUnique=unique(path);
+        if(isUnique){
+            ans=Math.max(path.length(), ans);
+        }
+        if(index==arr.size() || !isUnique)
+            return;
+        
+        for(int i=index; i<arr.size(); ++i){
+            dfs(arr, path+arr.get(i), i+1);
+        }
+        
+    }
+    private boolean unique(String s){
+        Set<Character> set=new HashSet();
+        for(char c:s.toCharArray()){
+            if(set.contains(c))
+                return false;
+            set.add(c);
+        }
+        return true;
+    }
+}
+```

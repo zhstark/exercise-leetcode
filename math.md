@@ -1,3 +1,17 @@
+## 最大公约数(Greatest common divisor)
+
+**欧几里得算法，又叫辗转相除法**基于以下定理：
+
+`gcd(a, b)=gcd(b, a mod b)`
+
+```Java
+int gcd(int a, int b){
+    if(b==0)
+        return a;
+    return gcd(b, a%b);
+}
+```
+
 ## [50 Pow(x, n)](https://leetcode.com/problems/powx-n/) :triangular_flag_on_post:
 
 > Implement pow(x, n), which calculates x raised to the power n (x^n).

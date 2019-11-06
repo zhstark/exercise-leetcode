@@ -61,3 +61,19 @@ def add(a,b):
         add(a^b, (a&b)<<1)
 
 ```
+
+## Gray code
+
+Gray code is a binary numeral system where 2 successive values differ in only one but.
+
+For example, the sequence of Gray codes for 3-bit numbers is: 000, 001, 011, 010, 110, 111, 101, 100, so G(4)=6.
+
+`G(n)=n XOR (n>>1)`
+
+```
+int g(int n){
+    return n^(n>>1);
+}
+```
+
+[1238 Circular Permutation in Binary Representation](https://leetcode.com/problems/circular-permutation-in-binary-representation/)

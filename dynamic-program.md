@@ -17,6 +17,8 @@
   - [1027 Longest Arithmetic Sequence](#1027-Longest-Arithmetic-Sequence)  :triangular_flag_on_post:
   - [123 Best Time to Buy and Sell Stock III](#123-best-time-to-buy-and-sell-stock-iiihttpsleetcodecomproblemsbest-time-to-buy-and-sell-stock-iii)
   - [518 Coin Change 2](#518-coin-change-2httpsleetcodecomproblemscoin-change-2)
+  - [309 Best Time to Buy and Sell Stock with Cooldown](#309-best-time-to-buy-and-sell-stock-with-cooldownhttpsleetcodecomproblemsbest-time-to-buy-and-sell-stock-with-cooldown)
+  - [10 Regular Expression Matching](https://leetcode.com/problems/regular-expression-matching/)
 
 ## 0-1 knapsack
 
@@ -917,6 +919,72 @@ class Solution {
             sell=Math.max(sell, prices[i]+preBuy); 
         }
         return sell;
+    }
+}
+```
+
+## [10 Regular Expression Matching](https://leetcode.com/problems/regular-expression-matching/)
+
+> Given an input string (s) and a pattern (p), implement regular expression matching with support for '.' and '*'.
+
+> '.' Matches any single character.
+> '*' Matches zero or more of the preceding element.
+> The matching should cover the entire input string (not partial).
+
+> Note:
+
+> s could be empty and contains only lowercase letters a-z.
+> p could be empty and contains only lowercase letters a-z, and characters like . or *.
+
+```
+1, If p.charAt(j) == s.charAt(i) :  dp[i][j] = dp[i-1][j-1];
+2, If p.charAt(j) == '.' : dp[i][j] = dp[i-1][j-1];
+3, If p.charAt(j) == '*': 
+   here are two sub conditions:
+               1   if p.charAt(j-1) != s.charAt(i) && p.charAt(j-1)!='.' : dp[i][j] = dp[i][j-2]  //in this case, a* only counts as empty
+               2   if p.charAt(i-1) == s.charAt(i) or p.charAt(i-1) == '.':
+                              dp[i][j] = dp[i-1][j]    //in this case, a* counts as multiple a 
+                           or dp[i][j] = dp[i][j-1]   // in this case, a* counts as single a
+                           or dp[i][j] = dp[i][j-2]   // in this case, a* counts as empty
+```
+
+目前有一点不理解，`p.charAt(j) == '*'  p.charAt(i-1)==s.charAt(i) or p.charAt(i-1) == '.'` 为啥 ` dp[i][j] = dp[i-1][j]` 不是 ` dp[i][j] = dp[i-1][j-1]`
+
+这里还要注意一些 corner case：
+
+```
+""
+".**********"
+```
+
+```Java
+class Solution {
+    public boolean isMatch(String s, String p) {
+        if((s==null && p==null) ||(s.length()==0 && p.length()==0))    return true;
+        if(s==null || p==null)    return false;
+        int n=s.length();
+        int m=p.length();
+        boolean[][] dp=new boolean[n+1][m+1];
+        dp[0][0]=true;
+        for (int i = 0; i < p.length(); i++) {
+            if (p.charAt(i) == '*' && dp[0][i-1]) 
+                dp[0][i+1] = true;
+        }
+        for(int i=1; i<n+1; ++i){
+            for(int j=1; j<m+1; ++j){
+                if(s.charAt(i-1)==p.charAt(j-1) || p.charAt(j-1)=='.')
+                    dp[i][j]=dp[i-1][j-1];
+                else if(p.charAt(j-1)=='*'){
+                    if(j>1 && p.charAt(j-2)!=s.charAt(i-1) && p.charAt(j-2)!='.')
+                        dp[i][j]=dp[i][j-2];
+                    else if(j>1 && (p.charAt(j-2)==s.charAt(i-1) || p.charAt(j-2)=='.')){
+                        dp[i][j]=(dp[i][j-1] || dp[i][j-2] || dp[i-1][j-1] || dp[i-1][j]);
+                        
+                    }
+                }
+            }
+        }
+        return dp[n][m];
     }
 }
 ```
