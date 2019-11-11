@@ -1,5 +1,10 @@
 几个基本排序算法代码
 
+- Quick sort
+- Merge Sort
+- bubbling sort
+- Dutch National Flag Problem (75)
+
 ## Quick sort
 
 时间复杂度 averge O(nlogn), worst O(n^2). Spacial complexity average O(logn), worst O(n)
@@ -147,5 +152,48 @@ int main()
     }
 
     return 0;
+}
+```
+
+## [75 Sort Colors](https://leetcode.com/problems/sort-colors/)
+
+> Given an array with n objects colored red, white or blue, sort them in-place so that objects of the same color are adjacent, with the colors in the order red, white and blue.
+
+> Here, we will use the integers 0, 1, and 2 to represent the color red, white, and blue respectively.
+
+> Could you come up with a one-pass algorithm using only constant space?
+
+Let's use three to deal with this problem. We use p0 to be the rightmost pointer of 0, p2 to be the leftmost pointer of 2, and curr to be the pointer traversing the array, which means `nums[index<p0]=0` and `nums[index>p2]=2`
+
+So while curr<=p2:
+- `if(nums[curr])==0: swap p0 and curr, move p0 and curr forward`
+- `if(nums[curr])==1: just move curr forward`
+- `if(nums[curr])==2: swap curr and p2, move curr right and p2 left.`
+
+```Java
+class Solution {
+    public void sortColors(int[] nums) {
+        int p0=0,p2=nums.length-1;
+        int curr=0;
+        while(curr<=p2){
+            if(nums[curr]==0){
+                swap(nums,curr, p0);
+                p0++;
+                ++curr;
+            }
+            else if(nums[curr]==2){
+                swap(nums,curr,p2);
+                --p2;
+            }
+            else
+                ++curr;
+        }
+    }
+    
+    private void swap(int[] A, int i, int j){
+        int temp=A[i];
+        A[i]=A[j];
+        A[j]=temp;
+    }
 }
 ```

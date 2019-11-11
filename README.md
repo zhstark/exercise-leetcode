@@ -40,6 +40,7 @@ Code is written by C++ or Python or Java.
 - [1210 Minimum Moves to Reach Target with Rotations](https://leetcode.com/problems/minimum-moves-to-reach-target-with-rotations/)
 - [542 01 Matrix](https://leetcode.com/problems/01-matrix/)
 - [317 Shortest Distance from All Buildings](https://leetcode.com/problems/shortest-distance-from-all-buildings/)   :triangular_flag_on_post:
+- [490 The Maze](https://leetcode.com/problems/the-maze/)
 
 ## [BackTracking](BackTracking.md)
 
@@ -96,6 +97,7 @@ Code is written by C++ or Python or Java.
 ## [Graph-Dijkstra](Dijkstra.md)
 
 - 743
+- [505 The Maze II](https://leetcode.com/problems/the-maze-ii/)
 
 ## [Greedy Algorithm](Greedy.md)
 
@@ -140,6 +142,10 @@ Code is written by C++ or Python or Java.
 - 232 Implement Queue using Stacks
 - 225 Implement Stack using Queues
 - [739 Daily Temperatures](https://leetcode.com/problems/daily-temperatures/)
+
+## [Sort](Sort.md)
+
+- [75 Sort Colors](https://leetcode.com/problems/sort-colors/)
 
 ## [2Pointers](2Pointers.md)
 

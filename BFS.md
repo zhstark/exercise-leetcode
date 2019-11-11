@@ -322,3 +322,50 @@ class Solution {
     }
 }
 ```
+
+## [490 The Maze](https://leetcode.com/problems/the-maze/)
+
+> There is a ball in a maze with empty spaces and walls. The ball can go through empty spaces by rolling up, down, left or right, but it won't stop rolling until hitting a wall. When the ball stops, it could choose the next direction.
+
+> Given the ball's start position, the destination and the maze, determine whether the ball could stop at the destination.
+
+> The maze is represented by a binary 2D array. 1 means the wall and 0 means the empty space. You may assume that the borders of the maze are all walls. The start and destination coordinates are represented by row and column indexes.
+
+标准 BFS 案例，记住 visited 不用需要用 set 保存！直接再用一个二维数组就可以了！
+
+```Java
+class Solution {
+    public boolean hasPath(int[][] maze, int[] start, int[] destination) {
+        int m=maze.length, n=maze[0].length;
+        if(start[0]==destination[0] && start[1]==destination[1])    return true;
+        int[][] dir=new int[][]{{0,1},{0,-1},{1,0},{-1,0}};
+        // in 2d matrix graph, using 2d array to store the visited, 
+        // no need to use set, idiot!
+        boolean[][] visited=new boolean[m][n];
+        Queue<Integer> X=new LinkedList();
+        Queue<Integer> Y=new LinkedList();
+        X.add(start[0]);
+        Y.add(start[1]);
+        visited[start[0]][start[1]]=true;
+        while(!X.isEmpty()){
+            int x=X.poll();
+            int y=Y.poll();
+            for(int i=0; i<4; ++i){
+                int xx=x, yy=y;
+                while(xx>=0 && xx<m && yy>=0 && yy<n && maze[xx][yy]==0){
+                    xx+=dir[i][0];
+                    yy+=dir[i][1];
+                }
+                xx-=dir[i][0];
+                yy-=dir[i][1];
+                if(visited[xx][yy]) continue;
+                X.add(xx);
+                Y.add(yy);
+                visited[xx][yy]=true;
+                if(xx==destination[0] && yy==destination[1])  return true;
+            }
+        }
+        return false;
+    }
+}
+```
