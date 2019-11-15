@@ -200,3 +200,48 @@ class Solution:
 #         else:
 #             return None
 ```
+
+## [95 Unique Binary Search Trees II](https://leetcode.com/problems/unique-binary-search-trees-ii/)
+
+> Given an integer n, generate all structurally unique BST's (binary search trees) that store values 1 ... n.
+
+Practice Recursive
+
+```Java
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public List<TreeNode> generateTrees(int n) {
+        List<TreeNode> ans=new ArrayList();
+        if(n<1) return ans;
+        return generateSubTree(1, n);
+    }  
+    public List<TreeNode> generateSubTree(int start, int end){
+        List<TreeNode> ans=new ArrayList();
+        if(start>end){
+            ans.add(null);
+            return ans;
+        }     
+        for(int i=start; i<=end; ++i){
+            List<TreeNode> leftTree=generateSubTree(start, i-1);
+            List<TreeNode> rightTree=generateSubTree(i+1, end);
+            for(TreeNode left: leftTree){
+                for(TreeNode right:rightTree){
+                    TreeNode root=new TreeNode(i);
+                    root.left=left;
+                    root.right=right;
+                    ans.add(root);
+                }
+            }
+        }
+        return ans;
+    }
+}
+```

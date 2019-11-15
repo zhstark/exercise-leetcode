@@ -230,3 +230,50 @@ class Solution{
     }
 }
 ```
+
+### [3 Longest Substring Without Repeating Characters](https://leetcode.com/problems/longest-substring-without-repeating-characters/solution/)
+
+> Given a string, find the length of the longest substring without repeating characters.
+
+跟上面的题目一样，他们写 sliding window 两个指针一块放到 while 条件语句里。而不是像我自己想的那样嵌套两个 while
+
+```Java
+public class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        int n = s.length();
+        Set<Character> set = new HashSet<>();
+        int ans = 0, i = 0, j = 0;
+        while (i < n && j < n) {
+            // try to extend the range [i, j]
+            if (!set.contains(s.charAt(j))){
+                set.add(s.charAt(j++));
+                ans = Math.max(ans, j - i);
+            }
+            else {
+                set.remove(s.charAt(i++));
+            }
+        }
+        return ans;
+    }
+}
+```
+
+当然这个题也可以用 map 来放索引值，这样一次性调到下一个不重复的位置。
+
+```Java
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        int n=s.length();
+        int ans=0;
+        int left=0,right=0;
+        Map<Character, Integer> dict=new HashMap();
+        for(;right<n; ++right){
+            if(dict.containsKey(s.charAt(right)))
+                left=Math.max(left,dict.get(s.charAt(right)));
+            ans=Math.max(ans, right-left+1);
+            dict.put(s.charAt(right), right+1);
+        }
+        return ans;
+    }
+}
+```
