@@ -1,4 +1,11 @@
 <!-- GFM-TOC -->
+<!-- 搜一搜 DP 问题分类 https://www.cnblogs.com/Renyi-Fan/p/7421109.html
+区间 dp
+线性 dp
+压状 dp
+树形 dp
+数位 dp
+https://blog.csdn.net/running_acmer/category_7665950.html-->
 - Content
   - [0-1 knapsack](#0-1-knapsack)
   - [Longset common substring](#Longset-common-substring)
@@ -20,6 +27,37 @@
   - [309 Best Time to Buy and Sell Stock with Cooldown](#309-best-time-to-buy-and-sell-stock-with-cooldownhttpsleetcodecomproblemsbest-time-to-buy-and-sell-stock-with-cooldown)
   - [10 Regular Expression Matching](https://leetcode.com/problems/regular-expression-matching/)
 
+## 线性 DP
+
+在线性空间上的递推
+
+### LIS (longest increasing sequence)单调递增最长子序列
+
+给定数组 arr，返回 arr 的最长递增子序列
+
+1. 定义长度为 n 的 dp 数组，`dp[i]`表示为以`arr[i]`结尾的最长递增子序列的长度
+2. 对于第一个数`arr[0]`来说，`dp[0]=1`，依次求出以`i`结尾的最长递增子序列
+3. 对于`dp[i]`，求`arr[i]`结尾的最长递增子序列，在`arr[0...i-1]`中选出比`arr[i]`小且长度最长的`dp[j]`, `dp[i]=Math.max(dp[0...i-1], 1), arr[j]<arr[i]`
+
+时间复杂度为 O(n^2)
+```Java
+public static int LongestSubString(int arr[]){
+    if(arr==null || arr.length==0)  return 0;
+    int ans=1;
+    int dp[]=new int[arr.length];
+    dp[0]=1;
+    for(int i=1; i<arr.length; ++i){
+        for(int j=0; j<i; ++j){
+            if(arr[i]>arr[j])
+                dp[i]=Math.max(dp[i], dp[j]+1);
+        }
+        ans=Math.max(ans, dp[i]);
+    }
+    return ans;
+}
+```
+
+这个题还可以用二分法来做
 ## 0-1 knapsack
 
 对于一组不同重量，不同价值，不可分割的物品，我们选择将某些物品装入背包，在满足背包最大重量限制的条件下，背包可装入的最大总价值是多少？

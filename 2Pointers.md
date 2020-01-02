@@ -5,8 +5,8 @@
 **Using a count to flag whether meet the requirement. And if the elements are characters, we can use an array instead of map.**
 
 In any sliding window based problem we have two pointers. 
-One rightright pointer whose job is to expand the current window and 
-then we have the leftleft pointer whose job is to contract a given window.
+One right pointer whose job is to expand the current window and 
+then we have the left pointer whose job is to contract a given window.
 At any point in time only one of these pointers move and the other one remains fixed.
 
 对 sliding window 问题，我们用两个指针，右指针用于扩展当前窗口，左指针用于缩小窗口。在任何时间点，只有一个指针移动，而另外一个静止。

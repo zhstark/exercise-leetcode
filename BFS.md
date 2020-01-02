@@ -369,3 +369,70 @@ class Solution {
     }
 }
 ```
+
+## maze solver
+
+> 给你一个二维数组，1 代表墙，0 代表通路，输出一个从起始位置到终止位置的路径
+
+谷歌面试题，从起始位置到终止位置简单，BFS 和 DFS都可以，关键是怎么只输出一个路径，如果输入所有路径直接 DFS。
+
+关于输出路径问题我们要做的就是记录当前点是从哪个点得到的。这里可以用一个三维数组 `lastPint[i][j][k]` 表示在位置`(i,j)`的点是从哪里来的。（妈的面试的 DP 问题也是三维数组，三维 DP）。
+
+另外对于检查这种矩阵的 `visited`，可以另起一个二维boolean数组记录是否访问过，对于这个问题，如果可以更改原矩阵，可以直接将 0 改为 1.
+
+```Java
+import java.util.*;
+
+class Untitled {
+	public static void main(String[] args) {
+		int[][] maze=new int[][]{{0,0,0,0},{1,1,0,0},{1,1,0,0},{1,0,0,1}};
+		int[] start=new int[]{0,0};
+		int[] end=new int[]{3,1};
+		List<int[]> ans=findAPath(maze, start, end);
+		for(int[] p: ans)
+			System.out.println(p[0]+","+p[1]);
+	}
+	
+	public static List<int[]> findAPath(int[][] maze, int[] start, int[] end){
+		int m=maze.length, n=maze[0].length;
+		int[][][] lastPoint=new int[m][n][2];
+		for(int i=0; i<m; i++){
+			for(int j=0; j<n; ++j){
+				Arrays.fill(lastPoint[i][j], -1);
+			}
+		}
+		// could we modify the maze matrix? 
+		Queue<int[]> q=new LinkedList();
+		q.add(start);
+		maze[start[0]][start[1]]=1;
+		int[][] dirs=new int[][]{{0,1},{0,-1},{1,0},{-1,0}};
+		while(!q.isEmpty()){
+			int[] curr=q.poll();
+			int x=curr[0], y=curr[1];
+			for(int[] dir: dirs){
+				int nx=x+dir[0];
+				int ny=y+dir[1];
+				if(nx>=0 && nx<m && ny>=0 && ny<n && maze[nx][ny]==0){
+					maze[nx][ny]=1;
+					lastPoint[nx][ny][0]=x;
+					lastPoint[nx][ny][1]=y;
+					q.add(new int[]{nx, ny});
+				}
+			}
+		}
+		List<int[]> ans=new LinkedList<int[]>();
+		if(lastPoint[end[0]][end[1]][0]==-1)	return ans;
+		ans.add(end);
+		int x=lastPoint[end[0]][end[1]][0];
+		int y=lastPoint[end[0]][end[1]][1];
+		while(x!=-1){
+			ans.add(0,new int[]{x,y});
+			int xx=x, yy=y;
+			x=lastPoint[xx][yy][0];
+			y=lastPoint[xx][yy][1];
+		}
+		return ans;
+		
+	}
+}
+```

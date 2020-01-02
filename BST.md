@@ -5,6 +5,28 @@
 
 2、如果没有了左子树，那么输出该节点，然后指向其右子树，回到第一步
 
+### 递归写法
+
+```Java
+public void inOrder(TreeNode root){
+    if(root==null)
+        return;
+    Stack<TreeNode> stack=new Stack();
+    TreeNode curr=root;
+    while(curr!=null || !stack.isEmpty()){
+        if(curr!=null){
+            stack.push(curr);
+            curr=curr.left;
+        }
+        else{
+            curr=stack.pop();
+            System.out.println(curr.val;
+            curr=curr.right;
+        }
+    }
+}
+```
+
 ### No 173
 
 ```py
@@ -151,11 +173,26 @@ class Solution {
 }
 ```
 
-
-
 ## Pre-Order
 
-###No 617 
+### Iteration
+
+```Java
+public void preOrder(TreeNode root){
+    if(root==null)  return;
+    Stack<TreeNode> stack=new Stack();
+    stack.push(root);
+    while(!stack.isEmpty()){
+        TreeNode node=stack.pop();
+        System.out.println(node.val);
+        if(node.left!=null)
+            stack.push(node.left);
+        if(node.right!=null)
+            stack.push(node.right);
+    }
+}
+```
+### No 617
 
 in Python:
 `x or y` = `x if x else y` = `x ? x : y` in C++
@@ -243,5 +280,38 @@ class Solution {
         }
         return ans;
     }
+}
+```
+
+## Post-Order
+
+### 迭代法
+
+```Java
+/**
+ * 后续遍历栈方式
+ * 需要增加一个节点记录，用于记录上次出栈的节点
+ * 1、如果栈顶元素非空且左节点存在，将其入栈，重复该过程。若不存在则进入第2步（该过程和中序遍历一致）
+ * 2、判断上一次出栈节点是否当前节点的右节点，或者当前节点是否存在右节点，满足任一条件，将当前节点输出，并出栈。否则将右节点压栈。跳至第1步
+ */
+static void postTraversalStack(Node root) {
+    Stack<Node> stack = new Stack<>();
+    stack.push(root);
+    Node lastNode = null;
+    while (!stack.isEmpty()) {
+        while (stack.peek().left != null) {
+            stack.push(stack.peek().left);
+        }
+        while (!stack.isEmpty()) {
+            if (lastNode == stack.peek().right || stack.peek().right == null) {
+                Node node = stack.pop();
+                System.out.print(node.val + " ");
+                lastNode = node;
+            } else if (stack.peek().right != null) {
+                stack.push(stack.peek().right);
+                break;
+            }
+        }
+    }
 }
 ```
