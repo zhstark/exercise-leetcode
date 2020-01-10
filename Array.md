@@ -255,6 +255,18 @@ class Solution {
 
 > The replacement must be in-place and use only constant extra memory.
 
+The point is how to find the regularity. Let's see some examples:
+```
+1 2 3 4 5
+1 2 3 5 4   <---
+1 2 4 3 5   <---
+1 2 4 5 3
+1 2 5 3 4
+1 2 5 4 3   <----
+1 3 2 4 5   <----
+```
+See the pointed part. we could notice that if from `a[i]`, the right part of `a[i] (a[i+1],a[i+2]...)` is decending, we need to put another number into this part, which also mean we gotta move a number out of it. So which number would be? If we want to have the next permutation, the number that move out from decending part must be the minimum number that is bigger than the new inserted number. After changing the number, reverse the decending part. Than get the answer. However, what if the whole array is decending at the first place? Check it. when we find the index of the decending begining, if it is 0, just reverse the array and return.
+
 此题难点在于理清逻辑，找个下个组合与当前组合的关系：需要如何排列
 
 1. 找到相邻的两个点，`a[i], a[i-1]`，满足`a[i]>a[i-1]`，并且自`a[i]`往后为递减。（倒着找方便）

@@ -28,9 +28,9 @@ class Solution {
         for(int i=0; i<t.length(); ++i){
             dic[t.charAt(i)]++;
         }
-        int left=0, right=0;
+        int left=0, right=0;// 2 pointers, one to the tail and the other to the head
         int head=0;
-        int counter=t.length();
+        int counter=t.length(); // check whether the substring is valid
         int length=Integer.MAX_VALUE;//record the length of valid result
         while(right<s.length()){
             if(dic[s.charAt(right)]>0){
@@ -39,6 +39,7 @@ class Solution {
             dic[s.charAt(right)]--;
             right++;
             while(counter==0){
+                // update d if finding minimum
                 if(length>right-left){
                     head=left;
                     length=right-left;

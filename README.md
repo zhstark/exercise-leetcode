@@ -76,6 +76,7 @@ Code is written by C++ or Python or Java.
 - [542 01 Matrix](https://leetcode.com/problems/01-matrix/)
 - [317 Shortest Distance from All Buildings](https://leetcode.com/problems/shortest-distance-from-all-buildings/)   :triangular_flag_on_post:
 - [490 The Maze](https://leetcode.com/problems/the-maze/)
+- maze solver
 
 ## [BackTracking](BackTracking.md)
 

@@ -1,3 +1,16 @@
+拓扑排序是指根据相互依赖关系来排序
+
+Let's see if we want to do A, we have to do B first, then we say A depends on B, we can use a graph to show this relationship: B->A, meaning we have to do B then we can do A.
+
+So in order to present this relationship, we better use a graph. We have use a hashmap or a 2-D array to represent a graph. If B points to A, then A has a indegree of 1. In order to verify if there is a circle. we can use a counter to record how many 0 indegree nodes show when we traverse the graph. So the steps to solve this kind of problems is:
+
+1. build a graph using 2d array or hashmap
+2. int counter=0
+3. build an indegree array to record the indegree of each nodes.
+4. build a queue, put every 0 indegree nodes into it, also updates `counter`
+5. traverse the graph starting with queue nodes. keeping update the indegree of every node, if the indegree is 0, put it into the queue and update the counter.
+6. check if there is a circle. if `counter=n`, no circle.
+
 拓扑排序需要使用图的数据结构来方便实现。
 构建好图之后需要创建一个数组来记录各节点的入度。
 
