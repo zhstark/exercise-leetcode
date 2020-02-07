@@ -63,6 +63,8 @@ class Solution {
 
 In order to save space, we just use 2 pointers, one from the string's begin to end, the other pass from the end to the begin.
 
+Everytime meet a non-alphanumeric character, just skip. In the code, we need to notice that to out of boundary if we justing keep skipping, so we would add a restriction in the while loop.
+
 C++
 
 ```cpp
@@ -206,5 +208,61 @@ class Solution {
         }
         return numberSeen;
     }
+}
+```
+
+## [151 Reverse Words in a String](https://leetcode.com/problems/reverse-words-in-a-string/)
+
+> Given an input string, reverse the string word by word.
+
+To clear the problem, we may want to ask these questions:
+
+- Does tab or newline character count as space characters?
+- Could the input string contains leading or trailing spaces?
+- How about multiple spaces between two words?
+
+Also when you write the code, you may need to consider how to deal with the input is null or empty.
+
+The one simple approach is a **two-pass** solution: first pass to split string by spaces into an array of words, then second pass to extrace the words in reversed order.
+
+```Java
+    public String reverseWords(String s) {
+        String[] words=s.trim().split("\\s+");
+        StringBuilder ans=new StringBuilder();
+        for(int i=words.length-1; i>=0; --i){
+            if(words[i]!="" && words[i]!=" "){
+                ans.append(words[i]+" ");
+            }
+        }
+        ans.delete(ans.length()-1, ans.length());
+        return ans.toString();
+    }
+```
+
+The time complexity and space complexity both are O(n), notice that '\\s+' is the regular expression of space or multiple space.
+
+We can do better in one-pass, while iterating the string in reversed order. We use 2 pointers to track of a word's begin and end position. When we are at the begining of a word, we append it.
+
+```Java
+public String reverseWords(String s){
+    StringBuilder ans=new StringBuilder();
+    int end=s.length();
+    for(int i=s.length()-1; i>=0;--i){
+        if(s.charAt(i)==' '){
+            end=i;
+        }
+        else{
+            if(i==0 || s.charAt(i-1)==' ')
+                ans.append(s.substring(i, end)+" ");
+        }
+    }
+    if(ans.length()>0)
+        ans.delete(ans.length()-1, ans.length());
+    return ans.toString();
+/* 
+In the coding part, remember s.chatAt(i) is a character, so 
+you need to use "'" to compare with it.
+Also consider how to deal with ans.length()==0
+*/
 }
 ```
