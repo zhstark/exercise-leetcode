@@ -129,7 +129,7 @@ class Solution {
 }
 ```
 
-## [161 One Edit Distance](https://leetcode.com/problems/one-edit-distance/)  :triangular_flag_on_post:
+## [161 One Edit Distance](https://leetcode.com/problems/one-edit-distance/)  :triangular_flag_on_post: :green_book:
 
 > Given two strings s and t, determine if they are both one edit distance apart.
 
@@ -142,6 +142,14 @@ class Solution {
 > Replace a character of s to get t
 
 还是人别家的答案写的好啊
+
+:green_book: For the case where m is equal to n, it becomes finding if there is exactly one modified charater. Now let‘s assume m<=n (if m>n we could just swap them).
+
+We make a first pass Over S and T concurrently and stop at the first non-matching character between S and T
+
+1. if S matches all characters in T, then check if there is an extra charater at the end of T.
+2. if `|n-m|==1`, that means we must skip this non-matching character only in T and make sure the remaining characters between S and T are exactly matching.
+3. if `|n-m|==0`, then we skip both non-matching characters in S and T and make sure the remaining characters between S and T are exactly matching.
 
 ```Java
 class Solution {
@@ -264,5 +272,56 @@ In the coding part, remember s.chatAt(i) is a character, so
 you need to use "'" to compare with it.
 Also consider how to deal with ans.length()==0
 */
+}
+```
+### Follow up
+
+*The input string does not contain leading or trailing spaces and the words are always separated by a single space.*
+
+The basic idea is that
+
+1. reverse the entire string
+2. reverse each individual word
+
+or in turn
+
+## [8 String to Integer (atoi)](https://leetcode.com/problems/string-to-integer-atoi/)
+
+The heart of this problem is dealing with overflow. 
+
+1. discards all leading whitespaces
+2. sign of the number
+3. overflow
+4. invalid input
+
+```Java
+class Solution {
+    public int myAtoi(String str) {
+        final int maxDiv10=Integer.MAX_VALUE/10;
+        int i=0, n=str.length();
+        // go through the whitespace
+        while(i<n && str.charAt(i)==' ')    ++i;
+        // deal with sign
+        int sign=1;
+        if(i<n && str.charAt(i)=='+'){
+            ++i;
+        }
+        else if(i<n && str.charAt(i)=='-'){
+            sign=-1;
+            ++i;
+        }
+        
+        int num=0;
+        while(i<n){
+            if(!Character.isDigit(str.charAt(i)))   break;
+            int digit=str.charAt(i)-'0';
+            // deal with overflow
+            if(num > maxDiv10 || num==maxDiv10 && digit>=8)
+                return sign==1? Integer.MAX_VALUE:Integer.MIN_VALUE;
+            num=num*10+digit;
+            ++i;
+        }
+        return sign*num;
+    }
 }
 ```

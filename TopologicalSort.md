@@ -1,6 +1,6 @@
 拓扑排序是指根据相互依赖关系来排序
 
-Let's see if we want to do A, we have to do B first, then we say A depends on B, we can use a graph to show this relationship: B->A, meaning we have to do B then we can do A.
+:green_book: Let's see if we want to do A, we have to do B first, then we say A depends on B, we can use a graph to show this relationship: B->A, meaning we have to do B then we can do A.
 
 So in order to present this relationship, we better use a graph. We have use a hashmap or a 2-D array to represent a graph. If B points to A, then A has a indegree of 1. In order to verify if there is a circle. we can use a counter to record how many 0 indegree nodes show when we traverse the graph. So the steps to solve this kind of problems is:
 

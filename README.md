@@ -1,8 +1,12 @@
 Records thinking and code of Leetcode problems.
 
+:four_leaf_clover: Wish everyone who struggles for getting a job has a good luck.
+
 Code is written by C++ or Python or Java.
 
 :triangular_flag_on_post: means that problem has *Facebook* tag in LeetCode.
+
+:green_book: means I think it's better to memorize the statement since there are so many details to consider.
 
 **Content**
 
@@ -29,7 +33,7 @@ Code is written by C++ or Python or Java.
 - Trie
 - Union find
 
-## [2Pointers](2Pointers.md)
+## [2Pointers](2Pointers.md) :green_book:
 
 - [76 Minimum Window Substring](https://leetcode.com/problems/minimum-window-substring/)  :triangular_flag_on_post:
 - [438 Find All Anagrams in a String](https://leetcode.com/problems/find-all-anagrams-in-a-string/)  :triangular_flag_on_post:
@@ -128,7 +132,7 @@ Code is written by C++ or Python or Java.
 
 ## [File](File.md)
 
-- [158 Read N Characters Given Read4 II - Call multiple times](https://leetcode.com/problems/read-n-characters-given-read4-ii-call-multiple-times/)  :triangular_flag_on_post: 
+- [158 Read N Characters Given Read4 II - Call multiple times](https://leetcode.com/problems/read-n-characters-given-read4-ii-call-multiple-times/)  :triangular_flag_on_post:  :green_book:
 
 ## [Graph-Dijkstra](Dijkstra.md)
 
@@ -169,7 +173,7 @@ Code is written by C++ or Python or Java.
 - [1078 Occurrences After Bigram](https://leetcode.com/problems/occurrences-after-bigram/)
 - [125 Valid Palindrome](https://leetcode.com/problems/valid-palindrome/)  :triangular_flag_on_post:
 - [680 Valid Palindrome II](https://leetcode.com/problems/valid-palindrome-ii/)  :triangular_flag_on_post:
-- [161 One Edit Distance](https://leetcode.com/problems/one-edit-distance/)   :triangular_flag_on_post:
+- [161 One Edit Distance](https://leetcode.com/problems/one-edit-distance/)   :triangular_flag_on_post: :green_book:
 - [65 Valid Number](https://leetcode.com/problems/valid-number/)  :triangular_flag_on_post:
 
 ## [Stack and Queue](Stack&Queue.md)
@@ -188,7 +192,7 @@ Code is written by C++ or Python or Java.
 
 - [211 Add and Search Word - Data structure design](https://leetcode.com/problems/add-and-search-word-data-structure-design)  :triangular_flag_on_post:
 
-## [Topological Sort](TopologicalSort.py)
+## [Topological Sort](TopologicalSort.py) :green_book:
 
 - [269 Alien Dictionary](https://leetcode.com/problems/alien-dictionary/) :triangular_flag_on_post:
 - 210

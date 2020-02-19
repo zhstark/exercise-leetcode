@@ -1,5 +1,7 @@
 ## Sliding Window
 
+:green_book:
+
 **Explain the time complexity** Time Complexity will be O(n) because the "start" and "end" points will only move from left to right once.
 
 **Using a count to flag whether meet the requirement. And if the elements are characters, we can use an array instead of map.**
@@ -260,6 +262,7 @@ public class Solution {
 ```
 
 当然这个题也可以用 map 来放索引值，这样一次性调到下一个不重复的位置。
+But if we use map to record index, when we use the index to make the left pointer skip, we did not erase the records between the distance. what if the right pointer visited the characters again? compare the index. if it's bigger than left, update it, no need to worry about it.
 
 ```Java
 class Solution {
