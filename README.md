@@ -159,10 +159,12 @@ Code is written by C++ or Python or Java.
 
 ## [Math](math.md)
 
+- 最大公约数(Greatest common divisor) :green_book:
 - 991 Broken Calculator
 - [50 Pow(x, n)](https://leetcode.com/problems/powx-n/) :triangular_flag_on_post:
 - [523 Continuous Subarray Sum](https://leetcode.com/problems/continuous-subarray-sum/) :triangular_flag_on_post:
 - [825. Friends Of Appropriate Ages](https://leetcode.com/problems/friends-of-appropriate-ages/)    :triangular_flag_on_post: 
+- [7 Reverse Integer](https://leetcode.com/problems/reverse-integer/) :green_book:
 
 ## [NP Problem](NP.py)
 

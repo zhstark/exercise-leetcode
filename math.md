@@ -1,4 +1,4 @@
-## 最大公约数(Greatest common divisor)
+## 最大公约数(Greatest common divisor) :green_book:
 
 **欧几里得算法，又叫辗转相除法**基于以下定理：
 
@@ -194,6 +194,32 @@ class Solution {
         if(B<=0.5*A+7 || B>A)
             return false;
         return true;
+    }
+}
+```
+
+## [7 Reverse Integer](https://leetcode.com/problems/reverse-integer/) :green_book:
+
+**Question to ask:**
+1. What if the integer's last digit is 0? for example, x=10,100...
+2. What if the reversed integer overflows?
+
+We do not need to handle negative integers separately, because the modulus operator works for negative integers as well (e.g., -43%10=-3)
+
+To check for overflow, we could check if ret>214748364 or ret<-214748364 before multiplying by 10. On the other hand, if ret==214748364, it must not overflow because the last reversed digit it guaranteed to be 1 due to constraint of the input x.
+
+```Java
+class Solution {
+    public int reverse(int x) {
+        int ans=0;
+        int maxDiv10=Integer.MAX_VALUE/10;
+        while(x!=0){
+            if(Math.abs(ans)>maxDiv10)
+                return 0;
+            ans=ans*10+x%10;
+            x/=10;
+        }
+        return ans;
     }
 }
 ```
