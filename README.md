@@ -66,10 +66,12 @@ Code is written by C++ or Python or Java.
 
 ## [BST (Binary Search Tree)](BST.md)
 
+- Iterative in-order traverse  :green_book:
 - 173
 - [426 Convert Binary Search Tree to Sorted Doubly Linked List](https://leetcode.com/problems/convert-binary-search-tree-to-sorted-doubly-linked-list/)   :triangular_flag_on_post: 
 - 617
 - [95 Unique Binary Search Trees II](https://leetcode.com/problems/unique-binary-search-trees-ii/)
+- [98 Validate Binary Search Tree](https://leetcode.com/problems/validate-binary-search-tree/)
 
 ## [BFS](BFS.md)
 
@@ -134,10 +136,11 @@ Code is written by C++ or Python or Java.
 
 - [158 Read N Characters Given Read4 II - Call multiple times](https://leetcode.com/problems/read-n-characters-given-read4-ii-call-multiple-times/)  :triangular_flag_on_post:  :green_book:
 
-## [Graph-Dijkstra](Dijkstra.md)
+## [Graph-Dijkstra](Dijkstra.md) :green_book: 
 
 - 743
 - [505 The Maze II](https://leetcode.com/problems/the-maze-ii/)
+- [1368 Minimum Cost to Make at Least One Valid Path in a Grid](https://leetcode.com/problems/minimum-cost-to-make-at-least-one-valid-path-in-a-grid/)
 
 ## [Greedy Algorithm](Greedy.md)
 
@@ -165,6 +168,7 @@ Code is written by C++ or Python or Java.
 - [523 Continuous Subarray Sum](https://leetcode.com/problems/continuous-subarray-sum/) :triangular_flag_on_post:
 - [825. Friends Of Appropriate Ages](https://leetcode.com/problems/friends-of-appropriate-ages/)    :triangular_flag_on_post: 
 - [7 Reverse Integer](https://leetcode.com/problems/reverse-integer/) :green_book:
+- [1363 Largest Multiple of Three](https://leetcode.com/problems/largest-multiple-of-three/)
 
 ## [NP Problem](NP.py)
 

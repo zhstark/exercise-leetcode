@@ -62,7 +62,7 @@ private:
 
 > Merge k sorted linked lists and return it as one sorted list. Analyze and describe its complexity.
 
-There is no need to put in into logn levels like merge sort. We can just merge 2 linked list at once. Than the time complextiy is O(n), while the space complexity is O(1).
+There is no need to put in into logn levels like merge sort. We can just merge 2 linked list at once. Than the time complextiy is O(nklogk), while the space complexity is O(1).
 
 ```Java
 /**

@@ -1,5 +1,13 @@
 单源最短路径，从一个源点到其他所有点的最短距离。该算法假设所有的边权重为非负值（Bellman-Ford 算法可以检测权重为负数的环路）
 
+Steps:
+1. Build a graph(if needed)
+2. initialize distance for all nodes
+3. Create a priority queue, put items according to the distance from source node.
+4. while(!pq.isEmpty()), traverse all nodes those are accessable, relax them and put them into pq if new_distance < old_distance
+
+The time complexity of this algorithm is O(VE)
+
 ## [505 The Maze II](https://leetcode.com/problems/the-maze-ii/
 
 > There is a ball in a maze with empty spaces and walls. The ball can go through empty spaces by rolling up, down, left or right, but it won't stop rolling until hitting a wall. When the ball stops, it could choose the next direction.
@@ -53,11 +61,9 @@ class Solution {
 }
 ```
 
-
----- 
+## 743
 
 ```python
-# 743
 class Solution:
     def networkDelayTime(self, times, N, K):
         """
@@ -116,4 +122,48 @@ class Solution:
                 return ans if ans<float('inf') else -1
 
         return Dijkstra(times, N, K)
+```
+
+## [1368 Minimum Cost to Make at Least One Valid Path in a Grid](https://leetcode.com/problems/minimum-cost-to-make-at-least-one-valid-path-in-a-grid/)
+
+The key of this problem is how to think about the question, how to build a math module of it.
+
+We consider each cell as a node. If we go along the arrow, means there is no cost to go in this way, otherwise cost 1. The cost is like weight, distance of a graph. So what we want to figure out is the shortest distance from left-top node to right-bottom node. Then this question becomes easy.
+
+*Dijkstra is only one method to solve this problem, there is a better way to solve it in O(mn) time and space complexity*
+
+```Java
+class Solution {
+    public int minCost(int[][] grid) {
+        int row=grid.length;
+        int col=grid[0].length;
+        int[][] dis=new int[row][col];
+        for(int i=0; i<row; i++){
+            Arrays.fill(dis[i], 10000);
+        }
+        dis[0][0]=0;
+        PriorityQueue<int[]> pq=new PriorityQueue<>( (int[] a, int[] b)-> dis[a[0]][a[1]]-dis[b[0]][b[1]]);
+        pq.add(new int[]{0,0});
+        int[] dx=new int[]{0,0,0,1,-1};
+        int[] dy=new int[]{0,1,-1,0,0};
+        while(!pq.isEmpty()){
+            int[] curr=pq.poll();
+            int x=curr[0], y=curr[1];
+            for(int i=1; i<5; i++){
+                int nx=x+dx[i], ny=y+dy[i];
+                if(nx>=0 && nx<row && ny>=0 && ny<col){
+                    int cost=1;
+                    if(grid[x][y]==i){
+                        cost=0;
+                    }
+                    if(dis[x][y]+cost<dis[nx][ny]){
+                        dis[nx][ny]=dis[x][y]+cost;
+                        pq.add(new int[]{nx, ny});
+                    }
+                }
+            }
+        }
+        return dis[row-1][col-1];
+    }
+}
 ```

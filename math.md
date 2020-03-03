@@ -223,3 +223,15 @@ class Solution {
     }
 }
 ```
+
+## [1363 Largest Multiple of Three](https://leetcode.com/problems/largest-multiple-of-three/)
+
+> Given an integer array of digits, return the largest multiple of three that can be formed by concatenating some of the given digits in any order.
+
+> Since the answer may not fit in an integer data type, return the answer as a string.
+
+> If there is no answer return an empty string.
+
+用余数来做这道题这一点想到了，但之前想的是吧余 1 和余 2 的数挑出来，然后点再在这里面 pick，
+但这里就有个问题解决不了：如何 pick 能得到想要的结果。
+正确的思路是你把全部数加起来，看看余几，然后减去余这个数的最小的数不久完了。fuck

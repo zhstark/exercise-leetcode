@@ -1,4 +1,4 @@
-## In Order iterative
+## In Order iterative :green_book:
 中序遍历即将各节点从小到大输出。
 
 1、如果当前 node 有左子树，先把该节点放到栈里，然后指向其左子树
@@ -14,15 +14,44 @@ public void inOrder(TreeNode root){
     Stack<TreeNode> stack=new Stack();
     TreeNode curr=root;
     while(curr!=null || !stack.isEmpty()){
-        if(curr!=null){
+        while(curr!=null){
             stack.push(curr);
             curr=curr.left;
         }
-        else{
-            curr=stack.pop();
-            System.out.println(curr.val;
-            curr=curr.right;
+        curr=stack.pop();
+        System.out.println(curr.val;
+        curr=curr.right;
         }
+    }
+}
+```
+### [98 Validate Binary Search Tree](https://leetcode.com/problems/validate-binary-search-tree/)
+
+```Java
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public boolean isValidBST(TreeNode root) {
+        Stack<TreeNode> stack=new Stack();
+        TreeNode pre=null;
+        while(root!=null || !stack.isEmpty()){
+            while(root!=null){
+                stack.push(root);
+                root=root.left;
+            }
+            root=stack.pop();
+            if(pre!=null && pre.val>=root.val)   return false;
+            pre=root;
+            root=root.right;
+        }
+        return true;   
     }
 }
 ```
