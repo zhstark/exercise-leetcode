@@ -252,3 +252,43 @@ class Solution {
     }
 }
 ```
+
+## [110 Balanced Binary Tree](https://leetcode.com/problems/balanced-binary-tree/) :green_book:
+
+> Given a binary tree, determine if it is height-balanced.
+> 
+> For this problem, a height-balanced binary tree is defined as:
+>
+> a binary tree in which the left and right subtrees of every node differ in height by no more than 1.
+
+**The smart point of this question is sentinel value -1**
+
+We want to avoid recalculation by passing the depth bottom-up. I use a sentinel value -1 to represent that the tree is unbalanced so we could avoid unnecessary calculations.
+
+In each step, we look at the left subtree's depth *L*, and ask "Is the left subtree unbalanced?" If it is indeed unbalanced, we return -1 right away. Otherwise, *L* represents the left subtree's depth. We then repeat the same process for the right subtree's depth *R*
+
+```Java
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public boolean isBalanced(TreeNode root) {
+        return getHeight(root)!=-1;
+        
+    }
+    public int getHeight(TreeNode root){
+        if(root==null)  return 0;
+        int l=getHeight(root.left);
+        int r=getHeight(root.right);
+        if(l==-1 || r==-1)  return -1;
+        if(Math.abs(l-r)>1) return -1;
+        return Math.max(l,r)+1;
+    }
+}
+```

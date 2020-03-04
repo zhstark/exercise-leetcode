@@ -62,7 +62,7 @@ Code is written by C++ or Python or Java.
 - 106 Construct Binary Tree from Inorder and Postorder Traversal
 - [124 Binary Tree Maximum Path Sum](https://leetcode.com/problems/binary-tree-maximum-path-sum/)   :triangular_flag_on_post:
 - [958 Check Completeness of a Binary Tree](https://leetcode.com/problems/check-completeness-of-a-binary-tree/)  :triangular_flag_on_post:
-
+- [110 Balanced Binary Tree](https://leetcode.com/problems/balanced-binary-tree/) :green_book:
 
 ## [BST (Binary Search Tree)](BST.md)
 
