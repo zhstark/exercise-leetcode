@@ -1,3 +1,19 @@
+## 需要自己构图时
+
+有时候用 hashtable 来表示图，一般构建图的代码如下。
+ 
+有时候用 `List<>[]` 表示图，
+
+```Java
+for(int i=0; i<n; i++){
+    if(i==headID)   continue;
+    int ma=manager[i];
+    if(!graph.containsKey(ma))
+        graph.put(ma, new ArrayList<Integer>());
+    graph.get(ma).add(i);
+}
+```
+
 ## [314 Binary Tree Vertical Order Traversal](https://leetcode.com/problems/binary-tree-vertical-order-traversal/)  :triangular_flag_on_post:
 
 > Given a binary tree, return the vertical order traversal of its nodes' values. (ie, from top to bottom, column by column).

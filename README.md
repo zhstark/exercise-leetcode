@@ -92,6 +92,12 @@ Code is written by C++ or Python or Java.
 - 46 Permutations
 - 47 Permutations II
 
+## [Bit manipulation](Bit_Manipulation.md) :green_book: 
+
+- Basic operation
+- Gray code
+- [137 Single Number II](https://leetcode.com/problems/single-number-ii/)
+
 ## [Divide and Conquuer](Divide&Conquer.md)
 
 - [973 K Closest Points to Origin](https://leetcode.com/problems/k-closest-points-to-origin/) :triangular_flag_on_post:
@@ -210,6 +216,5 @@ Code is written by C++ or Python or Java.
 ## Some tips of different kinds of problems
 
 - [2 dimension matrix](2-dimension-matrix.md)
-- [Bit manipulation](Bit_Manipulation.md)
 - [Binary Search](Binary-Search.md)
 - [N Sum](NSum.md)

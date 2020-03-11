@@ -77,3 +77,52 @@ int g(int n){
 ```
 
 [1238 Circular Permutation in Binary Representation](https://leetcode.com/problems/circular-permutation-in-binary-representation/)
+
+
+## [137 Single Number II](https://leetcode.com/problems/single-number-ii/)
+
+> Given a non-empty array of integers, every element appears three times except for one, which appears exactly once. Find that single one. a linear runtime complexity. Could you implement it without using extra memory?
+
+To solve this problem using only constant space, you have to rethink how the numbers are being represented in computers -- using bits.
+
+If you sum the ith bit of all numbers and mod 3, it must be either 0 or 1 due to the constraint of this problem where each number must appear either 3 times or once. This will be the ith bit of that "single number".
+
+A straightforward implemention is to use an array of size 32 to keep track of the total count of ith bit.
+
+```Java 
+class Solution {
+    public int singleNumber(int[] nums) {
+        int[] bits=new int[32];
+        int ans=0;
+        for(int i=0; i<32; i++){
+            for(int j: nums){
+                bits[i]+=(j>>i)&1;
+            }
+            bits[i]=bits[i]%3;
+            ans|=(bits[i]<<i);
+        }
+        return ans;
+    }
+}
+```
+
+We can improve this based on the previous solution using three bitmask variables:
+1. ones as a bitmask to represent the $i^th$ bit had appeared once
+2. twos as a bitmask to represent the $i^th$ bit had appeared twicn
+3. threes as a bitmask to represent the $i^th$ bit had appeared three times
+
+When the $i^th$ bit had appeared for the third time, clear the $i^th$ bit of both ones and twos to 0. The final answer will be the values of ones.
+
+```Java
+int singleNumber(int A[]){
+    int ones=0, twos=0,threes=0;
+    for(int i: A){
+        twos |= ones & A[i];
+        ones ^=A[i];
+        threes=ones&twos;
+        ones&=~threes;
+        twos&=~threes;
+    }
+    return ones;
+}
+```
