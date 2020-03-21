@@ -136,4 +136,84 @@ class Solution {
 }
 ```
 
+## [1383 Maximum Performance of a Team](https://leetcode.com/problems/maximum-performance-of-a-team/) :green_book: 
+
+> There are n engineers numbered from 1 to n and two arrays: speed and efficiency, where speed[i] and efficiency[i] represent the speed and efficiency for the i-th engineer respectively. Return the maximum performance of a team composed of at most k engineers, since the answer can be a huge number, return this modulo 10^9 + 7.
+
+> The performance of a team is the sum of their engineers' speeds multiplied by the minimum efficiency among their engineers. 
+
+Performance=sm(speed)*min(efficiency). Idea is simple: try every efficiency value from heighest to lowest and at the same time maintain an as-large-as-possible speed group, keep adding speed to total speed, if size of engineers group exceeds K, lay off the engineer with lowest speed.
+
+1. Sort efficiency with descending order. Bacause, afterwards, when we iterate whoe engineers, every round, when calculating the current performance, minimum efficiency is the effiency of the new incoming engineer.
+2. Maintain a pq to track of the minimum speed in the group. If size of group is K, kick the engineer with minimum speed out (since efficiency is fixed by new coming engineer, the only thing matters now is sum of speed).
+3. Calculate/Update performance
+
+I record 2 kinds of programming style to reference.
+
+```Java
+// This solution using inner class and override 
+class Solution {
+    private static final int MOD = 1000000007;
+    
+    public int maxPerformance(int n, int[] speed, int[] efficiency, int k) {
+        Engineer[] E = new Engineer[n];
+        for (int i = 0; i < n; ++i) {
+            E[i] = new Engineer(speed[i], efficiency[i]);
+        }
+        Arrays.sort(E, Collections.reverseOrder(Engineer.BY_EFFICIENCY));
+        
+        long speedSum = 0;
+        long best = 0;
+        PriorityQueue<Long> topSpeeds = new PriorityQueue<>();
+        for (Engineer e : E) {
+            topSpeeds.add(e.speed);
+            speedSum += e.speed;
+            while (topSpeeds.size() > k) {
+                long removeSpeed = topSpeeds.poll();
+                speedSum -= removeSpeed;
+            }
+            best = Math.max(best, e.efficiency * speedSum);
+        }
+        return (int)(best % MOD);
+    }
+    
+    private static class Engineer {
+        public long speed, efficiency;
+        
+        public Engineer(long s, long e) {
+            speed = s;
+            efficiency = e;
+        }
+        
+        public static final Comparator<Engineer> BY_EFFICIENCY = new Comparator<Engineer>() {
+            @Override
+            public int compare(Engineer lhs, Engineer rhs) {
+                return Long.compare(lhs.efficiency, rhs.efficiency);
+            }
+        };
+    }
+}
+
+----
+int MOD = (int) (1e9 + 7);
+int[][] engineers = new int[n][2];
+for (int i = 0; i < n; ++i) 
+	engineers[i] = new int[] {efficiency[i], speed[i]};
+
+Arrays.sort(engineers, (a, b) -> b[0] - a[0]);
+
+PriorityQueue<Integer> pq = new PriorityQueue<>(k, (a, b) -> a - b);
+long res = Long.MIN_VALUE, totalSpeed = 0;
+
+for (int[] engineer : engineers) {
+	if (pq.size() == k) totalSpeed -= pq.poll();  // layoff the one with min speed
+	pq.add(engineer[1]);
+	totalSpeed = (totalSpeed + engineer[1]);
+	res = Math.max(res, (totalSpeed * engineer[0]));  // min efficiency is the efficiency of new engineer
+}
+
+return (int) (res % MOD);
+```
+
+
 ## [759 Employee Free Time](https://leetcode.com/problems/employee-free-time/)

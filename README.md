@@ -153,6 +153,7 @@ Code is written by C++ or Python or Java.
 - [621 Task Scheduler](https://leetcode.com/problems/task-scheduler/) :triangular_flag_on_post: 
 - 253 Meeting room II
 - [53 Maximum Subarray](https://leetcode.com/problems/maximum-subarray/)
+- [1383 Maximum Performance of a Team](https://leetcode.com/problems/maximum-performance-of-a-team/) :green_book:
 
 ## [Hash Table](HashTable.md)
 
