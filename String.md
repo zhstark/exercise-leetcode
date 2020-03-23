@@ -325,3 +325,37 @@ class Solution {
     }
 }
 ```
+
+## 字符串匹配
+
+### RK 算法
+
+![image1](IMG_0131.PNG)
+
+![image2](IMG_0132.PNG)
+
+### [1392 Longest Happy Prefix](https://leetcode.com/problems/longest-happy-prefix/)
+
+可用 RK 算法和 KMP 算法
+
+RK:
+
+```Java
+class Solution {
+    public String longestPrefix(String s) {
+        long h1=0, h2=0;
+        int len=0;
+        long A=1;
+        final int mod=(int)1e9+7;
+        for(int i=0, j=s.length()-1; i<s.length()-1; i++, j--){
+            int c1=s.charAt(i)-'a';
+            int c2=s.charAt(j)-'a';
+            h1=(h1*26+c1)%mod;
+            h2=(A*c2+h2)%mod;
+            A=A*26%mod;
+            if(h1==h2)  len=i+1;
+        }
+        return s.substring(0, len);
+    }
+}
+```

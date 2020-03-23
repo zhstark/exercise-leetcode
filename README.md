@@ -188,6 +188,8 @@ Code is written by C++ or Python or Java.
 - [680 Valid Palindrome II](https://leetcode.com/problems/valid-palindrome-ii/)  :triangular_flag_on_post:
 - [161 One Edit Distance](https://leetcode.com/problems/one-edit-distance/)   :triangular_flag_on_post: :green_book:
 - [65 Valid Number](https://leetcode.com/problems/valid-number/)  :triangular_flag_on_post:
+- RK algorithm  :green_book:
+- [1392 Longest Happy Prefix](https://leetcode.com/problems/longest-happy-prefix/)
 
 ## [Stack and Queue](Stack&Queue.md)
 
