@@ -66,7 +66,7 @@ The proof:(https://leetcode.com/problems/linked-list-cycle-ii/solution/#approach
 
 and my notes of this proof:
 
-![](IMG_6892FF5D41DA-1.jpeg)
+![](images/IMG_6892FF5D41DA-1.jpeg)
 
 ```cpp
 class Solution {

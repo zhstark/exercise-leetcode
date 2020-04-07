@@ -330,9 +330,9 @@ class Solution {
 
 ### RK 算法
 
-![image1](IMG_0131.PNG)
+![image1](images/IMG_0131.PNG)
 
-![image2](IMG_0132.PNG)
+![image2](images/IMG_0132.PNG)
 
 ### [1392 Longest Happy Prefix](https://leetcode.com/problems/longest-happy-prefix/)
 
