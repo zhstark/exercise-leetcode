@@ -12,9 +12,44 @@ fast=head
 while fast and fast.next:
     slow=slow.next
     fast=fast.next.next
-if fast:
-        slow=slow.next
 ```
+
+1->2->3->4->null
+s  s  s
+f     f      f
+
+1->2->3->null
+s  s
+f     f
+
+如果让 slow 停留在考前一点的位置:
+
+```Java
+public ListNode mid(ListNode head){
+    if(head==null)  return head;
+    
+    // head!=null, head.next!=null
+    ListNode slow=head;
+    ListNode fast=head;
+    while(fast.next!=null && fast.next.next!=null){
+        slow=slow.next;
+        fast=fast.next;
+    }
+    return slow;
+}
+```
+
+## 用 dummy node
+
+- when the head could be changed when solving the problem
+- not sure yet which node will be head when constructing the list
+
+eg. insert a value into a sorted list
+eg. merge 2 sorted linked list.
+
+对链表增删改。
+
+return dummy.next
 
 ## 反转链表
 
