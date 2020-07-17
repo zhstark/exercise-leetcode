@@ -80,7 +80,30 @@ def BS_4(array, value):
         else:
             r=mid-1
     return -1
+```
 
+### 查找跟给定值最接近的元素
+
+```Java
+public int binarySearch(int[] A, int target){
+    int left=0, right=A.length-1;
+    while(left < right - 1) {
+        int mid = left + (right - left)/2;
+        if(A[mid] == target){
+            return mid;
+        } else if(A[mid] < target){
+            right = mid;
+        } else {
+            left = mid;
+        }
+    }
+
+    if (Math.abs(A[left] - target) < Math.abs(A[right] - target)){
+        return left;
+    } else {
+        return right;
+    }
+}
 ```
 
 ## 后记
