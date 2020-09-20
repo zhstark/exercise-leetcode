@@ -124,6 +124,50 @@ class Solution:
         return Dijkstra(times, N, K)
 ```
 
+Java
+
+```Java
+class Solution {
+    public int networkDelayTime(int[][] times, int N, int K) {
+        int[] distances = new int[N+1];
+        Arrays.fill(distances, Integer.MAX_VALUE);
+        Map<Integer, List<int[]>> graph = new HashMap<>();
+        for (int[] time: times) {
+            if (!graph.containsKey(time[0])) {
+                graph.put(time[0], new ArrayList<>());
+            }
+            graph.get(time[0]).add(new int[] {time[1], time[2]});
+        }
+        int res = 0;
+        distances[K] = 0;
+        boolean[] visited = new boolean[N+1];
+        PriorityQueue<int[]> pq = new PriorityQueue<>((a,b)-> a[1]-b[1]);
+        pq.add(new int[] {K, 0});
+        while (!pq.isEmpty()) {
+            int[] curr = pq.poll();
+            if (visited[curr[0]]){
+                continue;
+            }
+            visited[curr[0]] = true;
+            if (!graph.containsKey(curr[0])){
+                continue;
+            }
+            for (int[] ne: graph.get(curr[0])) {
+                if (distances[ne[0]] > curr[1] + ne[1]) {
+                    distances[ne[0]] = curr[1] + ne[1];
+                }
+                pq.offer(new int[] {ne[0], distances[ne[0]]});
+            }
+        }
+        for (int i = 1; i < N+1; i++) {
+            res = Math.max(res, distances[i]);
+        }
+        return res == Integer.MAX_VALUE? -1: res;
+        
+    }
+}
+```
+
 ## [1368 Minimum Cost to Make at Least One Valid Path in a Grid](https://leetcode.com/problems/minimum-cost-to-make-at-least-one-valid-path-in-a-grid/)
 
 The key of this problem is how to think about the question, how to build a math module of it.

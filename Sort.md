@@ -119,6 +119,25 @@ void MergeSort(vector<int>& nums){
 }
 ```
 
+```Java
+public class Solution{
+    public void mergeSort(int[] array){
+        if (array == null) {
+            return null;
+        }
+        mergeSortRec(array, 0, array.length-1);
+    }
+    private void mergeSortRec(int[] array, int left, int right){
+        if (left < right) {
+            int mid = left + (right - left) >> 2;
+            mergeSortRec(array, left, mid);
+            mergeSortRec(array, mid+1, right);
+            merge(array, left, mid, mid+1, right);
+        }
+    }
+}
+```
+
 ## bubbling sort
 
 ```cpp

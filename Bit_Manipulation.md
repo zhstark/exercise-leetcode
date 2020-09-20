@@ -3,7 +3,8 @@
 - | or
 - ~ not
 - ^ xor(异或,相同为0，相异为1)
-- <<,>> 移位操作
+- <<,>> 移位操作 signed shift, 相当于算数除 2(保留比较小的数(对负数来讲与/2不同))，根据符号位判断补 0 or 1
+- \>>> unsigned shift 全补 0
   
 - 并集：A | B
 - 交集: A & B
@@ -12,6 +13,9 @@
 - 将第 x 位置0: A & ~(1<<x)
 - 第 x 位是否为1: A&(1<<x)!=0
 - 所有 bit 都是1: -1
+
+- Integer.MAX_VALUE+1=Integer.MIN_VALUE
+- Integer.MIN_VALUE-1=Integer.MAX_VALUE
 
 ## 计算一个数有多少位是1：
 ```py

@@ -55,13 +55,13 @@ class Solution {
 > peek() -- Get the front element.
 > empty() -- Return whether the queue is empty.
 
-Using 2 stacks, stack1 to push, stack2 to pop.
+Using 2 stacks, stack1 to push, buffer all elements, stack2 to pop, pop out the 1st element
 
 When pushing elements, just push it into s1. When getting the front element, we push all elements from s1 into s2 (assuming now s2 is empty). Then elements in s2 are in reverse order, which is what we want.
 
 If we still want to get the front element(`pop(), peek()`), we just get it from s2 until s2 is empty. Then we pour all elements of s1 into s2 again.
 
-Time complexity is pushO(1), pop O(1) amortized,O(n) worst.
+Time complexity is pushO(1), pop *amortized* O(1) ,O(n) worst.
 
 *There is another method in which push O(n), pop O(1), not shown*
 

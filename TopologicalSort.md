@@ -96,19 +96,20 @@ Java
 
 ```Java
 class Solution{
-    public Stirng alienOrder(String[] words){
+    public String alienOrder(String[] words){
         if(words==null || words.length==0)  return "";
         Map<Character, Set<Character>> graph=new HashMap();
         Map<Character, Integer> degree=new HashMap();
         for(String word:words){
             for(char c: word.toCharArray()){
                 degree.put(c, 0);
+            }
         }
 
         for(int i=0; i<words.length-1; ++i){
             String curr=words[i];
             String next=words[i+1];
-            int length=Math.min(curr.length(), next.length())
+            int length=Math.min(curr.length(), next.length());
             for(int j=0; j<length; ++j){
                 char c1=curr.charAt(j);
                 char c2=next.charAt(j);
