@@ -48,15 +48,7 @@ class Solution {
                 map.put(x, new ArrayList<Integer>());
             }
             map.get(x).add(node.val);
-            // if(map.containsKey(x)){
-            //     List<Integer> temp=map.get(x);
-            //     temp.add(node.val);
-            // }
-            // else{
-            //     List<Integer> list=new ArrayList();
-            //     list.add(node.val);
-            //     map.put(x, list);
-            // }
+
             if(node.left!=null){
                 treeQ.add(node.left);
                 indexQ.add(x-1);
@@ -114,35 +106,6 @@ class Solution {
 }
 ```
 
-## 279
-
-BFS不止用在图中
-
-```py
-import math
-class Solution:
-    def numSquares(self, n: int) -> int:
-        if n<=0:
-            return 0
-        
-        squares=[i*i for i in range(1, int(math.sqrt(n))+1  )   ]
-        toCheck={n}
-        cnt=0
-        while True:
-            temp=set()
-            cnt+=1
-            for j in toCheck:
-                for i in squares:
-                    if j<i:
-                        break
-                    if i==j:
-                        return cnt
-
-                    temp.add(j-i)
-            toCheck=temp
-            
-
-```
 
 ## [1210 Minimum Moves to Reach Target with Rotations](https://leetcode.com/problems/minimum-moves-to-reach-target-with-rotations/)
 
