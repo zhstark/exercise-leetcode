@@ -1,3 +1,11 @@
+**并查集**
+
+Union-find算法常用来解决连通性问题，例如:
+
+- 网络连通性问题：给定一个图，判断其中任意两点之间是否存在一条路径。
+- 图的生成树问题：给定一个图，找出其中的一棵生成树。
+- 并查集问题：给定若干个集合，支持合并两个集合为一个集合和查询某个元素属于哪个集合。
+
 ## Standard code
 
 Union Find Set has two basic functions:
@@ -8,7 +16,7 @@ Union Find Set has two basic functions:
 Usually we use a class to represent an union find set. Python code:
 
 ```Python
-# rank is used to reduce the cost of union
+# rank is the height of the tree, used to reduce the cost of union
 class UnionFindSet(n):
     def __init__(self):
         parent=List(range(1,n+1))

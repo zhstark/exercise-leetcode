@@ -19,9 +19,8 @@ public void inOrder(TreeNode root){
             curr=curr.left;
         }
         curr=stack.pop();
-        System.out.println(curr.val;
+        System.out.println(curr.val);
         curr=curr.right;
-        }
     }
 }
 ```

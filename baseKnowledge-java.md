@@ -321,7 +321,7 @@ Interview Question: When will you use abstract class vs. interface?
 
 > An abstract class is good if you think you will plan on using inheritance since it provides a common base class implementation to derived classes
 
-> An abstract class is also good if you want to be able to declare non-public mumbers. In an interface, all methods must be public. If you think you will need to a dd methods in the future, then an abstract class is a better choice. Because if you add new method headings to an interface, then all of the classes that already implement that interface will have to be changed to implement the new methods.
+> An abstract class is also good if you want to be able to declare non-public mumbers. In an interface, all methods must be public. If you think you will need to add methods in the future, then an abstract class is a better choice. Because if you add new method headings to an interface, then all of the classes that already implement that interface will have to be changed to implement the new methods.
 
 > Interfaces are good choice when you think that the API will not change for a while. Interfaces are also good when you want to have something similar to multiple inheritance, since you can implement multiple interfaces.
 
