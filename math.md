@@ -12,6 +12,43 @@ int gcd(int a, int b){
 }
 ```
 
+## 取模运算的运算法则
+
+```
+(a+b)%p = (a%p + b%p)%p
+(a-b)%p = (a%p - b%p)%p
+(a*b)%p = ((a%p) * (b%p))%p
+```
+
+## 快速幂算法
+
+已一题目为例：
+
+> 求 A^B 的对 10^9+7 取余后的整数。
+
+这时候对于直接求解来说，最大的问题是溢出。当 B 的取值范围很大时，用 BigInteger 也会有内存溢出（超过限制）的情况。这时候就要用到上面取模运算的第三个规则。
+
+已 3^10 为例，
+
+3^10 = 9^5 = 9 * 9^4 = 9 * 81^2 = 9*6561
+
+我们对指数不断的除以2，底数进行平方运算，当指数为单数时，剥离出一个底数单独相乘。同时应用上述运算法则的第三个不断的进行取模。这样就可以在不出现溢出的情况下以 log(B) 的时间复杂度求解。
+
+```Java
+int base = 3;
+int power = 1000000000;
+int mod = 1000000007;
+int result = 1;
+while(power > 0) {
+    if (power & 1 == 1) { // power 是单数
+        result = (result * base) % mod; // 单独乘以底数
+    }
+    base = (base*base)%mod; // 底数变平方
+    power >>= 1; // 指数除以2
+}
+return result;
+```
+
 ## [50 Pow(x, n)](https://leetcode.com/problems/powx-n/) :triangular_flag_on_post:
 
 > Implement pow(x, n), which calculates x raised to the power n (x^n).
