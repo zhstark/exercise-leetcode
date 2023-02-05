@@ -6,7 +6,7 @@
 4. 先检测是否不满足条件，在检测是否满足条件
 5. ">>"的优先级低于"+"，所以除以二的时候用位移记得加括号
 
-## 花式二分法
+## 几个基本的二分法情况
 
 ### 查找第一个 值 等于给定值的元素
 
@@ -105,6 +105,54 @@ public int binarySearch(int[] A, int target){
     }
 }
 ```
+
+## min-max 问题
+
+### [2560. House Robber IV](https://leetcode.com/problems/house-robber-iv/description/)
+
+遇到求 mini-max 的问题一般用二分法。
+
+假设 mid 为所求的值，不断缩减 mid 的范围，并验证 mid 是否符合要求。
+
+在这个问题中，假设 mid 为所求的 capacity，然后遍历 `nums`，累计 `<= mid` 的个数。检查个数是否为k，如果为k则为可能所求的值。
+
+```Java
+class Solution {
+    public int minCapability(int[] nums, int k) {
+        int left = 1;
+        int right = (int)1e9;
+        
+        while(left < right) {
+            int mid = left + ((right - left) >> 1);
+            int count = 0;
+            for (int i = 0;i < nums.length; i++) {
+                if (nums[i] <= mid) {
+                    count++;
+                    i++;
+                }
+            }
+            if (count >= k) {
+                right = mid;
+            } else {
+                left = mid+1;
+            }
+        }
+        return left;
+    }
+}
+```
+
+### [2226. Maximum Candies Allocated to K Children](https://leetcode.com/problems/maximum-candies-allocated-to-k-children/description/)
+
+与上面很相似的问题。区别在于在这个问题中选取left right 的边界条件。
+
+`mid = (left + right + 1) / 2 Vs mid = (left + right) / 2`
+
+> mid = (left + right) / 2 to find first element valid
+> mid = (left + right + 1) / 2 to find last element valid
+
+在这个问题中，当 计数值 >= k，可能是left，即mid值一旦变大，糖果可能就不够分了，left 可能就是最终的结果。
+
 
 ## 后记
 
