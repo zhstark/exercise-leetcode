@@ -313,6 +313,8 @@ class Solution {
 
 ## Post-Order
 
+先遍历左子树，再遍历右子树，最后遍历根节点。
+
 ### 迭代法
 
 ```Java

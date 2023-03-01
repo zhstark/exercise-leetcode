@@ -5,6 +5,10 @@
 - bubbling sort
 - Dutch National Flag Problem (75)
 
+## 排序算法汇总题
+
+[sort-an-array](https://leetcode.com/problems/sort-an-array/description/)
+
 ## Quick sort
 
 时间复杂度 averge O(nlogn), worst O(n^2). Spacial complexity average O(logn), worst O(n)
